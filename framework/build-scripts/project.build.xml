@@ -74,6 +74,7 @@
 <!-- 
     Compile generated unit tests 
 --> 
+
     <target name="compile.gen.tests" depends="compile"> 
         <!-- bug-db.test.dir, build.home, and classes.dir properties have to be provided by caller! -->
         <fail message="Property bug-db.test.dir not set!" unless="bug-db.test.dir" />
@@ -84,32 +85,37 @@
         <echo message="build.home: ${build.home}" />
 
         <mkdir dir="${build.home}/gen-tests" />
+       
         <javac srcdir="${bug-db.test.dir}"                               
                destdir="${build.home}/gen-tests"                        
                debug="true"                                            
                deprecation="false"                                     
                optimize="false">
-               <classpath>
-                    <path refid="test.classpath" />
-                    <pathelement path="${classes.dir}" />
-                    <!-- Add dependencies to test generation tools -->
-                    <pathelement path="${jcrasher.jar}" />
-               </classpath>
-        </javac>                                                       
+            <classpath>
+                <path refid="test.classpath" />
+                <pathelement path="${classes.dir}" />
+                <!-- Add dependencies to test generation tools -->
+                <pathelement path="${jcrasher.jar}" />
+                <pathelement path="${script.dir}/build-scripts/lib/evosuite-standalone-runtime-1.0.3.jar" />
+                <pathelement path="${script.dir}/build-scripts/lib/evosuite.jar" />
+                <pathelement path="${script.dir}/lib/test_generation/generation/randoop-current.jar" />
+            </classpath>
+        </javac>           
+            
     </target> 
 
 <!-- 
     Run generated tests 
---> 
+-->
+     
     <target name="run.gen.tests"  depends="compile.gen.tests" description="Run generated tests">
         <!-- test.dir, test.include, and class.dir properties have to be provided by caller! -->
         <fail message="Property bug-db.test.dir not set!" unless="bug-db.test.dir" />
         <fail message="Property test.include not set!" unless="test.include" />
         <fail message="Property classes.dir not set!" unless="classes.dir" />
-        
+
         <echo message="classes.dir: ${classes.dir}" />
         <echo message="build.home: ${build.home}" />
-        
         <junit printsummary="no" haltonfailure="no" haltonerror="no" fork="no" showOutput="true">
             <classpath>
                 <pathelement path="${build.home}/gen-tests" />
@@ -117,6 +123,9 @@
                 <pathelement path="${classes.dir}" />
                 <!-- Add dependencies to test generation tools -->
                 <pathelement path="${jcrasher.jar}" />
+                <pathelement path="${script.dir}/build-scripts/lib/evosuite-standalone-runtime-1.0.3.jar" />
+                <pathelement path="${script.dir}/build-scripts/lib/evosuite.jar" />
+                <pathelement path="${script.dir}/lib/test_generation/generation/randoop-current.jar" />
             </classpath>
             <classpath refid="major.classpath"/>
             

@@ -84,12 +84,33 @@ Debug: Enable verbose logging and do not delete the temporary check-out director
 
 =head2 Supported test criteria and default search budgets:
 
-B<branch> => 100s, B<weakmutation> => 100s, B<strongmutation> => 200s
+B<branch> => 120s, B<weakmutation> => 120s, B<strongmutation> => 120s
 
 =cut
-my %criteria = ( branch         => 100,
-                 weakmutation   => 100,
-                 strongmutation => 200
+my %criteria = ( branch         => 120,
+                 weakmutation   => 120,
+                 strongmutation => 120,
+                 onlymutation => 120,
+                 defuse => 120,
+                 cbranch => 120,
+                 ibranch => 120,
+                 statement => 120,
+                 rho => 120,
+                 ambiguitiy => 120,
+                 alldefs => 120,
+                 exception => 120,
+                 regression => 120,
+                 readability => 120,
+                 onlybranch => 120,
+                 methodtrace => 120,
+                 method => 120,
+                 methodnoexception => 120,
+                 onlyline => 120,
+                 line => 120,
+                 output => 120,
+                 input => 120,
+                 trycatch => 120,
+                 default => 120
                );
 
 =pod
