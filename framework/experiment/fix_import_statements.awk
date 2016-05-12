@@ -32,6 +32,7 @@ BEGIN{
 			}
 		}
 		close(toRead);
+		close(tmpOut);	
 		system("mv "tmpOut" "toRead);
 	}
 }

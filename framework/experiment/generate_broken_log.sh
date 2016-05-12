@@ -38,7 +38,9 @@ cat $1 | gawk -v testDir=$2 -v logFile=$3 -v importFile=$4 'BEGIN{
 		if(grabImport==1){
 			out=classes[classes[0]]",";
 			split($0,parts,"import ");
-			print out parts[2] > importFile;
+			if(parts[2] !~ /junit/){
+				print out parts[2] > importFile;
+			}
 		}
 	}
 	/: warning:/ { grabImport=0;}
