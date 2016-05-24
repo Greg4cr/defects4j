@@ -116,7 +116,8 @@
 -->
     <target name="test"  depends="compile.tests" description="Run unit tests">
         <junit printsummary="no" haltonfailure="no" haltonerror="no" fork="no" showOutput="true">
-            <classpath refid="test.classpath">
+            <classpath refid="test.classpath"/>
+            <classpath>
                 <path refid="cobertura.classpath.include" />
             </classpath>
 

@@ -3,7 +3,7 @@
 # Generate tests to find real faults in Mockito
 
 trials=30
-faults=6
+faults=17
 criteria="default" 
 #branch line output weakmutation exception method methodnoexception"
 projects="Mockito"
@@ -19,10 +19,10 @@ for project in $projects; do
 	echo "------------------------"
 	echo "-----Project "$project
 	# For each fault
-	for (( fault=1 ; fault <= $faults ; fault++ )); do
+	for (( fault=17 ; fault <= $faults ; fault++ )); do
 		echo "-----Fault #"$fault
 		# For each trial
-		for (( trial=1; trial <= $trials ; trial++ )); do
+		for (( trial=15; trial <= $trials ; trial++ )); do
 			echo "-----Trial #"$trial
 		
 			# Generate EvoSuite tests
@@ -138,10 +138,10 @@ for project in $projects; do
 				echo $project","$fault","$trial","$suite","$numTests","$numTestsRemoved >> $result_dir"/test_stats.csv"
 
 				# Run final fault finding and coverage
-				mkdir /media/greg/WorkDrive2/tmp/genSpace/
-				perl ../bin/run_bug_detection.pl -p $project -d "working/suites/"$project"_"$fault"/"$project"/"$suite"/"$trial"/" -o $result_dir -f "**/*Test.java" -t /media/greg/WorkDrive2/tmp/genSpace
-				perl ../bin/run_coverage.pl -p $project -d "working/suites/"$project"_"$fault"/"$project"/"$suite"/"$trial"/" -o $result_dir -f "**/*Test.java" -t /media/greg/WorkDrive2/tmp/genSpace
-				rm -rf /media/greg/WorkDrive2/tmp/genSpace/
+				#mkdir /media/greg/WorkDrive2/tmp/genSpace/
+				#perl ../bin/run_bug_detection.pl -p $project -d "working/suites/"$project"_"$fault"/"$project"/"$suite"/"$trial"/" -o $result_dir -f "**/*Test.java" -t /media/greg/WorkDrive2/tmp/genSpace
+				#perl ../bin/run_coverage.pl -p $project -d "working/suites/"$project"_"$fault"/"$project"/"$suite"/"$trial"/" -o $result_dir -f "**/*Test.java" -t /media/greg/WorkDrive2/tmp/genSpace
+				#rm -rf /media/greg/WorkDrive2/tmp/genSpace/
 			}
 			done
 			rm -rf /media/greg/WorkDrive2/tmp/tempResults
