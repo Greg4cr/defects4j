@@ -24,7 +24,7 @@ for project in $projects; do
 		for (( trial=1; trial <= $trials ; trial++ )); do
 			echo "-----Trial #"$trial
 			# For each search budget
-			for budget in $budget; do
+			for budget in $budgets; do
 				echo "----Search Budget: "$budget	
 				# Generate EvoSuite tests
 				for criterion in $criteria; do
@@ -34,22 +34,21 @@ for project in $projects; do
 					cp ../util/evo.config evo.config.backup
                        	        	echo "-Dconfiguration_id=evosuite-"$criterion"-"$trial >> ../util/evo.config
 
-					perl ../bin/run_evosuite.pl -p $project -v $fault"f" -n $trial -o $result_dir"/suites/"$project"_"$fault"/"$budget -c $criterion -b $budget -t $working_dir"/genSpace" -D
+					perl ../bin/run_evosuite.pl -p $project -v $fault"f" -n $trial -o $result_dir"/suites/"$project"_"$fault"/"$budget -c $criterion -b $budget -t $working_dir"/genSpace"
 					mv evo.config.backup ../util/evo.config
 					cat evosuite-report/statistics.csv >> $result_dir"/suites/"$project"_"$fault"/"$budget"/generation-statistics.csv"
 					rm -rf evosuite-report
+
+                                        # Detect and remove non-compiling tests
+					echo "-----Checking to see if suite needs fixed"
+					perl ../util/fix_test_suite.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -t $working_dir"/genSpace"
+
+                                        # Generate coverage report
+                                        echo "-----Generating coverage report"
+                                        perl ../bin/run_evosuite_coverage.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -f "**/*Test.java" -t $working_dir"/genSpace" -c $criterion
+
 					rm -rf $working_dir"/genSpace/"
 				done
-
-				# Detect and remove non-compiling tests
-				suites=`ls $result_dir"/suites/"$project"_"$fault"/"$project"/"`
-				mkdir $working_dir"/tempResults"
-				for suite in $suites; do
-					echo $suite
-					echo "-----Checking to see if suite needs fixed: "$suite
-					perl ../util/fix_test_suite.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/"$suite"/"$trial -t $working_dir"/tempResults"
-				done
-				rm -rf $working_dir"/tempResults"
 			done
 		done
 	done
