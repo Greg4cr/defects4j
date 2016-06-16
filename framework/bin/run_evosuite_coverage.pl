@@ -59,11 +59,6 @@ See below for supported test criteria.
 The pattern of the file names of the test classes that should be included (optional).
 Per default all files (*.java) are included.
 
-=item -v C<version_id>
-
-Only analyze test suites for this version id (optional). Per default all
-test suites for the given project id are analyzed.
-
 =item -t F<tmp_dir>
 
 The temporary root directory to be used to check out program versions (optional).
@@ -139,7 +134,7 @@ use DB;
 # Process arguments and issue usage message if necessary.
 #
 my %cmd_opts;
-getopts('p:d:v:t:o:c:f:DA', \%cmd_opts) or pod2usage(1);
+getopts('p:d:t:o:c:f:DA', \%cmd_opts) or pod2usage(1);
 
 pod2usage(1) unless defined $cmd_opts{p} and defined $cmd_opts{d} and defined $cmd_opts{o} and defined $cmd_opts{c};
 
@@ -148,7 +143,6 @@ pod2usage(1) unless defined $cmd_opts{p} and defined $cmd_opts{d} and defined $c
 
 my $PID = $cmd_opts{p};
 my $SUITE_DIR = abs_path($cmd_opts{d});
-my $VID = $cmd_opts{v} if defined $cmd_opts{v};
 my $INCL = $cmd_opts{f} // "*.java";
 # Enable debugging if flag is set
 $DEBUG = 1 if defined $cmd_opts{D};
@@ -156,13 +150,6 @@ my $CRITERION = $cmd_opts{c};
 
 # Set up project
 my $project = Project::create_project($PID);
-
-# Check format of target version id
-if (defined $VID) {
-    # Verify that the provided version id is valid
-    Utils::check_vid($VID);
-    $project->contains_version_id($VID) or die "Version id ($VID) does not exist in project: $PID";
-}
 
 # Output directory for results
 system("mkdir -p $cmd_opts{o}");
@@ -220,7 +207,7 @@ Examples:
 =cut
 
 # Get all test suite archives that match the given project id and version id
-my $test_suites = Utils::get_all_test_suites($SUITE_DIR, $PID, $VID);
+my $test_suites = Utils::get_all_test_suites($SUITE_DIR, $PID);
 
 # Directory of class lists used for instrumentation step
 my $CLASSES = defined $cmd_opts{A} ? "loaded_classes" : "modified_classes";
