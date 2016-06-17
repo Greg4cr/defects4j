@@ -126,10 +126,11 @@ score=`cat $7"/suites/"$project"_"$fault"/"$budget"/"$project"/"$source"/"$trial
 
 log_file=$result_dir"/suites/fault_coverage.csv"
 
-if [ ! -a $log_file ]; then
+if [ -a $log_file ]; then
+	echo $project","$fault","$trial","$budget","$source","$score >> $log_file
+else
 	echo "# Project, Fault, Trial, Search Budget, Suite Source, Covered Lines, Number of Lines to Cover, Fault Coverage" >> $log_file
+	echo $project","$fault","$trial","$budget","$source","$score >> $log_file
 fi
-
-echo $project","$fault","$trial","$budget","$source","$score >> $log_file
 
 rm affectedlines.csv
