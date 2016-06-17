@@ -1,6 +1,6 @@
 #!/bin/bash
 # Gregory Gay (greg@greggay.com)
-# Generate tests to find real faults in Mockito
+# Generate tests to find real faults in Defects4J Programs
 
 trials=1
 faults=2
@@ -10,6 +10,7 @@ budgets="120"
 exp_dir=`pwd`
 result_dir=$exp_dir"/results"
 working_dir="/tmp"
+project_dir="/home/greg/svn/defects4j/framework/projects"
 
 mkdir $result_dir
 
@@ -43,10 +44,13 @@ for project in $projects; do
 					echo "-----Checking to see if suite needs fixed"
 					perl ../util/fix_test_suite_both.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -t $working_dir"/genSpace"
 
-                                        # Generate coverage report
-                                        echo "-----Generating coverage report"
+                                        # Generate coverage reports
+                                        echo "-----Generating coverage reports"
                                         perl ../bin/run_evosuite_coverage.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -f "**/*Test.java" -t $working_dir"/genSpace" -c default
+					perl ../bin/run_coverage_both.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -f "**/*Test.java" -t $working_dir"/genSpace"
 
+					# Check fault coverage
+					./measure_fault_coverage $project $fault $trial "evosuite-"$criterion $budget $project_dir $result_dir
 					rm -rf $working_dir"/genSpace/"
 				done
 			done
