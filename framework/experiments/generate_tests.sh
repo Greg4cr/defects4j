@@ -2,9 +2,9 @@
 # Gregory Gay (greg@greggay.com)
 # Generate tests to find real faults in Defects4J Programs
 
-trials=2
+trials=10
 faults=2
-criteria="line" #default branch line output weakmutation exception method methodnoexception"
+criteria="weakmutation" #default branch line output weakmutation exception method methodnoexception"
 projects="Lang"
 budgets="120"
 exp_dir=`pwd`
@@ -35,7 +35,7 @@ for project in $projects; do
 					cp ../util/evo.config evo.config.backup
                        	        	echo "-Dconfiguration_id=evosuite-"$criterion"-"$trial >> ../util/evo.config
 
-					perl ../bin/run_evosuite.pl -p $project -v $fault"f" -n $trial -o $result_dir"/suites/"$project"_"$fault"/"$budget -c $criterion -b $budget -t $working_dir"/genSpace"
+					perl ../bin/run_evosuite.pl -p $project -v $fault"f" -n $trial -o $result_dir"/suites/"$project"_"$fault"/"$budget -c $criterion -b $budget -t $working_dir"/genSpace" -A
 					mv evo.config.backup ../util/evo.config
 					cat evosuite-report/statistics.csv >> $result_dir"/suites/"$project"_"$fault"/"$budget"/generation-statistics.csv"
 					rm -rf evosuite-report
@@ -46,8 +46,8 @@ for project in $projects; do
 
                                         # Generate coverage reports
                                         echo "-----Generating coverage reports"
-                                        perl ../bin/run_evosuite_coverage.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -f "**/*Test.java" -t $working_dir"/genSpace" -c default
-					perl ../bin/run_coverage_both.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -f "**/*Test.java" -t $working_dir"/genSpace"
+                                        perl ../bin/run_evosuite_coverage.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -f "**/*Test.java" -t $working_dir"/genSpace" -c default -A
+					perl ../bin/run_coverage_both.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -f "**/*Test.java" -t $working_dir"/genSpace" -A
 
 					# Check fault coverage
 					echo "-----Checking fault coverage"
@@ -55,7 +55,7 @@ for project in $projects; do
 
 					# Measure fault detection
 					echo "----Measuring fault detection"
-				        perl ../bin/run_bug_detection.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion -f "**/*Test.java" -t $working_dir"/genSpace"	
+				        perl ../bin/run_bug_detection.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion -f "**/*Test.java" -t $working_dir"/genSpace" 	
 					rm -rf $working_dir"/genSpace/"
 				done
 			done
