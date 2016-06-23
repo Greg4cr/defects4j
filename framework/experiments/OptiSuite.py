@@ -68,7 +68,8 @@ class OptiSuite():
     # Produce and optimize test suites
     # numSuites = number of suites to produce
     def optimizeSuites(self, numSuites):
-        
+       
+        print "Repeat, Generations to Convergence, Best Fitness Score, Suite Size of Best Suite, Coverage of Best Suite"
         # For each suite to optimize
         for repeat in range(0,numSuites):
             self.population = []
@@ -156,7 +157,8 @@ class OptiSuite():
 
                 self.suites.append(best)
            
-            print str(repeat)+","+str(convergenceGen)+","+str(bestScore)
+            print str(repeat)+","+str(convergenceGen)+","+str(bestScore)+","+str(len(best))+","+self.calculateCoverage(best)
+
             if self.debug == 1:
                 popScores = []
 
