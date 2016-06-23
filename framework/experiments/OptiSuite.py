@@ -192,7 +192,7 @@ class OptiSuite():
     # pCrossover = percent of population to create using the crossover operator
     # crossoverOperator = form of crossover to perform: "OP", "UC", "DR"
     # stagnant = threshold for score stagnation
-    def setGoals(self, covTarget, sizeTarget, populationSize, budget, pRetain, pMutate, pCrossover, crossoverOperator, stagnantThreshold, seed):
+    def setGoals(self, covTarget, sizeTarget, populationSize, budget, pRetain, pMutate, pCrossover, crossoverOperator, stagnantThreshold, rSeed):
         if covTarget == "min":
             self.covTarget = 0.000001
         elif covTarget == "max":
@@ -235,8 +235,8 @@ class OptiSuite():
         else:
             raise Exception("Unsupported crossover operator:",crossoverOperator)
  
-        if seed != -1.0:
-            seed(seed)
+        if rSeed != -1.0:
+            seed(rSeed)
 
     # Calculate fitness as a single combination of objectives
     # suite = suite to calculate fitness for
@@ -453,7 +453,7 @@ def main(argv):
     pCrossover = 0.2
     stagnant = 5
     xoOp = "DR"
-    seed = -1.0
+    rSeed = -1.0
 
     try:
         opts, args = getopt.getopt(argv,"hm:n:c:s:o:p:b:r:q:t:x:a:z:D")
@@ -492,7 +492,7 @@ def main(argv):
         elif opt == "-D":
             optimizer.setDebug()
         elif opt == "-z":
-            seed = float(arg)
+            rSeed = float(arg)
 
     if inFile == '':
         raise Exception('No input matrix specified')
@@ -501,7 +501,7 @@ def main(argv):
         optimizer.importMatrix(inFile)
 
         # Configure optimization parameters
-        optimizer.setGoals(covTarget, sizeTarget, population, budget, pRetain, pMutate, pCrossover, xoOp, stagnant, seed)
+        optimizer.setGoals(covTarget, sizeTarget, population, budget, pRetain, pMutate, pCrossover, xoOp, stagnant, rSeed)
 
         # Generate suites
         optimizer.optimizeSuites(suites)
