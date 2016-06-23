@@ -157,7 +157,7 @@ class OptiSuite():
 
                 self.suites.append(best)
            
-            print str(repeat)+","+str(convergenceGen)+","+str(bestScore)+","+str(len(best))+","+self.calculateCoverage(best)
+            print str(repeat)+","+str(convergenceGen)+","+str(bestScore)+","+str(len(best))+","+str(self.calculateCoverage(best))
 
             if self.debug == 1:
                 popScores = []
