@@ -69,7 +69,7 @@ class OptiSuite():
     # numSuites = number of suites to produce
     def optimizeSuites(self, numSuites):
        
-        print "Repeat, Generations to Convergence, Best Fitness Score, Suite Size of Best Suite, Coverage of Best Suite"
+        print "Repeat, Generations to Convergence, Best Fitness Score, Suite Size of Best Suite, Coverage of Best Suite, Cov Goal, Size Goal, Population Size, Budget, Percent Retain, Percent Mutate, Percent Crossover, Crossover Operator, Stagnation Threshold"
         # For each suite to optimize
         for repeat in range(0,numSuites):
             self.population = []
@@ -86,21 +86,23 @@ class OptiSuite():
             for member in range(0,self.populationSize):
                 # Each initial member is a randomly generated suite of size 1...max
                 self.population.append([self.generateRandomSuite(randint(1,len(self.matrix))), 0.0])
-            
-                # Score that member
-                self.population[member] = [self.population[member][0], self.calculateSOFitness(self.population[member][0])]
         
             # Optimize and produce new population
             for generation in range(0,self.budget+1):
+                # Score all members of the population
+                for member in range(0,len(self.population)):
+                    suite=deepcopy(self.population[member][0])
+                    self.population[member] = [suite, self.calculateSOFitness(suite)]
 
                 # Sort and identify best members
-                self.population = sorted(self.population,key=lambda a_entry: a_entry[1])
+                self.population = deepcopy(sorted(self.population,key=lambda a_entry: a_entry[1]))
                 
                 if self.population[0][1] < bestScore:
-                    bestScore = self.population[0][1]
-                    best = self.population[0][0]
+                    bestScore = deepcopy(self.population[0][1])
+                    best = deepcopy(self.population[0][0])
                     convergenceGen=generation
                     stagnation = 0
+
                 else: 
                     stagnation+=1
                     
@@ -123,25 +125,21 @@ class OptiSuite():
                     topSolutions = deepcopy(self.population[0:int(self.percentRetain*self.populationSize)])
 
                     # Create M mutations for new population
-                    size = len(newPopulation)
                     for toAdd in range(0, int(self.percentMutate * self.populationSize)):
+                        size = len(newPopulation)
                         newPopulation.append([self.mutateSuite(topSolutions[randint(0,len(topSolutions)-1)][0]), 0.0])
-                        newPopulation[size + toAdd] = [newPopulation[size + toAdd][0], self.calculateSOFitness(newPopulation[size + toAdd][0])]
 
                     # Perform crossover N times
                     for toAdd in range(0, int((self.percentCrossover * self.populationSize) / 2)):
                         size = len(newPopulation)
                         children = self.createChildren(topSolutions[randint(0, len(topSolutions) - 1)][0], topSolutions[randint(0, len(topSolutions) - 1)][0])
                         newPopulation.append([children[0], 0.0])
-                        newPopulation[size] = [newPopulation[size][0], self.calculateSOFitness(newPopulation[size][0])]
                         size = len(newPopulation)
                         newPopulation.append([children[1], 0.0])
-                        newPopulation[size] = [newPopulation[size][0], self.calculateSOFitness(newPopulation[size][0])]
 
                     # Add N random members to maintain diversity
                     for toAdd in range(len(newPopulation),self.populationSize):
                         newPopulation.append([self.generateRandomSuite(randint(1,len(self.matrix))), 0.0])
-                        newPopulation[toAdd] = [newPopulation[toAdd][0], self.calculateSOFitness(newPopulation[toAdd][0])]
 
                     self.population = deepcopy(newPopulation)
 
@@ -149,15 +147,14 @@ class OptiSuite():
                 self.suites.append(best)
             else:
                 # Perform one last sort and append top member to output suite
-                self.population = sorted(self.population,key=lambda a_entry: a_entry[1])
-
                 if self.population[0][1] < bestScore:
-                    bestScore = self.population[0][1]
-                    best = self.population[0][0]
+                    bestScore = deepcopy(self.population[0][1])
+                    best = deepcopy(self.population[0][0])
 
                 self.suites.append(best)
-           
-            print str(repeat)+","+str(convergenceGen)+","+str(bestScore)+","+str(len(best))+","+str(self.calculateCoverage(best))
+            #print "root(",pow(self.normalize(len(best),1,len(self.matrix)) - self.normalize(self.sizeTarget,1,len(self.matrix)),2),"+",pow(self.normalize(self.calculateCoverage(best),0,100) - self.normalize(self.covTarget,0,100),2),"=",sqrt(pow(self.normalize(len(best),1,len(self.matrix)) - self.normalize(self.sizeTarget,1,len(self.matrix)),2)+pow(self.normalize(self.calculateCoverage(best),0,100) - self.normalize(self.covTarget,0,100),2))
+
+            print str(repeat)+","+str(convergenceGen)+","+str(bestScore)+","+str(len(best))+","+str(self.calculateCoverage(best))+","+str(self.sizeTarget)+","+str(self.covTarget)+","+str(self.populationSize)+","+str(self.budget)+","+str(self.percentRetain)+","+str(self.percentMutate)+","+str(self.percentCrossover)+","+self.crossoverOperator+","+str(self.stagnantThreshold)
 
             if self.debug == 1:
                 popScores = []
