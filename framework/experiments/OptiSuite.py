@@ -69,7 +69,7 @@ class OptiSuite():
     # numSuites = number of suites to produce
     def optimizeSuites(self, numSuites):
        
-        print "Repeat, Generations to Convergence, Best Fitness Score, Suite Size of Best Suite, Coverage of Best Suite, Cov Goal, Size Goal, Population Size, Budget, Percent Retain, Percent Mutate, Percent Crossover, Crossover Operator, Stagnation Threshold"
+        #print "Repeat, Generations to Convergence, Best Fitness Score, Suite Size of Best Suite, Coverage of Best Suite, Cov Goal, Size Goal, Population Size, Budget, Percent Retain, Percent Mutate, Percent Crossover, Crossover Operator, Stagnation Threshold"
         # For each suite to optimize
         for repeat in range(0,numSuites):
             self.population = []

@@ -21,7 +21,7 @@ for op in $ops; do
 							check=`awk -v PR=$pr -v PM=$pm -v PX=$px ' BEGIN{ sum=PR+PM+PX; if(sum > 1.0){ print "no"}else{ print sum;}}'`
 
                                                         if [ "$check" != "no" ]; then
-								python OptiSuite.py -m /tmp/suiteSpace/matrices/org.apache.commons.lang3.LocaleUtils.csv -n 10 -c max -s min -a $op -p $pop -b $budget -q $stag -r $pr -t $pm -x $px -z $RANDOM 2>&1 | tee "ptuning.csv" 
+								python OptiSuite.py -m /tmp/suiteSpace/matrices/org.apache.commons.lang3.LocaleUtils.csv -n 10 -c max -s min -a $op -p $pop -b $budget -q $stag -r $pr -t $pm -x $px -z $RANDOM 2>&1 | tee -a "ptuning.csv" 
 							fi
 						done
 					done
