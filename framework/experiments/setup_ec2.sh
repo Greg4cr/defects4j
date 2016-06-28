@@ -3,8 +3,6 @@
 # Initial installation setup for Amazon EC2 instances.
 # Must be run in sudo mode.
 
-yum update
-
 # Install Java8
 java_base_version="8"
 java_sub_version="91"
@@ -35,7 +33,9 @@ export PATH=$PATH:/usr/local/apache-ant/bin
 echo 'export PATH=$PATH:/usr/local/apache-ant/bin' >> /home/ec2-user/bashrc
 
 # Install other dependencies
-yum install git
+yum install svn
+yum install patch
 yum install gcc
 yum install cpan
 cpan DBI
+cpan DBD:CSV
