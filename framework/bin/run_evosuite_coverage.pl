@@ -121,6 +121,7 @@ use File::Basename;
 use Cwd qw(abs_path);
 use Getopt::Std;
 use Pod::Usage;
+use File::Find;
 
 use lib abs_path("$FindBin::Bin/../core");
 use Constants;
@@ -292,7 +293,7 @@ sub _run_coverage {
     $project->_ant_call("export.cp.test", "-Dfile.export=$cp_file");
     my $cp = `cat $cp_file` .
              ":$LIB_DIR/test_generation/runtime/evosuite-rt.jar";
-    $cp =~ s/tests/gen-tests/g;
+    find(sub {$cp = $cp . ":" . $File::Find::name if /gen-tests/}, $project->{prog_root});
     # Make sure all entries in class path exist.
     my @cp_entries = split /:/, $cp;
     my $edited_cp = "";
@@ -366,7 +367,20 @@ sub _run_coverage {
     $project->_ant_call("export.cp.test", "-Dfile.export=$cp_file");
     $cp = `cat $cp_file` .
              ":$LIB_DIR/test_generation/runtime/evosuite-rt.jar";
-    $cp =~ s/tests/gen-tests/g;
+    find(sub {$cp = $cp . ":" . $File::Find::name if /gen-tests/}, $project->{prog_root});
+    # Make sure all entries in class path exist.
+    @cp_entries = split /:/, $cp;
+    $edited_cp = "";
+    foreach my $entry (@cp_entries) {
+        if(-e $entry){
+            $edited_cp = $edited_cp .
+                         ":" .
+                         $entry;
+        }else{
+            $LOG->log_msg("entry: $entry does not exist.");
+        }
+    }
+    $cp = substr $edited_cp, 1;
     $LOG->log_msg("classpath: $cp");
 
     foreach my $class (@classes) {
