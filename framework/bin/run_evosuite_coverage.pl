@@ -271,6 +271,9 @@ sub _run_coverage {
     # Compile the program version
     $project->compile() or die "Compilation failed for fixed version";
 
+    # Compile tests. This ensures that all necessary folders are on classpath.
+    $project->compile_tests() or die "Test compilation failed for fixed version";
+
     # Compile generated tests
     if(! $project->compile_ext_tests($test_dir)) {
         $LOG->log_msg("Tests do not compile on fixed version!");
@@ -290,6 +293,19 @@ sub _run_coverage {
     my $cp = `cat $cp_file` .
              ":$LIB_DIR/test_generation/runtime/evosuite-rt.jar";
     $cp =~ s/tests/gen-tests/g;
+    # Make sure all entries in class path exist.
+    my @cp_entries = split /:/, $cp;
+    my $edited_cp = "";
+    foreach my $entry (@cp_entries) {
+        if(-e $entry){
+            $edited_cp = $edited_cp .
+                         ":" .
+                         $entry;
+        }else{
+            $LOG->log_msg("entry: $entry does not exist.");
+        }
+    }
+    $cp = substr $edited_cp, 1;
     $LOG->log_msg("classpath: $cp");
 
     foreach my $class (@classes) {
@@ -330,6 +346,7 @@ sub _run_coverage {
 
     # Compile the program version
     $project->compile() or die "Compilation failed for buggy version";
+    $project->compile_tests() or die "Test compilation failed for buggy version";
 
     # Compile generated tests
     if(! $project->compile_ext_tests($test_dir)) {
