@@ -273,7 +273,7 @@ sub _run_coverage {
     $project->compile() or die "Compilation failed for fixed version";
 
     # Compile tests. This ensures that all necessary folders are on classpath.
-    $project->compile_tests() or die "Test compilation failed for fixed version";
+    #$project->compile_tests() or die "Test compilation failed for fixed version";
 
     # Compile generated tests
     if(! $project->compile_ext_tests($test_dir)) {
@@ -293,7 +293,11 @@ sub _run_coverage {
     $project->_ant_call("export.cp.test", "-Dfile.export=$cp_file");
     my $cp = `cat $cp_file` .
              ":$LIB_DIR/test_generation/runtime/evosuite-rt.jar";
-    find(sub {$cp = $cp . ":" . $File::Find::name if /gen-tests/}, $project->{prog_root});
+    my $gen_test_dir = "";
+    find(sub {$gen_test_dir = $File::Find::name if /gen-tests/}, $project->{prog_root});
+    if($gen_test_dir ne ""){
+        $cp = $cp . ":" . $gen_test_dir;
+    }
     # Make sure all entries in class path exist.
     my @cp_entries = split /:/, $cp;
     my $edited_cp = "";
@@ -309,23 +313,28 @@ sub _run_coverage {
     $cp = substr $edited_cp, 1;
     $LOG->log_msg("classpath: $cp");
 
+
     foreach my $class (@classes) {
         my $cmd = "";
         if ($criterion eq "default") {
-            $cmd = "java -cp $TESTGEN_LIB_DIR/evosuite-current.jar org.evosuite.EvoSuite " .
+            $cmd = "java -cp $TESTGEN_LIB_DIR/evosuite-1.0.4.jar org.evosuite.EvoSuite " .
                         "-measureCoverage ".
                         "-class $class " .
+                        "-Djunit=$gen_test_dir " .
                         "-projectCP $cp " .
                         "-base_dir $project->{prog_root} " .
-                        "-Dcoverage_matrix=true";
+                        "-Dcoverage_matrix=true " .
+                        "-mem 3000";
         } else {
-            $cmd = "java -cp $TESTGEN_LIB_DIR/evosuite-current.jar org.evosuite.EvoSuite " .
+            $cmd = "java -cp $TESTGEN_LIB_DIR/evosuite-1.0.4.jar org.evosuite.EvoSuite " .
                         "-measureCoverage ".
                         "-criterion $criterion " .
                         "-class $class " .
+                        "-Djunit=$gen_test_dir " .
                         "-projectCP $cp " .
                         "-base_dir $project->{prog_root} " .
-                        "-Dcoverage_matrix=true";
+                        "-Dcoverage_matrix=true " .
+                        "-mem 3000";
         }
         $cmd =~ s/\R//g;
 
@@ -347,7 +356,7 @@ sub _run_coverage {
 
     # Compile the program version
     $project->compile() or die "Compilation failed for buggy version";
-    $project->compile_tests() or die "Test compilation failed for buggy version";
+    #$project->compile_tests() or die "Test compilation failed for buggy version";
 
     # Compile generated tests
     if(! $project->compile_ext_tests($test_dir)) {
@@ -367,7 +376,11 @@ sub _run_coverage {
     $project->_ant_call("export.cp.test", "-Dfile.export=$cp_file");
     $cp = `cat $cp_file` .
              ":$LIB_DIR/test_generation/runtime/evosuite-rt.jar";
-    find(sub {$cp = $cp . ":" . $File::Find::name if /gen-tests/}, $project->{prog_root});
+    $gen_test_dir = "";
+    find(sub {$gen_test_dir = $File::Find::name if /gen-tests/}, $project->{prog_root});
+    if($gen_test_dir ne ""){
+        $cp = $cp . ":" . $gen_test_dir;
+    }    
     # Make sure all entries in class path exist.
     @cp_entries = split /:/, $cp;
     $edited_cp = "";
@@ -386,20 +399,24 @@ sub _run_coverage {
     foreach my $class (@classes) {
         my $cmd = "";
         if ($criterion eq "default") {
-            $cmd = "java -cp $TESTGEN_LIB_DIR/evosuite-current.jar org.evosuite.EvoSuite " .
+            $cmd = "java -cp $TESTGEN_LIB_DIR/evosuite-1.0.4.jar org.evosuite.EvoSuite " .
                         "-measureCoverage ".
                         "-class $class " .
+                        "-Djunit=$gen_test_dir " .
                         "-projectCP $cp " .
                         "-base_dir $project->{prog_root} " .
-                        "-Dcoverage_matrix=true";
+                        "-Dcoverage_matrix=true " .
+                        "-mem 3000";
         } else {
-            $cmd = "java -cp $TESTGEN_LIB_DIR/evosuite-current.jar org.evosuite.EvoSuite " .
+            $cmd = "java -cp $TESTGEN_LIB_DIR/evosuite-1.0.4.jar org.evosuite.EvoSuite " .
                         "-measureCoverage ".
                         "-criterion $criterion " .
+                        "-Djunit=$gen_test_dir " .
                         "-class $class " .
                         "-projectCP $cp " .
                         "-base_dir $project->{prog_root} " .
-                        "-Dcoverage_matrix=true";
+                        "-Dcoverage_matrix=true " .
+                        "-mem 3000";
         }
         $cmd =~ s/\R//g;
 
