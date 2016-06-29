@@ -31,6 +31,7 @@ echo 'export ANT_HOME=/usr/local/apache-ant' >> /home/ec2-user/.bashrc
 echo 'export PATH=$PATH:/usr/local/apache-ant/bin' >> /home/ec2-user/.bashrc
 
 # Install other dependencies
+yum install screen
 yum install git
 yum install svn
 yum install patch
