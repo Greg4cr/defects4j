@@ -2,15 +2,19 @@
 # Gregory Gay (greg@greggay.com)
 # Generate tests to find real faults in Defects4J Programs
 
-trials=1
-faults=3
-criteria="weakmutation" #default branch line output weakmutation exception method methodnoexception"
-projects="Time"
-budgets="20"
+# Set at command line
+projects=$1
+faults=$2
+trials=$3
+project_dir=$4"/defects4j/framework/projects"
+all_classes=$5 #1 to generate tests for all loaded classes, 0 to only generate tests for patched classes
+
+# Pre-configured
+criteria="weakmutation default branch line output weakmutation exception method methodnoexception cbranch"
+budgets="120 600"
 exp_dir=`pwd`
 result_dir=$exp_dir"/results"
 working_dir="/tmp"
-project_dir="/home/greg/svn/defects4j/framework/projects"
 
 mkdir $result_dir
 
@@ -19,7 +23,7 @@ for project in $projects; do
 	echo "------------------------"
 	echo "-----Project "$project
 	# For each fault
-	for (( fault=2 ; fault <= $faults ; fault++ )); do
+	for (( fault=1 ; fault <= $faults ; fault++ )); do
 		echo "-----Fault #"$fault
 		# For each trial
 		for (( trial=1; trial <= $trials ; trial++ )); do
@@ -35,7 +39,14 @@ for project in $projects; do
 					cp ../util/evo.config evo.config.backup
                        	        	echo "-Dconfiguration_id=evosuite-"$criterion"-"$trial >> ../util/evo.config
 
-					perl ../bin/run_evosuite.pl -p $project -v $fault"f" -n $trial -o $result_dir"/suites/"$project"_"$fault"/"$budget -c $criterion -b $budget -t $working_dir"/genSpace" -A
+					if [ $all_classes -eq 1 ]; then
+						echo "(all loaded classes)"
+						perl ../bin/run_evosuite.pl -p $project -v $fault"f" -n $trial -o $result_dir"/suites/"$project"_"$fault"/"$budget -c $criterion -b $budget -t $working_dir"/genSpace" -A
+					else
+						echo "(only patched classes)"
+						perl ../bin/run_evosuite.pl -p $project -v $fault"f" -n $trial -o $result_dir"/suites/"$project"_"$fault"/"$budget -c $criterion -b $budget -t $working_dir"/genSpace"
+					fi
+
 					mv evo.config.backup ../util/evo.config
 					cat evosuite-report/statistics.csv >> $result_dir"/suites/"$project"_"$fault"/"$budget"/generation-statistics.csv"
 					rm -rf evosuite-report
@@ -46,9 +57,18 @@ for project in $projects; do
 
                                         # Generate coverage reports
                                         echo "-----Generating coverage reports"
-                                        perl ../bin/run_evosuite_coverage.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -f "**/*Test.java" -t $working_dir"/genSpace" -c default -A
 
-					perl ../bin/run_coverage_both.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -f "**/*Test.java" -t $working_dir"/genSpace" -A
+					if [ $all_classes -eq 1 ]; then
+						echo "(all loaded classes)"
+	                                        perl ../bin/run_evosuite_coverage.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -f "**/*Test.java" -t $working_dir"/genSpace" -c default -A
+
+						perl ../bin/run_coverage_both.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -f "**/*Test.java" -t $working_dir"/genSpace" -A
+					else
+						echo "(only patched classes"
+   					        perl ../bin/run_evosuite_coverage.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -f "**/*Test.java" -t $working_dir"/genSpace" -c default
+
+						perl ../bin/run_coverage_both.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -f "**/*Test.java" -t $working_dir"/genSpace"
+					fi
 
 					# Check fault coverage
 					echo "-----Checking fault coverage"
