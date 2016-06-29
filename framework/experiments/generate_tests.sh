@@ -10,8 +10,8 @@ project_dir=$4"/defects4j/framework/projects"
 all_classes=$5 #1 to generate tests for all loaded classes, 0 to only generate tests for patched classes
 
 # Pre-configured
-criteria="weakmutation default branch line output weakmutation exception method methodnoexception cbranch"
-budgets="120"
+criteria="default weakmutation branch line output weakmutation exception method methodnoexception cbranch"
+budgets="120 600"
 exp_dir=`pwd`
 result_dir=$exp_dir"/results"
 working_dir="/tmp"
