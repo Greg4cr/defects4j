@@ -2,11 +2,11 @@
 # Gregory Gay (greg@greggay.com)
 # Generate tests to find real faults in Defects4J Programs
 
-trials=10
-faults=2
+trials=1
+faults=3
 criteria="weakmutation" #default branch line output weakmutation exception method methodnoexception"
-projects="Lang"
-budgets="120"
+projects="Time"
+budgets="20"
 exp_dir=`pwd`
 result_dir=$exp_dir"/results"
 working_dir="/tmp"
@@ -47,6 +47,7 @@ for project in $projects; do
                                         # Generate coverage reports
                                         echo "-----Generating coverage reports"
                                         perl ../bin/run_evosuite_coverage.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -f "**/*Test.java" -t $working_dir"/genSpace" -c default -A
+
 					perl ../bin/run_coverage_both.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -f "**/*Test.java" -t $working_dir"/genSpace" -A
 
 					# Check fault coverage
