@@ -11,7 +11,7 @@ all_classes=$5 #1 to generate tests for all loaded classes, 0 to only generate t
 
 # Pre-configured
 criteria="weakmutation default branch line output weakmutation exception method methodnoexception cbranch"
-budgets="120 600"
+budgets="120"
 exp_dir=`pwd`
 result_dir=$exp_dir"/results"
 working_dir="/tmp"
@@ -41,10 +41,10 @@ for project in $projects; do
 
 					if [ $all_classes -eq 1 ]; then
 						echo "(all loaded classes)"
-						perl ../bin/run_evosuite.pl -p $project -v $fault"f" -n $trial -o $result_dir"/suites/"$project"_"$fault"/"$budget -c $criterion -b $budget -t $working_dir"/genSpace" -A
+						perl ../bin/run_evosuite.pl -p $project -v $fault"f" -n $trial -o $result_dir"/suites/"$project"_"$fault"/"$budget -c $criterion -b $budget -t $working_dir"/genSpace" -a 450 -A
 					else
 						echo "(only patched classes)"
-						perl ../bin/run_evosuite.pl -p $project -v $fault"f" -n $trial -o $result_dir"/suites/"$project"_"$fault"/"$budget -c $criterion -b $budget -t $working_dir"/genSpace"
+						perl ../bin/run_evosuite.pl -p $project -v $fault"f" -n $trial -o $result_dir"/suites/"$project"_"$fault"/"$budget -c $criterion -b $budget -t $working_dir"/genSpace" -a 450
 					fi
 
 					mv evo.config.backup ../util/evo.config

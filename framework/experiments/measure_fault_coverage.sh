@@ -28,7 +28,8 @@ cat $project_dir"/"$project"/patches/"$fault".src.patch" | awk '
 									for(p in parts){
 										size++;
 									}
-									class=parts[size];
+									split(parts[size],nameParts," ");
+									class=nameParts[1];
 								}
 								/@@/ {
 									split($3,parts,",");
