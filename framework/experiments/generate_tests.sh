@@ -35,50 +35,54 @@ for project in $projects; do
 				# Generate EvoSuite tests
 				for criterion in $criteria; do
 					mkdir $working_dir"/genSpace"
-					echo "-----Generating EvoSuite tests for "$criterion
-					# Add configuration ID to evo config
-					cp ../util/evo.config evo.config.backup
-                       	        	echo "-Dconfiguration_id=evosuite-"$criterion"-"$trial >> ../util/evo.config
 
-					if [ $all_classes -eq 1 ]; then
-						echo "(all loaded classes)"
-						perl ../bin/run_evosuite.pl -p $project -v $fault"f" -n $trial -o $result_dir"/suites/"$project"_"$fault"/"$budget -c $criterion -b $budget -t $working_dir"/genSpace" -a 450 -A
+                                        if [ -a $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial"/"$project"-"$fault"f-evosuite-"$criterion"."$trial".tar.bz2" ]; then
+						echo "Suite already exists."
 					else
-						echo "(only patched classes)"
-						perl ../bin/run_evosuite.pl -p $project -v $fault"f" -n $trial -o $result_dir"/suites/"$project"_"$fault"/"$budget -c $criterion -b $budget -t $working_dir"/genSpace" -a 450
-					fi
+						echo "-----Generating EvoSuite tests for "$criterion
+						# Add configuration ID to evo config
+						cp ../util/evo.config evo.config.backup
+                       		        	echo "-Dconfiguration_id=evosuite-"$criterion"-"$trial >> ../util/evo.config
 
-					mv evo.config.backup ../util/evo.config
-					cat evosuite-report/statistics.csv >> $result_dir"/suites/"$project"_"$fault"/"$budget"/generation-statistics.csv"
-					rm -rf evosuite-report
+						if [ $all_classes -eq 1 ]; then
+							echo "(all loaded classes)"
+							perl ../bin/run_evosuite.pl -p $project -v $fault"f" -n $trial -o $result_dir"/suites/"$project"_"$fault"/"$budget -c $criterion -b $budget -t $working_dir"/genSpace" -a 450 -A
+						else
+							echo "(only patched classes)"
+							perl ../bin/run_evosuite.pl -p $project -v $fault"f" -n $trial -o $result_dir"/suites/"$project"_"$fault"/"$budget -c $criterion -b $budget -t $working_dir"/genSpace" -a 450
+						fi
 
-                                        # Detect and remove non-compiling tests
-					echo "-----Checking to see if suite needs fixed"
-					perl ../util/fix_test_suite_both.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -t $working_dir"/genSpace"
+						mv evo.config.backup ../util/evo.config
+						cat evosuite-report/statistics.csv >> $result_dir"/suites/"$project"_"$fault"/"$budget"/generation-statistics.csv"
+						rm -rf evosuite-report
 
-                                        # Generate coverage reports
-                                        echo "-----Generating coverage reports"
+                                	      	# Detect and remove non-compiling tests
+						echo "-----Checking to see if suite needs fixed"
+						perl ../util/fix_test_suite_both.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -t $working_dir"/genSpace"
 
-					if [ $all_classes -eq 1 ]; then
-						echo "(all loaded classes)"
-	                                        perl ../bin/run_evosuite_coverage.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -f "**/*Test.java" -t $working_dir"/genSpace" -c default -A
+                        	                # Generate coverage reports
+                                	        echo "-----Generating coverage reports"
 
-						perl ../bin/run_coverage_both.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -f "**/*Test.java" -t $working_dir"/genSpace" -A
-					else
-						echo "(only patched classes"
-   					        perl ../bin/run_evosuite_coverage.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -f "**/*Test.java" -t $working_dir"/genSpace" -c default
+						if [ $all_classes -eq 1 ]; then
+							echo "(all loaded classes)"
+	                                	        perl ../bin/run_evosuite_coverage.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -f "**/*Test.java" -t $working_dir"/genSpace" -c default -A
 
-						perl ../bin/run_coverage_both.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -f "**/*Test.java" -t $working_dir"/genSpace"
-					fi
+							perl ../bin/run_coverage_both.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -f "**/*Test.java" -t $working_dir"/genSpace" -A
+						else
+							echo "(only patched classes"
+   						        perl ../bin/run_evosuite_coverage.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -f "**/*Test.java" -t $working_dir"/genSpace" -c default
 
-					# Check fault coverage
-					echo "-----Checking fault coverage"
-					./measure_fault_coverage.sh $project $fault $trial "evosuite-"$criterion $budget $project_dir $result_dir
+							perl ../bin/run_coverage_both.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -f "**/*Test.java" -t $working_dir"/genSpace"
+						fi
 
-					# Measure fault detection
-					echo "----Measuring fault detection"
-				        perl ../bin/run_bug_detection.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion -f "**/*Test.java" -t $working_dir"/genSpace" 	
-					rm -rf $working_dir"/genSpace/"
+						# Check fault coverage
+						echo "-----Checking fault coverage"
+						./measure_fault_coverage.sh $project $fault $trial "evosuite-"$criterion $budget $project_dir $result_dir
+
+						# Measure fault detection
+						echo "----Measuring fault detection"
+				     	   	perl ../bin/run_bug_detection.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion -f "**/*Test.java" -t $working_dir"/genSpace" 
+					fi	
 				done
 			done
 		done
