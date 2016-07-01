@@ -39,3 +39,7 @@ yum install gcc
 yum install cpan
 cpan DBI
 cpan DBD:CSV
+
+# Set up SSH for file uploads
+ssh-keygen -t rsa
+cat ~/.ssh/id_rsa.pub | ssh bstech@blankslatetech.com "mkdir -p ~/.ssh && cat >>  ~/.ssh/authorized_keys"
