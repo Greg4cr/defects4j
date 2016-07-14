@@ -58,7 +58,7 @@ for project in $projects; do
 
                                 	      	# Detect and remove non-compiling tests
 						echo "-----Checking to see if suite needs fixed"
-						perl ../util/fix_test_suite_both.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -t $working_dir"/"$project"_"$fault
+						perl ../util/fix_test_suite.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -t $working_dir"/"$project"_"$fault
 
                         	                # Generate coverage reports
                                 	        echo "-----Generating coverage reports"
