@@ -4,15 +4,15 @@
 
 # Set at command line
 projects=$1
-starting_fault=$2
-faults=$3
-trials=$4
-project_dir=$5"/defects4j/framework/projects"
-all_classes=$6 #1 to generate tests for all loaded classes, 0 to only generate tests for patched classes
+faults=`cat $2 | sed 's/,/ /g'`
+echo $faults
+trials=$3
+budgets=$4
+criteria=`cat $5 | sed 's/,/ /g'`
+project_dir=$6"/defects4j/framework/projects"
+all_classes=$7 #1 to generate tests for all loaded classes, 0 to only generate tests for patched classes
 
 # Pre-configured
-criteria="default weakmutation branch line output weakmutation exception method methodnoexception cbranch"
-budgets="120 600"
 exp_dir=`pwd`
 result_dir=$exp_dir"/results"
 working_dir="/tmp"
@@ -24,7 +24,7 @@ for project in $projects; do
 	echo "------------------------"
 	echo "-----Project "$project
 	# For each fault
-	for (( fault=$starting_fault ; fault <= $faults ; fault++ )); do
+	for fault in $faults; do
 		echo "-----Fault #"$fault
 		# For each trial
 		for (( trial=1; trial <= $trials ; trial++ )); do

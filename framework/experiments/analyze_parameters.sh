@@ -2,7 +2,7 @@
 # Gregory Gay (greg@greggay.com)
 # Perform analysis of parameter tuning results
 
-parameters="9 10 11 12 14"
+parameters="8 9 13 14"
 
 for parameter in $parameters; do
 	echo `cat ptuning.csv | cut -d, -f $parameter | head -1`

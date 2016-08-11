@@ -45,7 +45,7 @@ for project in $projects; do
 				matrices=`ls $working_dir"/suiteSpace/matrices/"`
 				for matrix in $matrices; do
 					echo $matrix
-					python OptiSuite.py -m $working_dir"/suiteSpace/matrices/"$matrix -n $suites -c $covTarget -s $sizeTarget -r 0.2 -t 0.2 -x 0.5 -z $RANDOM -a "OP" -p 100 -b 100 -q 25
+					python OptiSuite.py -m $working_dir"/suiteSpace/matrices/"$matrix -n $suites -c $covTarget -s $sizeTarget -r 0.2 -t 0.2 -x 0.5 -z $RANDOM -a "OP" -p 500 -b 200 -q 150
 					mv suites.csv $working_dir"/suiteSpace/suites/listing.csv" 
 				done
 
