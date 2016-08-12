@@ -281,7 +281,7 @@ F<out_dir/C<project_id>/evosuite-C<criterion>/C<test_id>>
 =cut
 
 # Compress generated tests
-(my $cri_no_semicolon = $CRITERION) =~ s/:/-/;
+(my $cri_no_semicolon = $CRITERION) =~ s/:/-/g;
 my $archive = "$PID-$VID-evosuite-$cri_no_semicolon.$TID.tar.bz2";
 if (system("tar -cjf $TMP_DIR/$archive -C $TMP_DIR/evosuite-$CRITERION/ .") != 0) {
     $LOG->log_msg("Error: cannot archive and compress test suite!");
