@@ -5,7 +5,6 @@
 # Set at command line
 projects=$1
 faults=`cat $2 | sed 's/,/ /g'`
-echo $faults
 trials=$3
 budgets=$4
 criteria=`cat $5 | sed 's/,/ /g'`
@@ -34,15 +33,16 @@ for project in $projects; do
 				echo "----Search Budget: "$budget	
 				# Generate EvoSuite tests
 				for criterion in $criteria; do
+					crinosc=`echo $criterion | sed 's/:/-/g'`
 					mkdir $working_dir"/"$project"_"$fault
 
-                                        if [ -a $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial"/"$project"-"$fault"f-evosuite-"$criterion"."$trial".tar.bz2" ]; then
+                                        if [ -a $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial"/"$project"-"$fault"f-evosuite-"$crinosc"."$trial".tar.bz2" ]; then
 						echo "Suite already exists."
 					else
 						echo "-----Generating EvoSuite tests for "$criterion
 						# Add configuration ID to evo config
 						cp ../util/evo.config evo.config.backup
-                       		        	echo "-Dconfiguration_id=evosuite-"$criterion"-"$trial >> ../util/evo.config
+                       		        	echo "-Dconfiguration_id=evosuite-"$crinosc"-"$trial >> ../util/evo.config
 
 						if [ $all_classes -eq 1 ]; then
 							echo "(all loaded classes)"
@@ -58,37 +58,37 @@ for project in $projects; do
 
                                 	      	# Detect and remove non-compiling tests
 						echo "-----Checking to see if suite needs fixed"
-						perl ../util/fix_test_suite.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -t $working_dir"/"$project"_"$fault
+						perl ../util/fix_test_suite.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -t $working_dir"/"$project"_"$fault
 
                         	                # Generate coverage reports
 #                                	        echo "-----Generating coverage reports"
 
 #						if [ $all_classes -eq 1 ]; then
 #							echo "(all loaded classes)"
-#	                                	        perl ../bin/run_evosuite_coverage.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -f "**/*Test.java" -t $working_dir"/"$project"_"$fault -c default -A
+#	                                	        perl ../bin/run_evosuite_coverage.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -f "**/*Test.java" -t $working_dir"/"$project"_"$fault -c default -A
 
-#							perl ../bin/run_coverage_both.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -f "**/*Test.java" -t $working_dir"/"$project"_"$fault -A
+#							perl ../bin/run_coverage_both.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -f "**/*Test.java" -t $working_dir"/"$project"_"$fault -A
 #						else
 #							echo "(only patched classes"
- #  						        perl ../bin/run_evosuite_coverage.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -f "**/*Test.java" -t $working_dir"/"$project"_"$fault -c default
+ #  						        perl ../bin/run_evosuite_coverage.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -f "**/*Test.java" -t $working_dir"/"$project"_"$fault -c default
 
-#							perl ../bin/run_coverage_both.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -f "**/*Test.java" -t $working_dir"/"$project"_"$fault
+#							perl ../bin/run_coverage_both.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -f "**/*Test.java" -t $working_dir"/"$project"_"$fault
 #						fi
 
 						# Check fault coverage
 #						echo "-----Checking fault coverage"
-#						./measure_fault_coverage.sh $project $fault $trial "evosuite-"$criterion $budget $project_dir $result_dir
+#						./measure_fault_coverage.sh $project $fault $trial "evosuite-"$crinosc $budget $project_dir $result_dir
 
 						# Measure fault detection
 						echo "----Measuring fault detection"
-				     	   	perl ../bin/run_bug_detection.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$criterion -f "**/*Test.java" -t $working_dir"/"$project"_"$fault
+				     	   	perl ../bin/run_bug_detection.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc -f "**/*Test.java" -t $working_dir"/"$project"_"$fault
 						rm -rf $working_dir"/"$project"_"$fault 
 					fi	
 				done
 			done
 		done
 		# Back up to cloud
-		tar cvzf $project"_"$fault"_"$budget"_custom.tgz" $result_dir"/suites/"$project"_"$fault"/"
-		scp $project"_"$fault"_"$budget"_custom.tgz" bstech@blankslatetech.com:/home/bstech/greggay.com/data/	
+#		tar cvzf $project"_"$fault"_"$budget"_custom.tgz" $result_dir"/suites/"$project"_"$fault"/"
+#		scp $project"_"$fault"_"$budget"_custom.tgz" bstech@blankslatetech.com:/home/bstech/greggay.com/data/	
 	done
 done
