@@ -88,7 +88,7 @@ for project in $projects; do
 			done
 		done
 		# Back up to cloud
-#		tar cvzf $project"_"$fault"_"$budget"_custom.tgz" $result_dir"/suites/"$project"_"$fault"/"
-#		scp $project"_"$fault"_"$budget"_custom.tgz" bstech@blankslatetech.com:/home/bstech/greggay.com/data/	
+		tar cvzf $project"_"$fault"_"$budgets"_custom.tgz" $result_dir"/suites/"$project"_"$fault"/"
+		scp $project"_"$fault"_"$budgets"_custom.tgz" bstech@blankslatetech.com:/home/bstech/greggay.com/data/	
 	done
 done

@@ -226,7 +226,6 @@ suite: foreach (@list) {
     printf ("$sep\n$name\n$sep\n");
 
     $project->checkout_vid($vid);
-
     # Extract generated tests into temp directory
     Utils::extract_test_suite("$SUITE_DIR/$name", "$TMP_DIR/$src")
         or die "Cannot extract test suite!";
