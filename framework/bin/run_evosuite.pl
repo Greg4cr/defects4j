@@ -147,7 +147,8 @@ my %criteria = ( branch         => 120,
                  "branch:output" => 120,
                  "branch:output:line" => 120,
                  "branch:output:line:weakmutation" => 120,
-                 "branch:weakmutation:line" => 120
+                 "branch:weakmutation:line" => 120,
+                 "cbranch:weakmutation" => 120
                );
 
 =pod
