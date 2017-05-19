@@ -94,7 +94,8 @@
                destdir="${build.home}/gen-tests"                        
                debug="true"                                            
                deprecation="false"                                     
-               optimize="false">
+               optimize="false"
+               compiler="modern">
             <compilerarg line="-Xmaxerrs 100000" />
             <classpath>
                 <path refid="test.classpath" />
