@@ -534,8 +534,6 @@ sub run_evosuite {
                     "-Dtest_dir=evosuite-$criterion " .
                     "-Dsearch_budget=$time " .
                     "-Dassertion_timeout=$timeout " .
-                    "-Djunit_suffix=EvoSuite_$criterion" .
-                    "_Test " .
                     "-Dshow_progress=false " .
                     "$config";
     } else {
@@ -546,8 +544,6 @@ sub run_evosuite {
                     "-criterion $criterion " .
                     "-Dsearch_budget=$time " .
                     "-Dassertion_timeout=$timeout " .
-                    "-Djunit_suffix=EvoSuite_$criterion" .
-                    "_Test " .
                     "-Dshow_progress=false " .
                     "$config";
     }
