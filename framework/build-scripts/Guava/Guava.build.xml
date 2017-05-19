@@ -66,7 +66,7 @@
         </exec>  
     </target>
   
-    <target name="compile.tests" depends="build-lib" description="Compile the tests.">
+    <target name="compile.tests" depends="build-lib,compile" description="Compile the tests.">
        <exec dir="${basedir}" executable="/bin/bash">
             <arg line="mvn -pl 'guava,guava-testlib,guava-tests,.' test-compile -U"/>
        </exec>

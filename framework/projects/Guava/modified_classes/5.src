@@ -1,2 +1,2 @@
-google.common.util.concurrent.AbstractCatchingFuture
-google.common.util.concurrent.AbstractTransformFuture
+com.google.common.util.concurrent.AbstractCatchingFuture
+com.google.common.util.concurrent.AbstractTransformFuture
