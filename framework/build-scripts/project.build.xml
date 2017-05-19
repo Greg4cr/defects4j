@@ -101,7 +101,7 @@
                 <pathelement path="${classes.dir}" />
                 <!-- Add dependencies to test generation tools -->
                 <pathelement path="${jcrasher.jar}" />
-                <pathelement path="${script.dir}/build-scripts/lib/evosuite-standalone-runtime-1.0.3.jar" />
+                <pathelement path="${script.dir}/build-scripts/lib/evosuite-standalone-runtime-1.0.5.jar" />
                 <pathelement path="${script.dir}/build-scripts/lib/evosuite.jar" />
                 <pathelement path="${script.dir}/lib/test_generation/generation/randoop-current.jar" />
             </classpath>
