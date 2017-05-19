@@ -528,16 +528,27 @@ sub run_evosuite {
     close(IN);
 
     # TODO: better layout of libs
-    my $cmd = "java -cp $SCRIPT_DIR/build-scripts/lib/evosuite.jar org.evosuite.EvoSuite " .
-                "-class $class " .
-                "-projectCP $cp " .
-                "-Dtest_dir=evosuite-$criterion " .
-                "-criterion $criterion " .
-                "-Dsearch_budget=$time " .
-                "-Dassertion_timeout=$timeout " .
-                "-Djunit_suffix=EvoSuite_$criterion " .
-                "-Dshow_progress=false " .
-                "$config";
+    my $cmd = "";
+    if ($criterion eq "default") {
+        $cmd = "java -cp $SCRIPT_DIR/build-scripts/lib/evosuite.jar org.evosuite.EvoSuite " .
+                    "-class $class " .
+                    "-projectCP $cp " .
+                    "-Dtest_dir=evosuite-$criterion " .
+                    "-Dsearch_budget=$time " .
+                    "-Dassertion_timeout=$timeout " .
+                    "-Dshow_progress=false " .
+                    "$config";
+    } else {
+        $cmd = "java -cp $SCRIPT_DIR/build-scripts/lib/evosuite.jar org.evosuite.EvoSuite " .
+                    "-class $class " .
+                    "-projectCP $cp " .
+                    "-Dtest_dir=evosuite-$criterion " .
+                    "-criterion $criterion " .
+                    "-Dsearch_budget=$time " .
+                    "-Dassertion_timeout=$timeout " .
+                    "-Dshow_progress=false " .
+                    "$config";
+    }
 
     print "Running EvoSuite ($criterion) using config $config_file ... ";
     my $output = `cd $self->{prog_root}; $cmd 2>&1`;
@@ -586,7 +597,7 @@ sub run_randoop {
     }
     close(IN);
 
-    my $cmd = "java -ea -classpath $SCRIPT_DIR/projects/lib/randoop.jar:$cp randoop.main.Main gentests " .
+    my $cmd = "java -ea -classpath $SCRIPT_DIR/lib/test_generation/generation/randoop-current.jar:$cp randoop.main.Main gentests " .
               "$target_classes " .
               "--junit-output-dir=randoop " .
               "--timelimit=$timeout " .

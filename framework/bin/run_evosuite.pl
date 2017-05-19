@@ -84,12 +84,64 @@ Debug: Enable verbose logging and do not delete the temporary check-out director
 
 =head2 Supported test criteria and default search budgets:
 
-B<branch> => 100s, B<weakmutation> => 100s, B<strongmutation> => 200s
+B<branch> => 120s, B<weakmutation> => 120s, B<strongmutation> => 120s
 
 =cut
-my %criteria = ( branch         => 100,
-                 weakmutation   => 100,
-                 strongmutation => 200
+my %criteria = ( branch         => 120,
+                 weakmutation   => 120,
+                 strongmutation => 120,
+                 onlymutation => 120,
+                 defuse => 120,
+                 cbranch => 120,
+                 ibranch => 120,
+                 statement => 120,
+                 rho => 120,
+                 ambiguitiy => 120,
+                 alldefs => 120,
+                 exception => 120,
+                 regression => 120,
+                 readability => 120,
+                 onlybranch => 120,
+                 methodtrace => 120,
+                 method => 120,
+                 methodnoexception => 120,
+                 onlyline => 120,
+                 line => 120,
+                 output => 120,
+                 input => 120,
+                 trycatch => 120,
+                 default => 120,
+                 "branch:line" => 120,
+                 "branch:line:cbranch" => 120,
+                 "branch:line:cbranch:weakmutation" => 120,
+                 "branch:line:cbranch:weakmutation:method" => 120,
+                 "branch:cbranch" => 120,
+                 "branch:weakmutation" => 120,
+                 "branch:weakmutation:cbranch" => 120,
+                 "branch:weakmutation:cbranch:exception" => 120,
+                 "cbranch:branch:line:weakmutation:output" => 120,
+                 "branch:exception" => 120,
+                 "branch:exception:cbranch" => 120,
+                 "branch:weakmutation" => 120,
+                 "branch:weakmutation:method" => 120,
+                 "branch:output" => 120,
+                 "branch:output:line" => 120,
+                 "branch:output:line:weakmutation" => 120,
+                 "branch:weakmutation:line" => 120,
+                 "cbranch:weakmutation" => 120,
+                 "branch:line:weakmutation:exception" => 120,
+                 "branch:cbranch:weakmutation:output" => 120,
+                 "branch:exception:line" => 120,
+                 "branch:exception:line:methodnoexception" => 120,
+                 "cbranch:weakmutation:output" => 120,
+                 "branch:line:output:exception" => 120,
+                 "cbranch:branch:line:exception" => 120,
+                 "cbranch:exception" => 120,
+                 "branch:exception:method" => 120,
+                 "branch:line:method" => 120,
+                 "branch:exception:line:method" => 120,
+                 "branch:line:output:exception:method" => 120,
+                 "branch:line:weakmutation:exception:method" => 120
                );
 
 =pod
@@ -218,17 +270,18 @@ foreach my $class (@classes) {
 # Copy log file for this version id and test criterion to output directory
 system("mv $log $LOG_DIR") == 0 or die "Cannot copy log file!";
 # Compress generated tests and copy archive to output directory
-my $archive = "$PID-$VID-evosuite-$CRITERION.$TID.tar.bz2";
+(my $cri_no_semicolon = $CRITERION) =~ s/:/-/g;
+my $archive = "$PID-$VID-evosuite-$cri_no_semicolon.$TID.tar.bz2";
 if (system("tar -cjf $TMP_DIR/$archive -C $TMP_DIR/evosuite-$CRITERION/ .") != 0) {
-    $LOG->log_msg("Error: cannot compress test suites!");
-    next;
+    $LOG->log_msg("Error: cannot archive and compress test suite!");
+} else {
+    # Move test suite to OUT_DIR/pid/suite_src/test_id
+    #
+    # e.g., .../Lang/evosuite-branch/1
+    #
+    my $dir = "$OUT_DIR/$PID/evosuite-$cri_no_semicolon/$TID";
+    system("mkdir -p $dir && mv $TMP_DIR/$archive $dir") == 0 or die "Cannot move test suite archive to output directory!";
 }
-# Move test suite to OUT_DIR/pid/suite_src/test_id
-#
-# e.g., .../Lang/evosuite-branch/1
-#
-my $dir = "$OUT_DIR/$PID/evosuite-$CRITERION/$TID";
-system("mkdir -p $dir && mv $TMP_DIR/$archive $dir") == 0 or die "Cannot copy test suite archive to output directory!";
 
 $LOG->log_time("End test generation");
 
