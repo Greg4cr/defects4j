@@ -55,10 +55,11 @@ for project in $projects; do
 						mv evo.config.backup ../util/evo.config
 						cat evosuite-report/statistics.csv >> $result_dir"/suites/"$project"_"$fault"/"$budget"/generation-statistics.csv"
 						rm -rf evosuite-report
+					fi
 
-                                	      	# Detect and remove non-compiling tests
-						echo "-----Checking to see if suite needs fixed"
-						perl ../util/fix_test_suite.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -t $working_dir"/"$project"_"$fault
+                                	# Detect and remove non-compiling tests
+					echo "-----Checking to see if suite needs fixed"
+					perl ../util/fix_test_suite.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -t $working_dir"/"$project"_"$fault
 
                         	                # Generate coverage reports
 #                                	        echo "-----Generating coverage reports"
@@ -80,10 +81,9 @@ for project in $projects; do
 #						./measure_fault_coverage.sh $project $fault $trial "evosuite-"$crinosc $budget $project_dir $result_dir
 
 						# Measure fault detection
-						echo "----Measuring fault detection"
-				     	   	perl ../bin/run_bug_detection.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc -f "**/*Test.java" -t $working_dir"/"$project"_"$fault
-						rm -rf $working_dir"/"$project"_"$fault 
-					fi	
+					echo "----Measuring fault detection"
+				    	perl ../bin/run_bug_detection.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc -f "**/*Test.java" -t $working_dir"/"$project"_"$fault
+					rm -rf $working_dir"/"$project"_"$fault 
 				done
 			done
 		done
