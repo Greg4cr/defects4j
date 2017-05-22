@@ -51,7 +51,7 @@ sub _apply_cmd {
     my ($self, $work_dir, $patch_file, $path) = @_;
     # Path to patch directory within the working directory
     $path = $path // ".";
-    return "git --work-tree=$work_dir apply --directory=$work_dir/$path $patch_file 2>&1";
+    return "git --work-tree=$work_dir apply --unsafe-paths --directory=$work_dir/$path $patch_file 2>&1";
 }
 
 sub _diff_cmd {
