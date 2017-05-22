@@ -49,7 +49,7 @@ for project in $projects; do
 							perl ../bin/run_evosuite.pl -p $project -v $fault"f" -n $trial -o $result_dir"/suites/"$project"_"$fault"/"$budget -c $criterion -b $budget -t $working_dir"/"$project"_"$fault -a 450 -A
 						else
 							echo "(only patched classes)"
-							perl ../bin/run_evosuite.pl -p $project -v $fault"f" -n $trial -o $result_dir"/suites/"$project"_"$fault"/"$budget -c $criterion -b $budget -t $working_dir"/"$project"_"$fault -a 450
+							perl ../bin/run_evosuite.pl -p $project -v $fault"f" -n $trial -o $result_dir"/suites/"$project"_"$fault"/"$budget -c $criterion -b $budget -t $working_dir"/"$project"_"$fault -a 450 
 						fi
 
 						mv evo.config.backup ../util/evo.config
@@ -83,12 +83,12 @@ for project in $projects; do
 						# Measure fault detection
 					echo "----Measuring fault detection"
 				    	perl ../bin/run_bug_detection.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc -f "**/*Test.java" -t $working_dir"/"$project"_"$fault
-					rm -rf $working_dir"/"$project"_"$fault 
+					#rm -rf $working_dir"/"$project"_"$fault 
 				done
 			done
 		done
 		# Back up to cloud
-	#	tar cvzf $project"_"$fault"_"$budgets"_custom.tgz" $result_dir"/suites/"$project"_"$fault"/"
+		tar cvzf $project"_"$fault"_"$budgets"_custom.tgz" $result_dir"/suites/"$project"_"$fault"/"
 	#	scp $project"_"$fault"_"$budgets"_custom.tgz" bstech@blankslatetech.com:/home/bstech/greggay.com/data/	
 	done
 done
