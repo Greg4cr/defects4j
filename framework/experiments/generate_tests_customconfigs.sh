@@ -80,8 +80,8 @@ for project in $projects; do
 #						./measure_fault_coverage.sh $project $fault $trial "evosuite-"$crinosc $budget $project_dir $result_dir
 
 						# Measure fault detection
-						#echo "----Measuring fault detection"
-				     	   	#perl ../bin/run_bug_detection.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc -f "**/*Test.java" -t $working_dir"/"$project"_"$fault
+						echo "----Measuring fault detection"
+				     	   	perl ../bin/run_bug_detection.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc -f "**/*Test.java" -t $working_dir"/"$project"_"$fault
 						rm -rf $working_dir"/"$project"_"$fault 
 					fi	
 				done
