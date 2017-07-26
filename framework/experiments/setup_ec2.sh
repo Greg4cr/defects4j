@@ -6,16 +6,18 @@
 yum update
 
 # Install Java8
-java_base_version="8"
-java_sub_version="91"
-java_base_build="14"
 
-java_version="${java_base_version}u${java_sub_version}"
-java_build="b${java_base_build}"
-java_version_with_build="${java_version}-${java_build}"
+## Latest JDK8 version is JDK8u141 released on 19th July, 2017.
 
-wget --no-cookies --header "Cookie: gpw_e24=xxx; oraclelicense=accept-securebackup-cookie;" "http://download.oracle.com/otn-pub/java/jdk/${java_version_with_build}/jdk-${java_version}-linux-x64.rpm"
-rpm -i jdk-${java_version}-linux-x64.rpm
+BASE_URL_8=http://download.oracle.com/otn-pub/java/jdk/8u141-b15/336fa29ff2bb4ef291e347e091f7f4a7/jdk-8u141
+
+platform="-linux-x64.rpm"
+
+JDK_VERSION=`echo $BASE_URL_8 | rev | cut -d "/" -f1 | rev`
+
+wget -c --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" "${BASE_URL_8}${platform}"
+
+rpm -i ${JDK_VERSION}${platform}
 
 echo "export JAVA_HOME=/usr/java/default" >> /home/ec2-user/.bashrc
 
