@@ -86,6 +86,10 @@ All relevant classes: Generate tests for all relevant classes (i.e., all classes
 touched by the triggering tests). By default tests are generated only for
 classes modified by the bug fix.
 
+=item -C
+
+All project classes: Variant of -A. Generate tests for all project classes.
+
 =back
 
 =head1 DESCRIPTION
@@ -107,9 +111,61 @@ bug. The latter is the default behavior.
 =back
 
 =cut
-my %criteria = ( branch         => 100,
-                 weakmutation   => 100,
-                 strongmutation => 200
+my %criteria = ( branch         => 120,
+                 weakmutation   => 120,
+                 strongmutation => 120,
+                 onlymutation => 120,
+                 defuse => 120,
+                 cbranch => 120,
+                 ibranch => 120,
+                 statement => 120,
+                 rho => 120,
+                 ambiguitiy => 120,
+                 alldefs => 120,
+                 exception => 120,
+                 regression => 120,
+                 readability => 120,
+                 onlybranch => 120,
+                 methodtrace => 120,
+                 method => 120,
+                 methodnoexception => 120,
+                 onlyline => 120,
+                 line => 120,
+                 output => 120,
+                 input => 120,
+                 trycatch => 120,
+                 default => 120,
+                 "branch:line" => 120,
+                 "branch:line:cbranch" => 120,
+                 "branch:line:cbranch:weakmutation" => 120,
+                 "branch:line:cbranch:weakmutation:method" => 120,
+                 "branch:cbranch" => 120,
+                 "branch:weakmutation" => 120,
+                 "branch:weakmutation:cbranch" => 120,
+                 "branch:weakmutation:cbranch:exception" => 120,
+                 "cbranch:branch:line:weakmutation:output" => 120,
+                 "branch:exception" => 120,
+                 "branch:exception:cbranch" => 120,
+                 "branch:weakmutation" => 120,
+                 "branch:weakmutation:method" => 120,
+                 "branch:output" => 120,
+                 "branch:output:line" => 120,
+                 "branch:output:line:weakmutation" => 120,
+                 "branch:weakmutation:line" => 120,
+                 "cbranch:weakmutation" => 120,
+                 "branch:line:weakmutation:exception" => 120,
+                 "branch:cbranch:weakmutation:output" => 120,
+                 "branch:exception:line" => 120,
+                 "branch:exception:line:methodnoexception" => 120,
+                 "cbranch:weakmutation:output" => 120,
+                 "branch:line:output:exception" => 120,
+                 "cbranch:branch:line:exception" => 120,
+                 "cbranch:exception" => 120,
+                 "branch:exception:method" => 120,
+                 "branch:line:method" => 120,
+                 "branch:exception:line:method" => 120,
+                 "branch:line:output:exception:method" => 120,
+                 "branch:line:weakmutation:exception:method" => 120
                );
 
 =pod
@@ -141,7 +197,7 @@ use Log;
 # Process arguments and issue usage message if necessary.
 #
 my %cmd_opts;
-getopts('p:v:o:n:t:c:b:a:AD', \%cmd_opts) or pod2usage(1);
+getopts('p:v:o:n:t:c:b:a:ACD', \%cmd_opts) or pod2usage(1);
 
 pod2usage(1) unless defined $cmd_opts{p} and
                     defined $cmd_opts{v} and
@@ -174,6 +230,7 @@ $BUDGET = $BUDGET // $default;
 $DEBUG = 1 if defined $cmd_opts{D};
 
 my $CLASSES = defined $cmd_opts{A} ? "loaded_classes" : "modified_classes";
+$CLASSES = defined $cmd_opts{C} ? "all_classes" :  $CLASSES;
 
 # List of target classes
 my $TARGET_CLASSES = "$SCRIPT_DIR/projects/$PID/$CLASSES/$BID.src";
@@ -251,15 +308,16 @@ F<out_dir/C<project_id>/evosuite-C<criterion>/C<test_id>>
 =cut
 
 # Compress generated tests
-my $archive = "$PID-$VID-evosuite-$CRITERION.$TID.tar.bz2";
+(my $cri_no_semicolon = $CRITERION) =~ s/:/-/g;
+my $archive = "$PID-$VID-evosuite-$cri_no_semicolon.$TID.tar.bz2";
 if (system("tar -cjf $TMP_DIR/$archive -C $TMP_DIR/evosuite-$CRITERION/ .") != 0) {
-    $LOG->log_msg("Error: cannot archive and ompress test suite!");
+    $LOG->log_msg("Error: cannot archive and compress test suite!");
 } else {
     # Move test suite to OUT_DIR/pid/suite_src/test_id
     #
     # e.g., .../Lang/evosuite-branch/1
     #
-    my $dir = "$OUT_DIR/$PID/evosuite-$CRITERION/$TID";
+    my $dir = "$OUT_DIR/$PID/evosuite-$cri_no_semicolon/$TID";
     system("mkdir -p $dir && mv $TMP_DIR/$archive $dir") == 0 or die "Cannot move test suite archive to output directory!";
 }
 
