@@ -1,0 +1,7 @@
+org.jfree.chart.plot.PiePlot3D
+org.jfree.chart.plot.MultiplePiePlot
+org.jfree.chart.demo.TimeSeriesChartDemo1
+org.jfree.chart.demo.PieChartDemo1
+org.jfree.chart.plot.PiePlot
+org.jfree.chart.demo.BarChartDemo1
+org.jfree.chart.plot.RingPlot

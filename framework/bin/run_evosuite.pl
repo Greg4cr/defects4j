@@ -88,7 +88,7 @@ classes modified by the bug fix.
 
 =item -C
 
-All project classes: Variant of -A. Generate tests for all project classes.
+All selected classes: Variant of -A. Generate tests for all selected classes (in selected_classes folder)
 
 =back
 
@@ -230,7 +230,7 @@ $BUDGET = $BUDGET // $default;
 $DEBUG = 1 if defined $cmd_opts{D};
 
 my $CLASSES = defined $cmd_opts{A} ? "loaded_classes" : "modified_classes";
-$CLASSES = defined $cmd_opts{C} ? "all_classes" :  $CLASSES;
+$CLASSES = defined $cmd_opts{C} ? "selected_classes" :  $CLASSES;
 
 # List of target classes
 my $TARGET_CLASSES = "$SCRIPT_DIR/projects/$PID/$CLASSES/$BID.src";

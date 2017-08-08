@@ -1,0 +1,6 @@
+org.jfree.data.time.MovingAverage
+org.jfree.chart.labels.SymbolicXYItemLabelGenerator
+org.jfree.data.time.TimeSeriesCollection
+org.jfree.data.time.TimeSeries
+org.jfree.chart.demo.TimeSeriesChartDemo1
+org.jfree.data.time.TimeSeriesTableModel

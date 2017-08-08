@@ -1,0 +1,12 @@
+org.jfree.chart.block.GridArrangement
+org.jfree.chart.ChartFrame
+org.jfree.chart.title.LegendItemBlockContainer
+org.jfree.chart.block.ColumnArrangement
+org.jfree.chart.editor.ChartEditorManager
+org.jfree.chart.block.BlockContainer
+org.jfree.chart.block.FlowArrangement
+org.jfree.chart.title.CompositeTitle
+org.jfree.chart.servlet.DisplayChart
+org.jfree.chart.block.CenterArrangement
+org.jfree.chart.block.BorderArrangement
+org.jfree.chart.title.LegendTitle
