@@ -1,0 +1,11 @@
+org.apache.commons.math.transform.FastHadamardTransformer
+org.apache.commons.math.complex.ComplexField
+org.apache.commons.math.transform.FastSineTransformer
+org.apache.commons.math.complex.ComplexFormat
+org.apache.commons.math.analysis.solvers.LaguerreSolver$ComplexSolver
+org.apache.commons.math.complex.Complex
+org.apache.commons.math.complex.ComplexUtils
+org.apache.commons.math.analysis.solvers.LaguerreSolver
+org.apache.commons.math.complex.ComplexField$LazyHolder
+org.apache.commons.math.transform.FastFourierTransformer
+org.apache.commons.math.transform.FastCosineTransformer

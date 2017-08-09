@@ -1,0 +1,11 @@
+org.apache.commons.math.stat.inference.TestUtils
+org.apache.commons.math.ode.nonstiff.GraggBulirschStoerIntegrator
+org.apache.commons.math.ode.events.EventState
+org.apache.commons.math.analysis.UnivariateRealSolverFactoryImpl
+org.apache.commons.math.ode.nonstiff.EmbeddedRungeKuttaIntegrator
+org.apache.commons.math.ode.nonstiff.RungeKuttaIntegrator
+org.apache.commons.math.ode.AdaptiveStepsizeIntegrator
+org.apache.commons.math.stat.inference.OneWayAnovaImpl
+org.apache.commons.math.analysis.BrentSolver
+org.apache.commons.math.distribution.PoissonDistributionImpl
+org.apache.commons.math.stat.inference.TTestImpl

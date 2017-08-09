@@ -1,0 +1,15 @@
+org.apache.commons.math.stat.correlation.SpearmansCorrelation
+org.apache.commons.math.ode.MultistepIntegrator
+org.apache.commons.math.ode.events.EventState
+org.apache.commons.math.analysis.solvers.UnivariateRealSolverFactoryImpl
+org.apache.commons.math.ode.nonstiff.RungeKuttaIntegrator
+org.apache.commons.math.ode.nonstiff.AdaptiveStepsizeIntegrator
+org.apache.commons.math.analysis.solvers.UnivariateRealSolverUtils$LazyHolder
+org.apache.commons.math.stat.inference.TestUtils
+org.apache.commons.math.ode.nonstiff.GraggBulirschStoerIntegrator
+org.apache.commons.math.ode.nonstiff.AdamsBashforthIntegrator
+org.apache.commons.math.ode.nonstiff.EmbeddedRungeKuttaIntegrator
+org.apache.commons.math.ode.nonstiff.DormandPrince853Integrator
+org.apache.commons.math.optimization.general.NonLinearConjugateGradientOptimizer
+org.apache.commons.math.analysis.solvers.BrentSolver
+org.apache.commons.math.ode.nonstiff.AdamsMoultonIntegrator

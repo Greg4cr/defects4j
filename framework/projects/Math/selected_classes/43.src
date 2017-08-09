@@ -1,0 +1,9 @@
+org.apache.commons.math.random.EmpiricalDistributionImpl
+org.apache.commons.math.random.EmpiricalDistributionImpl$ArrayDataAdapter
+org.apache.commons.math.random.EmpiricalDistributionImpl$DataAdapterFactory
+org.apache.commons.math.stat.descriptive.AggregateSummaryStatistics$AggregatingSummaryStatistics
+org.apache.commons.math.stat.descriptive.SummaryStatistics
+org.apache.commons.math.random.ValueServer
+org.apache.commons.math.stat.descriptive.SynchronizedSummaryStatistics
+org.apache.commons.math.stat.descriptive.AggregateSummaryStatistics
+org.apache.commons.math.random.EmpiricalDistributionImpl$StreamDataAdapter

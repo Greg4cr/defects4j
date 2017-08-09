@@ -1,4 +1,4 @@
-.org.apache.commons.lang.time.DateFormatUtils
-.org.apache.commons.lang.time.StopWatch
-.org.apache.commons.lang.time.DateUtils
-.org.apache.commons.lang.time.DurationFormatUtils
+org.apache.commons.lang.time.DateFormatUtils
+org.apache.commons.lang.time.StopWatch
+org.apache.commons.lang.time.DateUtils
+org.apache.commons.lang.time.DurationFormatUtils

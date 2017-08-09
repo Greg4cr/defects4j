@@ -1,0 +1,4 @@
+org.apache.commons.math.stat.inference.TestUtils
+org.apache.commons.math.distribution.DistributionFactoryImpl
+org.apache.commons.math.distribution.PoissonDistributionImpl
+org.apache.commons.math.distribution.NormalDistributionImpl

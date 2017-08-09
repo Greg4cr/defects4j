@@ -1,0 +1,17 @@
+org.apache.commons.math.distribution.PoissonDistributionImpl
+org.apache.commons.math.special.Beta
+org.apache.commons.math.special.Gamma
+org.apache.commons.math.distribution.NormalDistributionImpl
+org.apache.commons.math.distribution.DistributionFactory
+org.apache.commons.math.distribution.DistributionFactoryImpl
+org.apache.commons.math.stat.inference.TestFactory
+org.apache.commons.math.stat.inference.TTestImpl
+org.apache.commons.math.distribution.BinomialDistributionImpl
+org.apache.commons.math.stat.inference.TestUtils
+org.apache.commons.math.stat.regression.SimpleRegression
+org.apache.commons.math.distribution.TDistributionImpl
+org.apache.commons.math.distribution.FDistributionImpl
+org.apache.commons.math.distribution.GammaDistributionImpl
+org.apache.commons.math.distribution.PascalDistributionImpl
+org.apache.commons.math.stat.inference.TestFactoryImpl
+org.apache.commons.math.stat.inference.ChiSquareTestImpl

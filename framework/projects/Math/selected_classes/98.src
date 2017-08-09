@@ -1,0 +1,10 @@
+org.apache.commons.math.estimation.AbstractEstimator
+org.apache.commons.math.estimation.GaussNewtonEstimator
+org.apache.commons.math.stat.descriptive.SynchronizedMultivariateSummaryStatistics
+org.apache.commons.math.stat.regression.GLSMultipleLinearRegression
+org.apache.commons.math.linear.MatrixUtils
+org.apache.commons.math.linear.BigMatrixImpl
+org.apache.commons.math.linear.RealMatrixImpl
+org.apache.commons.math.linear.QRDecompositionImpl
+org.apache.commons.math.random.CorrelatedRandomVectorGenerator
+org.apache.commons.math.stat.regression.AbstractMultipleLinearRegression

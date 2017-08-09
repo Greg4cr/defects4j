@@ -1,0 +1,13 @@
+org.apache.commons.math3.geometry.euclidean.twod.Line
+org.apache.commons.math3.geometry.euclidean.threed.SubPlane
+org.apache.commons.math3.geometry.euclidean.twod.NestedLoops
+org.apache.commons.math3.geometry.euclidean.threed.PolyhedronsSet$RotationTransform
+org.apache.commons.math3.geometry.euclidean.threed.OutlineExtractor$BoundaryProjector
+org.apache.commons.math3.geometry.euclidean.threed.OutlineExtractor
+org.apache.commons.math3.geometry.euclidean.twod.PolygonsSet
+org.apache.commons.math3.geometry.euclidean.threed.PolyhedronsSet$FacetsContributionVisitor
+org.apache.commons.math3.geometry.euclidean.twod.Line$LineTransform
+org.apache.commons.math3.geometry.euclidean.threed.PolyhedronsSet
+org.apache.commons.math3.geometry.euclidean.twod.PolygonsSet$SegmentsBuilder
+org.apache.commons.math3.geometry.euclidean.threed.Plane
+org.apache.commons.math3.geometry.euclidean.twod.SubLine

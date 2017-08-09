@@ -1,0 +1,4 @@
+org.apache.commons.math.stat.inference.TestUtils
+org.apache.commons.math.stat.inference.TestFactoryImpl
+org.apache.commons.math.stat.inference.ChiSquareTestImpl
+org.apache.commons.math.stat.inference.TestFactory

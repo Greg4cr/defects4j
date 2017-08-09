@@ -1,0 +1,3 @@
+org.apache.commons.math.optimization.general.PowellOptimizer$LineSearch
+org.apache.commons.math.optimization.univariate.BrentOptimizer
+org.apache.commons.math.optimization.general.PowellOptimizer

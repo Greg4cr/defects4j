@@ -1,0 +1,7 @@
+org.apache.commons.math.analysis.solvers.UnivariateRealSolverFactory
+org.apache.commons.math.stat.inference.TestUtils
+org.apache.commons.math.stat.correlation.SpearmansCorrelation
+org.apache.commons.math.analysis.solvers.NewtonSolver
+org.apache.commons.math.analysis.solvers.UnivariateRealSolverFactoryImpl
+org.apache.commons.math.analysis.solvers.UnivariateRealSolverUtils$LazyHolder
+org.apache.commons.math.analysis.solvers.BisectionSolver
