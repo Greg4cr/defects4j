@@ -1,0 +1,6 @@
+.org.apache.commons.lang.text.StrBuilder$StrBuilderWriter
+.org.apache.commons.lang.text.StrBuilder$StrBuilderReader
+.org.apache.commons.lang.text.StrTokenizer
+.org.apache.commons.lang.text.StrBuilder
+.org.apache.commons.lang.text.StrSubstitutor
+.org.apache.commons.lang.text.StrBuilder$StrBuilderTokenizer
