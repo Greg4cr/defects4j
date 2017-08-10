@@ -1,0 +1,7 @@
+com.google.javascript.jscomp.CollapseProperties
+com.google.javascript.jscomp.DefaultPassConfig$56
+com.google.javascript.jscomp.VariableReferenceCheck
+com.google.javascript.jscomp.ReferenceCollectingCallback
+com.google.javascript.jscomp.DefaultPassConfig$23
+com.google.javascript.jscomp.InlineVariables
+com.google.javascript.jscomp.DefaultPassConfig$49

@@ -1,0 +1,8 @@
+com.google.javascript.jscomp.DefaultPassConfig$103
+com.google.javascript.jscomp.InlineFunctions$FindCandidatesReferences
+com.google.javascript.jscomp.InlineFunctions$Inline
+com.google.javascript.jscomp.FunctionToBlockMutator
+com.google.javascript.jscomp.RenameLabels
+com.google.javascript.jscomp.InlineFunctions
+com.google.javascript.jscomp.DefaultPassConfig$72
+com.google.javascript.jscomp.FunctionInjector

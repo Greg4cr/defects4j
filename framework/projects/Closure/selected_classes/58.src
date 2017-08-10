@@ -1,0 +1,5 @@
+com.google.javascript.jscomp.DeadAssignmentsElimination
+com.google.javascript.jscomp.DefaultPassConfig$80
+com.google.javascript.jscomp.LiveVariablesAnalysis
+com.google.javascript.jscomp.CoalesceVariableNames
+com.google.javascript.jscomp.DefaultPassConfig$73

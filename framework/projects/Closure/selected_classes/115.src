@@ -1,0 +1,5 @@
+com.google.javascript.jscomp.InlineFunctions$Inline
+com.google.javascript.jscomp.DefaultPassConfig$84
+com.google.javascript.jscomp.FunctionInjector$CallSiteType
+com.google.javascript.jscomp.FunctionInjector
+com.google.javascript.jscomp.InlineFunctions$FindCandidatesReferences

@@ -1,0 +1,17 @@
+com.google.javascript.jscomp.FunctionRewriter
+com.google.javascript.jscomp.InlineFunctions
+com.google.javascript.jscomp.DefaultPassConfig$21
+com.google.javascript.jscomp.DefaultPassConfig$98
+com.google.javascript.jscomp.FunctionRewriter$ReductionGatherer
+com.google.javascript.jscomp.PeepholeReplaceKnownMethods
+com.google.javascript.jscomp.InlineCostEstimator
+com.google.javascript.jscomp.DefaultPassConfig$90
+com.google.javascript.jscomp.FunctionRewriter$Reduction
+com.google.javascript.jscomp.DefaultPassConfig$13
+com.google.javascript.jscomp.FunctionInjector
+com.google.javascript.jscomp.InlineFunctions$FindCandidatesReferences
+com.google.javascript.jscomp.ExpandJqueryAliases
+com.google.javascript.jscomp.AliasKeywords
+com.google.javascript.jscomp.DefaultPassConfig$78
+com.google.javascript.jscomp.InlineFunctions$Inline
+com.google.javascript.jscomp.DefaultPassConfig$20
