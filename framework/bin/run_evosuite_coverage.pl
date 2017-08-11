@@ -101,7 +101,25 @@ my %criteria = ( branch,
                  output,
                  input,
                  trycatch,
-                 default
+                 default,
+                 "branch:line",
+                 "branch:line:cbranch",
+                 "branch:line:cbranch:weakmutation",
+                 "branch:line:cbranch:weakmutation:method",
+                 "branch:cbranch",
+                 "branch:weakmutation",
+                 "branch:weakmutation:cbranch",
+                 "branch:weakmutation:cbranch:exception",
+                 "cbranch:branch:line:weakmutation:output",
+                 "branch:exception",
+                 "branch:exception:cbranch",
+                 "branch:weakmutation",
+                 "branch:weakmutation:method",
+                 "branch:output",
+                 "branch:output:line",
+                 "branch:output:line:weakmutation",
+                 "branch:weakmutation:line",
+                 "cbranch:weakmutation"
                );
 
 =pod

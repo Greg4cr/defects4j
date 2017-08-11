@@ -9,7 +9,7 @@ mkdir class_lists
 mkdir "class_lists/"$project
 mkdir "class_lists/"$project"/all_classes"
 
-for ((fault=1; fault<=$faults; fault++)); do
+for ((fault=22; fault<=$faults; fault++)); do
 	defects4j checkout -p $project -v $fault"f" -w "/tmp/"$project"_"$fault
 	cd "/tmp/"$project"_"$fault
 	defects4j compile
