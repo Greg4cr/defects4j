@@ -75,6 +75,14 @@ JFreeChart (L<Vcs::Svn> backend)
 
 Closure compiler (L<Vcs::Git> backend)
 
+=item * L<Guava|Project::Guava>
+
+Guava library (L<Vcs::Git> backend)
+
+=item * L<JacksonCore|Project::JacksonCore>
+
+Jackson core library (L<Vcs::Git> backend)
+
 =item * L<Lang|Project::Lang>
 
 Commons lang (L<Vcs::Git> backend)
@@ -82,6 +90,10 @@ Commons lang (L<Vcs::Git> backend)
 =item * L<Math|Project::Math>
 
 Commons math (L<Vcs::Git> backend)
+
+=item * L<Mockito|Project::Mockito>
+
+Mockito (L<Vcs::Git> backend)
 
 =item * L<Time|Project::Time>
 
@@ -708,7 +720,7 @@ sub mutate {
 
 =pod
 
-  $project->mutation_analysis(log_file, relevant_tests [, single_test])
+  $project->mutation_analysis(log_file, relevant_tests [, exclude_file, single_test])
 
 Performs mutation analysis for the developer-written tests of the checked-out program
 version.
@@ -721,8 +733,9 @@ B<Note that C<mutate> is not called implicitly>.
 =cut
 sub mutation_analysis {
     @_ >= 3 or die $ARG_ERROR;
-    my ($self, $log_file, $relevant_tests, $single_test) = @_;
+    my ($self, $log_file, $relevant_tests, $exclude_file, $single_test) = @_;
     my $log = "-logfile $log_file";
+    my $exclude = defined $exclude_file ? "-Dmajor.exclude=$exclude_file" : "";
     my $relevant = $relevant_tests ? "-Dd4j.relevant.tests.only=true" : "";
 
     my $single_test_opt = "";
@@ -734,14 +747,13 @@ sub mutation_analysis {
     my $basedir = $self->{prog_root};
 
     return $self->_call_major("mutation.test",
-                            "-Dmajor.exclude=$basedir/exclude.txt " .
                             "-Dmajor.kill.log=$basedir/kill.csv " .
-                            "$relevant $log $single_test_opt");
+                            "$relevant $log $exclude $single_test_opt");
 }
 
 =pod
 
-  $project->mutation_analysis_ext(test_dir, test_include, log_file [, single_test])
+  $project->mutation_analysis_ext(test_dir, test_include, log_file [, exclude_file, single_test])
 
 Performs mutation analysis for all tests in F<test_dir> that match the pattern
 C<test_include>. 
@@ -753,8 +765,9 @@ B<Note that C<mutate> is not called implicitly>.
 =cut
 sub mutation_analysis_ext {
     @_ >= 4 or die $ARG_ERROR;
-    my ($self, $dir, $include, $log_file, $single_test) = @_;
+    my ($self, $dir, $include, $log_file, $exclude_file, $single_test) = @_;
     my $log = "-logfile $log_file";
+    my $exclude = defined $exclude_file ? "-Dmajor.exclude=$exclude_file" : "";
 
     my $basedir = $self->{prog_root};
 
@@ -766,9 +779,8 @@ sub mutation_analysis_ext {
 
     return $self->_call_major("mutation.test",
                             "-Dd4j.test.dir=$dir -Dd4j.test.include=$include " .
-                            "-Dmajor.exclude=$basedir/exclude.txt " .
                             "-Dmajor.kill.log=$basedir/kill.csv " .
-                            "$log $single_test_opt");
+                            "$log $exclude $single_test_opt");
 }
 
 =pod
@@ -801,29 +813,16 @@ sub run_evosuite {
     }
     close(IN);
 
-    my $cmd = "";
-    if ($criterion eq "default") {
-        $cmd = "java -cp $TESTGEN_LIB_DIR/evosuite-current.jar org.evosuite.EvoSuite " .
-                    "-class $class " .
-                    "-projectCP $cp " .
-                    "-base_dir $self->{prog_root} " .
-                    "-Dtest_dir=evosuite-$criterion " .
-                    "-Dsearch_budget=$time " .
-                    "-Dassertion_timeout=$timeout " .
-                    "-Dshow_progress=false " .
-                    "$config 2>&1";
-    } else {
-        $cmd = "java -cp $TESTGEN_LIB_DIR/evosuite-current.jar org.evosuite.EvoSuite " .
-                    "-class $class " .
-                    "-projectCP $cp " .
-                    "-base_dir $self->{prog_root} " .
-                    "-Dtest_dir=evosuite-$criterion " .
-                    "-criterion $criterion " .
-                    "-Dsearch_budget=$time " .
-                    "-Dassertion_timeout=$timeout " .
-                    "-Dshow_progress=false " .
-                    "$config 2>&1";
-    }
+    my $cmd = "cd $self->{prog_root}" .
+              " && java -cp $TESTGEN_LIB_DIR/evosuite-current.jar org.evosuite.EvoSuite " .
+                "-class $class " .
+                "-projectCP $cp " .
+                "-Dtest_dir=evosuite-$criterion " .
+                "-criterion $criterion " .
+                "-Dsearch_budget=$time " .
+                "-Dassertion_timeout=$timeout " .
+                "-Dshow_progress=false " .
+                "$config 2>&1";
 
     my $log;
     my $ret = Utils::exec_cmd($cmd, "Run EvoSuite ($criterion;$config_file)", \$log);
@@ -1066,7 +1065,8 @@ sub _call_major {
     @_ >= 2 or die $ARG_ERROR;
     my ($self, $target, $option_str, $log_file, $ant_cmd) =  @_;
     $option_str = "-Dbuild.compiler=major.ant.MajorCompiler " . ($option_str // "");
-    $ant_cmd = "PATH=$MAJOR_ROOT/bin:\$PATH && $MAJOR_ROOT/bin/ant" unless defined $ant_cmd;
+    $ENV{PATH}="$MAJOR_ROOT/bin:$ENV{PATH}";
+    $ant_cmd = "$MAJOR_ROOT/bin/ant" unless defined $ant_cmd;
     return $self->_ant_call($target, $option_str, $log_file, $ant_cmd);
 }
 
