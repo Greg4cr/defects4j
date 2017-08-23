@@ -16,6 +16,7 @@ apt-get install oracle-java8-installer
 /usr/sbin/alternatives --config javac
 
 # Install ant
+apt-get install ant
 wget http://archive.apache.org/dist/ant/binaries/apache-ant-1.9.0-bin.tar.gz
 tar xzf apache-ant-1.9.0-bin.tar.gz
 mv apache-ant-1.9.0 /usr/local/apache-ant
