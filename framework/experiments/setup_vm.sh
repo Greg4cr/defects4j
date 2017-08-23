@@ -7,6 +7,8 @@
 
 ## Latest JDK8 version is JDK8u141 released on 19th July, 2017.
 
+apt-get install rpm
+
 BASE_URL_8=http://download.oracle.com/otn-pub/java/jdk/8u141-b15/336fa29ff2bb4ef291e347e091f7f4a7/jdk-8u141
 
 platform="-linux-x64.rpm"
