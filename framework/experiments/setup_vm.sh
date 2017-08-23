@@ -33,6 +33,7 @@ echo 'export PATH=$PATH:/usr/local/apache-ant/bin' >> /home/greg/.bashrc
 # Install other dependencies
 apt-get install make
 apt-get install screen
+apt-get install unzip
 apt-get install git
 #apt-get install svn
 apt-get install patch
