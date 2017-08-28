@@ -1,0 +1,6 @@
+com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer$TableInfo
+com.fasterxml.jackson.core.json.ByteSourceJsonBootstrapper
+com.fasterxml.jackson.core.json.UTF8StreamJsonParser
+com.fasterxml.jackson.core.json.ReaderBasedJsonParser
+com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer
+com.fasterxml.jackson.core.sym.BytesToNameCanonicalizer$TableInfo

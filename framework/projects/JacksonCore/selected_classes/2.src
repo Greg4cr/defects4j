@@ -1,0 +1,11 @@
+com.fasterxml.jackson.core.json.UTF8DataInputJsonParser
+com.fasterxml.jackson.core.format.DataFormatDetector
+com.fasterxml.jackson.core.JsonFactory
+com.fasterxml.jackson.core.json.ByteSourceJsonBootstrapper
+com.fasterxml.jackson.core.json.ReaderBasedJsonParser
+com.fasterxml.jackson.core.io.UTF32Reader
+com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer$TableInfo
+com.fasterxml.jackson.core.format.DataFormatMatcher
+com.fasterxml.jackson.core.json.UTF8StreamJsonParser
+com.fasterxml.jackson.core.sym.CharsToNameCanonicalizer$TableInfo
+com.fasterxml.jackson.core.sym.CharsToNameCanonicalizer

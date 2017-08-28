@@ -1,0 +1,13 @@
+com.fasterxml.jackson.core.util.DefaultIndenter
+com.fasterxml.jackson.core.util.MinimalPrettyPrinter
+com.fasterxml.jackson.core.util.JsonGeneratorDelegate
+com.fasterxml.jackson.core.util.DefaultPrettyPrinter$FixedSpaceIndenter
+com.fasterxml.jackson.core.filter.FilteringParserDelegate
+com.fasterxml.jackson.core.filter.FilteringGeneratorDelegate
+com.fasterxml.jackson.core.json.WriterBasedJsonGenerator
+com.fasterxml.jackson.core.json.ReaderBasedJsonParser
+com.fasterxml.jackson.core.JsonGenerator
+com.fasterxml.jackson.core.json.UTF8JsonGenerator
+com.fasterxml.jackson.core.sym.ByteQuadsCanonicalizer$TableInfo
+com.fasterxml.jackson.core.json.UTF8StreamJsonParser
+com.fasterxml.jackson.core.json.UTF8DataInputJsonParser
