@@ -11,6 +11,8 @@ add-apt-repository ppa:webupd8team/java
 apt-get update
 apt-get install oracle-java8-installer
 
+echo 'export JAVA_HOME=/usr/lib/jvm/java-8-oracle/' >> /home/greg/.bashrc
+
 # Ensure correct versions of Java are used
 /usr/sbin/alternatives --config java
 /usr/sbin/alternatives --config javac
@@ -24,6 +26,10 @@ echo 'export ANT_HOME=/usr/local/apache-ant' >> /home/greg/.bashrc
 echo 'export PATH=$PATH:/usr/local/apache-ant/bin' >> /home/greg/.bashrc
 
 # Install other dependencies
+apt-get install maven
+
+echo 'export M2_HOME=/usr/share/maven' >> /home/greg/.bashrc
+
 apt-get install make
 apt-get install screen
 apt-get install unzip
