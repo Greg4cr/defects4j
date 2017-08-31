@@ -42,6 +42,12 @@ yum install cpan
 cpan DBI
 cpan DBD:CSV
 
+# Install Maven
+sudo wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
+sudo sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
+sudo yum install -y apache-maven
+mvn --version
+
 # Set up SSH for file uploads
 ssh-keygen -t rsa
 cat ~/.ssh/id_rsa.pub | ssh bstech@blankslatetech.com "mkdir -p ~/.ssh && cat >>  ~/.ssh/authorized_keys"
