@@ -1,0 +1,4 @@
+org.mockito.internal.creation.cglib.AcrossJVMSerializationFeature
+org.mockito.internal.creation.instance.InstantiatorProvider
+org.mockito.internal.creation.cglib.CglibMockMaker
+org.mockito.internal.creation.instance.ConstructorInstantiator
