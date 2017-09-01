@@ -1,0 +1,7 @@
+com.fasterxml.jackson.dataformat.xml.deser.XmlBeanDeserializerModifier
+com.fasterxml.jackson.dataformat.xml.XmlFactory
+com.fasterxml.jackson.dataformat.xml.deser.FromXmlParser
+com.fasterxml.jackson.dataformat.xml.deser.XmlTokenStream
+com.fasterxml.jackson.dataformat.xml.XmlMapper
+com.fasterxml.jackson.dataformat.xml.JacksonXmlModule
+com.fasterxml.jackson.dataformat.xml.deser.WrapperHandlingDeserializer
