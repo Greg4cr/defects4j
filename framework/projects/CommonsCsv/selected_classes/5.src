@@ -1,6 +1,6 @@
-java.org.apache.commons.csv.Lexer
-java.org.apache.commons.csv.CSVParser
-java.org.apache.commons.csv.CSVRecord
-java.org.apache.commons.csv.CSVPrinter
-java.org.apache.commons.csv.CSVFormat
-java.org.apache.commons.csv.CSVParser$1
+org.apache.commons.csv.Lexer
+org.apache.commons.csv.CSVParser
+org.apache.commons.csv.CSVRecord
+org.apache.commons.csv.CSVPrinter
+org.apache.commons.csv.CSVFormat
+org.apache.commons.csv.CSVParser$1
