@@ -1,0 +1,6 @@
+org.jsoup.examples.HtmlToPlainText
+org.jsoup.helper.HttpConnection$Response
+org.jsoup.helper.DataUtil
+org.jsoup.examples.ListLinks
+org.jsoup.helper.HttpConnection
+org.jsoup.Jsoup

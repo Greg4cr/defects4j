@@ -1,0 +1,17 @@
+org.jsoup.nodes.Attribute
+org.jsoup.nodes.Attributes$Dataset
+org.jsoup.nodes.TextNode
+org.jsoup.nodes.Document$OutputSettings
+org.jsoup.select.NodeTraversor
+org.jsoup.parser.Parser
+org.jsoup.select.Collector$Accumulator
+org.jsoup.DataUtil
+org.jsoup.nodes.DataNode
+org.jsoup.safety.Whitelist
+org.jsoup.nodes.XmlDeclaration
+org.jsoup.nodes.Attributes$Dataset$EntrySet
+org.jsoup.safety.Cleaner
+org.jsoup.nodes.Entities
+org.jsoup.nodes.Evaluator$AttributeStarting
+org.jsoup.nodes.Comment
+org.jsoup.select.Collector

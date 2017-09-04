@@ -1,0 +1,3 @@
+org.jsoup.helper.HttpConnection
+org.jsoup.safety.Cleaner
+org.jsoup.safety.Whitelist

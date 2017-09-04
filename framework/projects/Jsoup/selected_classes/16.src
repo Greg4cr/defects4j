@@ -1,0 +1,17 @@
+org.jsoup.nodes.Comment
+org.jsoup.helper.HttpConnection
+org.jsoup.examples.HtmlToPlainText
+org.jsoup.Jsoup
+org.jsoup.nodes.FormElement
+org.jsoup.helper.HttpConnection$Request
+org.jsoup.parser.HtmlTreeBuilderState
+org.jsoup.examples.ListLinks
+org.jsoup.parser.HtmlTreeBuilder
+org.jsoup.select.QueryParser
+org.jsoup.parser.CharacterReader
+org.jsoup.select.Collector
+org.jsoup.helper.HttpConnection$Response
+org.jsoup.nodes.XmlDeclaration
+org.jsoup.nodes.Attributes$Dataset$EntrySet
+org.jsoup.helper.DataUtil
+org.jsoup.nodes.DocumentType
