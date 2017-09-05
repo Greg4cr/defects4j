@@ -1,0 +1,11 @@
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory
+com.fasterxml.jackson.databind.deser.BasicDeserializerFactory
+com.fasterxml.jackson.databind.SequenceWriter
+com.fasterxml.jackson.databind.deser.DataFormatReaders$AccessorForReader
+com.fasterxml.jackson.databind.introspect.BasicClassIntrospector
+com.fasterxml.jackson.databind.introspect.BasicBeanDescription
+com.fasterxml.jackson.databind.introspect.POJOPropertyBuilder
+com.fasterxml.jackson.databind.introspect.POJOPropertiesCollector
+com.fasterxml.jackson.databind.ser.std.SerializableSerializer
+com.fasterxml.jackson.databind.deser.DataFormatReaders
+com.fasterxml.jackson.databind.deser.DataFormatReaders$Match

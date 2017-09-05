@@ -1,0 +1,7 @@
+com.fasterxml.jackson.databind.ext.CoreXMLDeserializers
+com.fasterxml.jackson.databind.deser.BasicDeserializerFactory
+com.fasterxml.jackson.databind.deser.std.UUIDDeserializer
+com.fasterxml.jackson.databind.deser.DataFormatReaders$AccessorForReader
+com.fasterxml.jackson.databind.deser.std.FromStringDeserializer$Std
+com.fasterxml.jackson.databind.deser.std.FromStringDeserializer
+com.fasterxml.jackson.databind.SequenceWriter

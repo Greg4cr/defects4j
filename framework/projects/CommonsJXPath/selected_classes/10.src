@@ -1,0 +1,11 @@
+org.apache.commons.jxpath.ri.model.jdom.JDOMNodeIterator
+org.apache.commons.jxpath.ri.model.jdom.JDOMNodePointer
+org.apache.commons.jxpath.ri.model.dom.DOMPointerFactory
+org.apache.commons.jxpath.ri.model.dom.DOMNodePointer
+org.apache.commons.jxpath.ri.model.jdom.JDOMAttributeIterator
+org.apache.commons.jxpath.ri.model.dom.DOMAttributeIterator
+org.apache.commons.jxpath.ri.model.jdom.JDOMAttributePointer
+org.apache.commons.jxpath.ri.model.dom.DOMNamespaceIterator
+org.apache.commons.jxpath.ri.model.jdom.JDOMPointerFactory
+org.apache.commons.jxpath.ri.model.dom.DOMAttributePointer
+org.apache.commons.jxpath.ri.model.dom.DOMNodeIterator

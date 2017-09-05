@@ -1,0 +1,14 @@
+com.fasterxml.jackson.databind.ser.DefaultSerializerProvider$Impl
+com.fasterxml.jackson.databind.ser.std.BeanSerializerBase
+com.fasterxml.jackson.databind.SequenceWriter
+com.fasterxml.jackson.databind.ser.DefaultSerializerProvider
+com.fasterxml.jackson.databind.ser.BeanSerializerFactory
+com.fasterxml.jackson.databind.ObjectWriter
+com.fasterxml.jackson.databind.deser.DataFormatReaders$AccessorForReader
+com.fasterxml.jackson.databind.ObjectWriter$Prefetch
+com.fasterxml.jackson.databind.ser.impl.WritableObjectId
+com.fasterxml.jackson.databind.ser.PropertyBuilder
+com.fasterxml.jackson.databind.ser.BeanSerializerBuilder
+com.fasterxml.jackson.databind.ObjectMapper
+com.fasterxml.jackson.databind.MappingJsonFactory
+com.fasterxml.jackson.databind.ObjectReader

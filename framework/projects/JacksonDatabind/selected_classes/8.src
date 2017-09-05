@@ -1,0 +1,12 @@
+com.fasterxml.jackson.databind.MappingJsonFactory
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory
+com.fasterxml.jackson.databind.SequenceWriter
+com.fasterxml.jackson.databind.ObjectReader
+com.fasterxml.jackson.databind.ObjectMapper
+com.fasterxml.jackson.databind.deser.BeanDeserializerFactory
+com.fasterxml.jackson.databind.ser.std.SerializableSerializer
+com.fasterxml.jackson.databind.deser.DataFormatReaders$AccessorForReader
+com.fasterxml.jackson.databind.ObjectWriter$Prefetch
+com.fasterxml.jackson.databind.deser.DataFormatReaders
+com.fasterxml.jackson.databind.deser.DataFormatReaders$Match
+com.fasterxml.jackson.databind.ObjectWriter

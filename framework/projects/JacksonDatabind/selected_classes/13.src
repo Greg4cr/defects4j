@@ -1,0 +1,8 @@
+com.fasterxml.jackson.databind.ser.BasicSerializerFactory
+com.fasterxml.jackson.databind.ser.std.BeanSerializerBase
+com.fasterxml.jackson.databind.deser.DataFormatReaders$AccessorForReader
+com.fasterxml.jackson.databind.ser.impl.BeanAsArraySerializer
+com.fasterxml.jackson.databind.ser.std.EnumSerializer
+com.fasterxml.jackson.databind.SequenceWriter
+com.fasterxml.jackson.databind.MappingJsonFactory
+com.fasterxml.jackson.databind.ser.BeanSerializerBuilder

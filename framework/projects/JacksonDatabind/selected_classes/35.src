@@ -1,0 +1,12 @@
+com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector
+com.fasterxml.jackson.databind.ObjectMapper$DefaultTypeResolverBuilder
+com.fasterxml.jackson.databind.jsontype.impl.StdTypeResolverBuilder
+com.fasterxml.jackson.databind.ser.BeanSerializerFactory
+com.fasterxml.jackson.databind.deser.DataFormatReaders$AccessorForReader
+com.fasterxml.jackson.databind.jsontype.impl.AsWrapperTypeDeserializer
+com.fasterxml.jackson.databind.ser.std.SerializableSerializer
+com.fasterxml.jackson.databind.ObjectMapper
+com.fasterxml.jackson.databind.ObjectReader
+com.fasterxml.jackson.databind.MappingJsonFactory
+com.fasterxml.jackson.databind.deser.DataFormatReaders
+com.fasterxml.jackson.databind.ser.PropertyBuilder
