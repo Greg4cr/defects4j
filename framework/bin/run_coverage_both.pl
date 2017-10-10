@@ -301,9 +301,9 @@ sub _run_coverage {
     if (Utils::has_failing_tests($test_log)) {
         $LOG->log_msg(" - Broken test suite: $archive");
         printf ("Broken test suite: $archive\n");
-        $cov_info = {};
-        system("cp $test_log $LOG_DIR/$suite_src/${bid}b/${bid}b.$test_id.failing.log") == 0
-            or die "Cannot copy stack traces from failing tests";
+        #$cov_info = {};
+        #system("cp $test_log $LOG_DIR/$suite_src/${bid}b/${bid}b.$test_id.failing.log") == 0
+        #    or die "Cannot copy stack traces from failing tests";
     }
 
     # Add information about test suite to hash that holds the coverage information
