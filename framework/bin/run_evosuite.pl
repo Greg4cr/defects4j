@@ -193,7 +193,7 @@ use Log;
 # Process arguments and issue usage message if necessary.
 #
 my %cmd_opts;
-getopts('p:v:o:n:t:c:b:a:AD', \%cmd_opts) or pod2usage(1);
+getopts('p:v:o:n:t:c:b:a:ACD', \%cmd_opts) or pod2usage(1);
 
 pod2usage(1) unless defined $cmd_opts{p} and
                     defined $cmd_opts{v} and
@@ -226,6 +226,7 @@ $BUDGET = $BUDGET // $default;
 $DEBUG = 1 if defined $cmd_opts{D};
 
 my $CLASSES = defined $cmd_opts{A} ? "loaded_classes" : "modified_classes";
+$CLASSES = defined $cmd_opts{C} ? "selected_classes" :  $CLASSES;
 
 # List of target classes
 my $TARGET_CLASSES = "$SCRIPT_DIR/projects/$PID/$CLASSES/$BID.src";
@@ -303,7 +304,8 @@ F<out_dir/C<project_id>/evosuite-C<criterion>/C<test_id>>
 =cut
 
 # Compress generated tests
-my $archive = "$PID-$VID-evosuite-$CRITERION.$TID.tar.bz2";
+(my $cri_no_semicolon = $CRITERION) =~ s/:/-/g;
+my $archive = "$PID-$VID-evosuite-$cri_no_semicolon.$TID.tar.bz2";
 if (system("tar -cjf $TMP_DIR/$archive -C $TMP_DIR/evosuite-$CRITERION/ .") != 0) {
     $LOG->log_msg("Error: cannot archive and ompress test suite!");
 } else {
@@ -311,7 +313,7 @@ if (system("tar -cjf $TMP_DIR/$archive -C $TMP_DIR/evosuite-$CRITERION/ .") != 0
     #
     # e.g., .../Lang/evosuite-branch/1
     #
-    my $dir = "$OUT_DIR/$PID/evosuite-$CRITERION/$TID";
+    my $dir = "$OUT_DIR/$PID/evosuite-$cri_no_semicolon/$TID";
     system("mkdir -p $dir && mv $TMP_DIR/$archive $dir") == 0 or die "Cannot move test suite archive to output directory!";
 }
 
