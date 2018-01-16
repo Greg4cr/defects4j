@@ -85,10 +85,10 @@ for project in $projects; do
 
 						# Measure mutation score.
 						echo "---Measuring mutation score"
-					perl ../bin/run_mutation.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc -f "**/*Test.java" -t $working_dir"/"$project"_"$fault -D
+					perl ../bin/run_mutation.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc -f "**/*Test.java" -t $working_dir"/"$project"_"$fault 
 
 
-						#rm -rf $working_dir"/"$project"_"$fault 
+						rm -rf $working_dir"/"$project"_"$fault 
 					fi	
 				done
 			done
