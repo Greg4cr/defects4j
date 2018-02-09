@@ -61,19 +61,19 @@ for project in $projects; do
 						perl ../util/fix_test_suite.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -t $working_dir"/"$project"_"$fault
 
                         	                # Generate coverage reports
-#                                	        echo "-----Generating coverage reports"
+                                	        echo "-----Generating coverage reports"
 
-#						if [ $all_classes -eq 1 ]; then
-#							echo "(all loaded classes)"
-#	                                	        perl ../bin/run_evosuite_coverage.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -f "**/*Test.java" -t $working_dir"/"$project"_"$fault -c default -A
+						if [ $all_classes -eq 1 ]; then
+							echo "(all loaded classes)"
+	                                	        perl ../bin/run_evosuite_coverage.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -f "**/*Test.java" -t $working_dir"/"$project"_"$fault -c default -A
 
 #							perl ../bin/run_coverage_both.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -f "**/*Test.java" -t $working_dir"/"$project"_"$fault -A
-#						else
-#							echo "(only patched classes"
- #  						        perl ../bin/run_evosuite_coverage.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -f "**/*Test.java" -t $working_dir"/"$project"_"$fault -c default
+						else
+							echo "(only patched classes"
+  						        perl ../bin/run_evosuite_coverage.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -f "**/*Test.java" -t $working_dir"/"$project"_"$fault -c default
 
 #							perl ../bin/run_coverage_both.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -f "**/*Test.java" -t $working_dir"/"$project"_"$fault
-#						fi
+						fi
 
 						# Check fault coverage
 #						echo "-----Checking fault coverage"
