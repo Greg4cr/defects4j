@@ -1,11 +1,12 @@
-Defects4J -- version 1.1.0
+Defects4J -- version 1.2.0 [![Build Status](https://travis-ci.org/rjust/defects4j.svg?branch=master)](https://travis-ci.org/rjust/defects4j)
 ----------------
-Defects4J is a collection of reproducible bugs collected with the goal of
-advancing software testing research.
+Defects4J is a collection of reproducible bugs and a supporting infrastructure
+with the goal of advancing software engineering research.
 
 The projects
 ---------------
-Defects4J contains 596 bugs from the following open-source projects:
+
+Defects4J contains 597 bugs from the following open-source projects:
 
 | Identifier      | Project name                         | Number of bugs |
 |-----------------|--------------------------------------|----------------|
@@ -13,7 +14,7 @@ Defects4J contains 596 bugs from the following open-source projects:
 | Closure         | Closure compiler                     | 133            |
 | CommonsCodec    | Apache commons-encoders and decoders |  22            |  
 | CommonsCLI      | Apache commons-CLI library           |  24            |
-| CommonsCSV      | Apache commons-csv                   |  12            |
+| CommonsCsv      | Apache commons-csv                   |  12            |
 | CommonsJXPath   | Apache commons-JXPath                |  14            |
 | Guava           | Guava library                        |   9            |
 | JacksonCore     | Jackson core module                  |  13            |

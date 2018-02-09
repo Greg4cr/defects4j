@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 #
 #-------------------------------------------------------------------------------
-# Copyright (c) 2014-2017 René Just, Darioush Jalali, and Defects4J contributors.
+# Copyright (c) 2014-2018 René Just, Darioush Jalali, and Defects4J contributors.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -94,7 +94,7 @@ $BID =~ /^(\d+)$/ or die "Wrong bug id format (\\d+): $BID!";
 -e $CLASSES or die "File with classes to mutate does not exist: $CLASSES";
 
 # The mutation operators that should be enabled
-my @MU_OPS = ("AOR", "LOR","SOR", "COR", "ROR", "ORU", "LVR", "STD");
+my @MUT_OPS = ("AOR", "LOR","SOR", "COR", "ROR", "ORU", "LVR", "STD");
 
 my $mml_src = "$OUT_DIR/$BID.mml";
 my $mml_bin = "${mml_src}.bin";
