@@ -75,6 +75,42 @@ JFreeChart (L<Vcs::Svn> backend)
 
 Closure compiler (L<Vcs::Git> backend)
 
+=item B<CommonsCLI|Project::CommonsCLI> 
+
+Commons CLI library (uses Vcs::Git as Vcs backend)
+
+=item B<CommonsCodec|Project::CommonsCodec>
+
+Commons encoders and decoders (uses Vcs::Git as Vcs backend)
+
+=item B<CommonsCsv|Project::CommonsCsv> 
+
+Commons CSV (uses Vcs::Git as Vcs backend)
+
+=item B<CommonsJXPath|Project::CommonsJXPath> 
+
+Commons JXPath (uses Vcs::Git as Vcs backend)
+
+=item * L<Guava|Project::Guava>
+
+Guava library (L<Vcs::Git> backend)
+
+=item * L<JacksonCore|Project::JacksonCore>
+
+Jackson core library (L<Vcs::Git> backend)
+
+=item B<JacksonDatabind|Project::JacksonDatabind> 
+
+Jackson data binding utilities (uses Vcs::Git as Vcs backend)
+
+=item B<JacksonXml|Project::JacksonXml> 
+
+Jackson XML utilities (uses Vcs::Git as Vcs backend)
+
+=item B<Jsoup|Project:Jsoup> 
+
+jsoup HTML parser (uses Vcs::Git as Vcs backend)
+
 =item * L<Lang|Project::Lang>
 
 Commons lang (L<Vcs::Git> backend)
@@ -835,16 +871,29 @@ sub run_evosuite {
     }
     close(IN);
 
-    my $cmd = "cd $self->{prog_root}" .
-              " && java -cp $TESTGEN_LIB_DIR/evosuite-current.jar org.evosuite.EvoSuite " .
-                "-class $class " .
-                "-projectCP $cp " .
-                "-Dtest_dir=evosuite-$criterion " .
-                "-criterion $criterion " .
-                "-Dsearch_budget=$time " .
-                "-Dassertion_timeout=$timeout " .
-                "-Dshow_progress=false " .
-                "$config 2>&1";
+    my $cmd = "";
+    if ($criterion eq "default") {
+        $cmd = "java -cp $TESTGEN_LIB_DIR/evosuite-current.jar org.evosuite.EvoSuite " .
+                    "-class $class " .
+                    "-projectCP $cp " .
+                    "-base_dir $self->{prog_root} " .
+                    "-Dtest_dir=evosuite-$criterion " .
+                    "-Dsearch_budget=$time " .
+                    "-Dassertion_timeout=$timeout " .
+                    "-Dshow_progress=false " .
+                    "$config 2>&1";
+    } else {
+        $cmd = "java -cp $TESTGEN_LIB_DIR/evosuite-current.jar org.evosuite.EvoSuite " .
+                    "-class $class " .
+                    "-projectCP $cp " .
+                    "-base_dir $self->{prog_root} " .
+                    "-Dtest_dir=evosuite-$criterion " .
+                    "-criterion $criterion " .
+                    "-Dsearch_budget=$time " .
+                    "-Dassertion_timeout=$timeout " .
+                    "-Dshow_progress=false " .
+                    "$config 2>&1";
+    }
 
     my $log;
     my $ret = Utils::exec_cmd($cmd, "Run EvoSuite ($criterion;$config_file)", \$log);
