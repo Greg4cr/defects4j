@@ -9,10 +9,12 @@ addons:
   apt:
     packages:
       - openjdk-7-jdk
+      - maven
 
 install:
   - jdk_switcher use openjdk7
   - export PATH=$JAVA_HOME/bin:$PATH
+  - export M3_HOME=/usr/share/maven
   - (echo y;echo o conf prerequisites_policy follow;echo o conf commit) | cpan
   - cpan install Carton
   - carton install
@@ -30,27 +32,27 @@ jobs:
     # take a long time to finish.
     - stage: verify
 ## Chart
-    -  script: carton exec ./test_verify_bugs.sh -p Chart
+      script: carton exec ./test_verify_bugs.sh -p Chart
 ## CommonsCodec
-    -  script: carton exec ./test_verify_bugs.sh -p CommonsCodec
+    - script: carton exec ./test_verify_bugs.sh -p CommonsCodec
 ## CommonsCLI
-    -  script: carton exec ./test_verify_bugs.sh -p CommonsCLI
+    - script: carton exec ./test_verify_bugs.sh -p CommonsCLI
 ## CommonsCsv
-    -  script: carton exec ./test_verify_bugs.sh -p CommonsCsv
+    - script: carton exec ./test_verify_bugs.sh -p CommonsCsv
 ## CommonsJXPath
-    -  script: carton exec ./test_verify_bugs.sh -p CommonsJXPath
+    - script: carton exec ./test_verify_bugs.sh -p CommonsJXPath
 ## Guava
-    -  script: carton exec ./test_verify_bugs.sh -p Guava
+    - script: carton exec ./test_verify_bugs.sh -p Guava
 ## JacksonCore
-    -  script: carton exec ./test_verify_bugs.sh -p JacksonCore
+    - script: carton exec ./test_verify_bugs.sh -p JacksonCore
 ## JacksonDatabind
-    -  script: carton exec ./test_verify_bugs.sh -p JacksonDatabind -b1..20
-    -  script: carton exec ./test_verify_bugs.sh -p JacksonDatabind -b21..39
+    - script: carton exec ./test_verify_bugs.sh -p JacksonDatabind -b1..20
+    - script: carton exec ./test_verify_bugs.sh -p JacksonDatabind -b21..39
 ## JacksonXml
-    -  script: carton exec ./test_verify_bugs.sh -p JacksonXml
+    - script: carton exec ./test_verify_bugs.sh -p JacksonXml
 ## Jsoup
-    -  script: carton exec ./test_verify_bugs.sh -p JacksonDatabind -b1..32
-    -  script: carton exec ./test_verify_bugs.sh -p JacksonDatabind -b33..64
+    - script: carton exec ./test_verify_bugs.sh -p JacksonDatabind -b1..32
+    - script: carton exec ./test_verify_bugs.sh -p JacksonDatabind -b33..64
 ## Lang
     - script: carton exec ./test_verify_bugs.sh -p Lang -b1..32
     - script: carton exec ./test_verify_bugs.sh -p Lang -b33..65
