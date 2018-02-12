@@ -51,8 +51,8 @@ jobs:
 ## JacksonXml
     - script: carton exec ./test_verify_bugs.sh -p JacksonXml
 ## Jsoup
-    - script: carton exec ./test_verify_bugs.sh -p JacksonDatabind -b1..32
-    - script: carton exec ./test_verify_bugs.sh -p JacksonDatabind -b33..64
+    - script: carton exec ./test_verify_bugs.sh -p Jsoup -b1..32
+    - script: carton exec ./test_verify_bugs.sh -p Jsoup -b33..64
 ## Lang
     - script: carton exec ./test_verify_bugs.sh -p Lang -b1..32
     - script: carton exec ./test_verify_bugs.sh -p Lang -b33..65
