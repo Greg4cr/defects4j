@@ -1,5 +1,5 @@
 <project name="CommonsCLI" basedir="${basedir}">
-
+    <property environment="env"/>
     <!-- Force build in Java 1.7 for older versions of the project -->
     <property name="build.compiler" value="javac1.7"/>
 
@@ -33,8 +33,9 @@
         <if>
             <isset property="use-mvn"/>
             <then>
-                <exec dir="${basedir}" executable="/bin/bash">			
-                    <arg line="mvn compile"/>
+               <exec dir="${basedir}" executable="/bin/bash">			
+                     <arg value="-c"/>
+                     <arg value="export M2_HOME=${env.M2_HOME}; mvn compile"/>
                </exec>
             </then>
             <else>
@@ -50,8 +51,9 @@
         <if>
             <isset property="use-mvn"/>
             <then>
-                <exec dir="${basedir}" executable="/bin/bash">			
-                    <arg line="mvn test-compile"/>
+                <exec dir="${basedir}" executable="/bin/bash">
+                     <arg value="-c"/>
+                     <arg value="export M2_HOME=${env.M2_HOME}; mvn test-compile"/>
                 </exec>
             </then>
             <else>

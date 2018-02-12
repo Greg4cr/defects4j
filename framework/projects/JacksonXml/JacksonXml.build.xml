@@ -1,5 +1,5 @@
 <project name="JacksonXml" basedir="${basedir}">
-
+    <property environment="env"/>
     <property name="build.home" value="${basedir}" />
     <property name="test.src.home" value="${basedir}/src/test"/>
     <property name="source.home" value="${basedir}/src/main"/> 
@@ -29,13 +29,15 @@
 
     <target name="compile" description="Compile the source code.">
         <exec dir="${basedir}" executable="/bin/bash">			
-            <arg line="mvn compile -U"/>
+	    <arg value="-c"/>	
+            <arg value="export M2_HOME=${env.M2_HOME}; mvn compile -U"/>
         </exec>  
     </target>
     
     <target name="compile.tests" description="Compile the tests.">
-       <exec dir="${basedir}" executable="/bin/bash">
-            <arg line ="mvn test-compile -U"/>
+	<exec dir="${basedir}" executable="/bin/bash">
+            <arg value="-c"/>
+            <arg value="export M2_HOME=${env.M2_HOME}; mvn test-compile -U"/>
         </exec>
     </target>
 

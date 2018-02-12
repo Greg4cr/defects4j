@@ -1,5 +1,5 @@
 <project name="Guava" basedir="${basedir}">
-
+    <property environment="env"/>
     <property name="build.home" value="${basedir}" />
     <property name="test.src.home" value="${basedir}/guava-tests/test"/>
     <property name="source.home" value="${basedir}/guava/src" /> 
@@ -43,14 +43,16 @@
     </target>
 
     <target name="compile"  depends="build-lib" description="Compile the source code.">
-        <exec dir="${basedir}" executable="/bin/bash">			
-            <arg line="mvn -pl 'guava,guava-testlib,guava-tests,.' compile -U"/>
+        <exec dir="${basedir}" executable="/bin/bash">
+            <arg value="-c"/>
+	    <arg value="export M2_HOME=${env.M2_HOME}; mvn -pl 'guava,guava-testlib,guava-tests,.' compile -U"/>
         </exec>  
     </target>
   
     <target name="compile.tests" depends="build-lib,compile" description="Compile the tests.">
        <exec dir="${basedir}" executable="/bin/bash">
-            <arg line="mvn -pl 'guava,guava-testlib,guava-tests,.' test-compile -U"/>
+            <arg value="-c"/>
+            <arg value="export M2_HOME=${env.M2_HOME}; mvn -pl 'guava,guava-testlib,guava-tests,.' test-compile -U"/>
        </exec>
     </target>
 

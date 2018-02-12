@@ -1,5 +1,5 @@
 <project name="CommonsJXPath" basedir="${basedir}">
-
+    <property environment="env"/>
     <property name="build.home" value="${basedir}" />
     <property name="source.home" value="${basedir}/src/main"/> 	
     <property name="test.src.home" value="${basedir}/src/test"/>
@@ -28,14 +28,16 @@
 
     <target name="compile" description="Compile the  source code.">
         <exec dir="${basedir}" executable="/bin/bash">	
-            <arg line="mvn compile"/>
+            <arg value="-c"/>
+            <arg value="export M2_HOME=${env.M2_HOME}; mvn compile"/>
         </exec>
     </target>
 
     <!-- target used for compiling test cases.-->
     <target name="compile.tests" description="Compile the tests.">
         <exec dir="${basedir}" executable="/bin/bash">	
-            <arg line="mvn test-compile"/>
+            <arg value="-c"/>
+            <arg value="export M2_HOME=${env.M2_HOME}; mvn test-compile"/>
         </exec>
     </target>
 

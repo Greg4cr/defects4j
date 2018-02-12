@@ -1,5 +1,5 @@
 <project name="CommonsCsv" basedir="${basedir}">
-
+    <property environment="env"/>
     <property name="build.home" value="${basedir}" />
     <property name="test.src.home" value="${basedir}/src/test"/>
     <property name="source.home" value="${basedir}/src/main"/> 
@@ -28,14 +28,16 @@
     </path>
 
     <target name="compile" description="Compile the source code.">
-        <exec dir="${basedir}" executable="/bin/bash">			
-            <arg line="mvn compile"/>
+        <exec dir="${basedir}" executable="/bin/bash">
+            <arg value="-c"/>
+            <arg value="export M2_HOME=${env.M2_HOME}; mvn compile"/>
         </exec>  
     </target>
     
     <target name="compile.tests" description="Compile the tests.">
        <exec dir="${basedir}" executable="/bin/bash">
-            <arg line ="mvn test-compile"/>
+            <arg value="-c"/>
+            <arg value="export M2_HOME=${env.M2_HOME}; mvn test-compile"/>
         </exec>
     </target>
 
