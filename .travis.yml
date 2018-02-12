@@ -14,7 +14,7 @@ addons:
 install:
   - jdk_switcher use openjdk7
   - export PATH=$JAVA_HOME/bin:$PATH
-  - export M3_HOME=/usr/share/maven
+  - export M2_HOME=/usr/share/maven
   - (echo y;echo o conf prerequisites_policy follow;echo o conf commit) | cpan
   - cpan install Carton
   - carton install
