@@ -46,8 +46,8 @@ my $PID = "JacksonDatabind";
 sub new {
     my $class = shift;
     my $name = "jacksondatabind";
-    my $src  = "src/main";
-    my $test = "src/test";
+    my $src  = "src/main/java";
+    my $test = "src/test/java";
     my $vcs  = Vcs::Git->new($PID,
                              "$REPO_DIR/$name.git",
                              "$SCRIPT_DIR/projects/$PID/commit-db",
