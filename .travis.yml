@@ -40,13 +40,15 @@ jobs:
     - script: carton exec ./test_verify_bugs.sh -p CommonsCodec -b1..11
     - script: carton exec ./test_verify_bugs.sh -p CommonsCodec -b12..22
 ## CommonsCLI
-    - script: carton exec ./test_verify_bugs.sh -p CommonsCLI 
+    - script: carton exec ./test_verify_bugs.sh -p CommonsCLI -b1..12
+    - script: carton exec ./test_verify_bugs.sh -p CommonsCLI -b13..24
 ## CommonsCsv
     - script: carton exec ./test_verify_bugs.sh -p CommonsCsv
 ## CommonsJXPath
     - script: carton exec ./test_verify_bugs.sh -p CommonsJXPath
 ## Guava
-    - script: carton exec ./test_verify_bugs.sh -p Guava
+    - script: carton exec ./test_verify_bugs.sh -p Guava -b1..5
+    - script: carton exec ./test_verify_bugs.sh -p Guava -b6..9
 ## JacksonCore
     - script: carton exec ./test_verify_bugs.sh -p JacksonCore
 ## JacksonDatabind
@@ -67,10 +69,11 @@ jobs:
     - script: carton exec ./test_verify_bugs.sh -p Lang -b33..48
     - script: carton exec ./test_verify_bugs.sh -p Lang -b49..65
 ## Math
-    - script: carton exec ./test_verify_bugs.sh -p Math -b1..27
-    - script: carton exec ./test_verify_bugs.sh -p Math -b28..54
-    - script: carton exec ./test_verify_bugs.sh -p Math -b55..80
-    - script: carton exec ./test_verify_bugs.sh -p Math -b81..106
+    - script: carton exec ./test_verify_bugs.sh -p Math -b1..21
+    - script: carton exec ./test_verify_bugs.sh -p Math -b22..42
+    - script: carton exec ./test_verify_bugs.sh -p Math -b43..63
+    - script: carton exec ./test_verify_bugs.sh -p Math -b64..84
+    - script: carton exec ./test_verify_bugs.sh -p Math -b85..106
 ## Mockito
     - script: carton exec ./test_verify_bugs.sh -p Mockito -b1..5
     - script: carton exec ./test_verify_bugs.sh -p Mockito -b6..10
@@ -79,4 +82,5 @@ jobs:
     - script: carton exec ./test_verify_bugs.sh -p Mockito -b21..27
     - script: carton exec ./test_verify_bugs.sh -p Mockito -b28..38
 ## Time
-    - script: carton exec ./test_verify_bugs.sh -p Time
+    - script: carton exec ./test_verify_bugs.sh -p Time -b1..13
+    - script: carton exec ./test_verify_bugs.sh -p Time -b14..27
