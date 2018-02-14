@@ -1,35 +1,62 @@
 diff --git a/src/main/java/org/jsoup/select/Selector.java b/src/main/java/org/jsoup/select/Selector.java
-index 691b1cf..e9a8fc5 100644
+index e370de8..b46e468 100644
 --- a/src/main/java/org/jsoup/select/Selector.java
 +++ b/src/main/java/org/jsoup/select/Selector.java
-@@ -136,7 +136,7 @@ public class Selector {
-     
-     private void combinator(char combinator) {
-         tq.consumeWhitespace();
--        String subQuery = consumeSubQuery(); // support multi > childs
-+        String subQuery = tq.consumeToAny(combinators); // support multi > childs
-         
-         Elements output;
-         if (combinator == '>')
-@@ -152,21 +152,6 @@ public class Selector {
-         
-         elements.clear(); elements.addAll(output);
+@@ -107,8 +107,6 @@ public class Selector {
+         if (tq.matchesAny(combinators)) { // if starts with a combinator, use root as elements
+             elements.add(root);
+             combinator(tq.consume().toString());
+-        } else if (tq.matches(":has(")) {
+-            elements.addAll(root.getAllElements());
+         } else {
+             addElements(findElements()); // chomp first element matcher off queue 
+         }            
+@@ -180,8 +178,6 @@ public class Selector {
+             return matches(false);
+         } else if (tq.matches(":matchesOwn(")) {
+             return matches(true);
+-        } else if (tq.matches(":not(")) {
+-            return not();
+         } else { // unhandled
+             throw new SelectorParseException("Could not parse query '%s': unexpected token at '%s'", query, tq.remainder());
+         }
+@@ -305,15 +301,6 @@ public class Selector {
+         return own ? root.getElementsMatchingOwnText(regex) : root.getElementsMatchingText(regex);
      }
+ 
+-    // :not(selector)
+-    private Elements not() {
+-        tq.consume(":not");
+-        String subQuery = tq.chompBalanced('(', ')');
+-        Validate.notEmpty(subQuery, ":not(selector) subselect must not be empty");
 -
--    private String consumeSubQuery() {
--        StringBuilder sq = new StringBuilder();
--        while (!tq.isEmpty()) {
--            if (tq.matches("("))
--                sq.append("(").append(tq.chompBalanced('(', ')')).append(")");
--            else if (tq.matches("["))
--                sq.append("[").append(tq.chompBalanced('[', ']')).append("]");
--            else if (tq.matchesAny(combinators))
--                break;
--            else
--                sq.append(tq.consume());
--        }
--        return sq.toString();
+-        return filterOut(root.getAllElements(), select(subQuery, root));
 -    }
-     
-     private Elements findElements() {
-         if (tq.matchChomp("#")) {
+-
+     // direct child descendants
+     private static Elements filterForChildren(Collection<Element> parents, Collection<Element> candidates) {
+         Elements children = new Elements();
+@@ -405,23 +392,6 @@ public class Selector {
+         return children;
+     }
+ 
+-    // exclude set. package open so that Elements can implement .not() selector.
+-    static Elements filterOut(Collection<Element> elements, Collection<Element> outs) {
+-        Elements output = new Elements();
+-        for (Element el: elements) {
+-            boolean found = false;
+-            for (Element out: outs) {
+-                if (el.equals(out)) {
+-                    found = true;
+-                    break;
+-                }
+-            }
+-            if (!found)
+-                output.add(el);
+-        }
+-        return output;
+-    }
+-
+     public static class SelectorParseException extends IllegalStateException {
+         public SelectorParseException(String msg, Object... params) {
+             super(String.format(msg, params));

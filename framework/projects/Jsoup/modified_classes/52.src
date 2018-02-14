@@ -1,2 +1,4 @@
-org.jsoup.parser.TreeBuilderState
-org.jsoup.parser.TreeBuilder
+org.jsoup.parser.Tokeniser
+org.jsoup.parser.TokeniserState
+org.jsoup.parser.CharacterReader
+org.jsoup.helper.DataUtil

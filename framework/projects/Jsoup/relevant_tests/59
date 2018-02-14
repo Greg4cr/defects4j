@@ -8,6 +8,7 @@ org.jsoup.nodes.NodeTest
 org.jsoup.nodes.TextNodeTest
 org.jsoup.parser.AttributeParseTest
 org.jsoup.parser.ParserTest
+org.jsoup.parser.TagTest
 org.jsoup.safety.CleanerTest
 org.jsoup.select.ElementsTest
 org.jsoup.select.SelectorTest

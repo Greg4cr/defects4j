@@ -1,1 +1,3 @@
-org.jsoup.nodes.Entities
+org.jsoup.nodes.Element
+org.jsoup.parser.Parser
+org.jsoup.parser.Tag

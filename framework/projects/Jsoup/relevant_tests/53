@@ -1,5 +1,7 @@
-org.jsoup.helper.DataUtilTest
 org.jsoup.integration.ParseTest
+org.jsoup.integration.UrlConnectTest
+org.jsoup.nodes.AttributeTest
+org.jsoup.nodes.AttributesTest
 org.jsoup.nodes.DocumentTest
 org.jsoup.nodes.ElementTest
 org.jsoup.nodes.NodeTest

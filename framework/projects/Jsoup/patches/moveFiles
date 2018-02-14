@@ -1,0 +1,6 @@
+for((i=$1; i<=$2; i++)); do
+	j=$(($i-1))
+	echo $i","$j
+	mv $i".src.patch" $j".src.patch"
+	mv $i".test.patch" $j".test.patch"
+done

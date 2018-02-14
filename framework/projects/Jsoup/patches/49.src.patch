@@ -1,31 +1,13 @@
-diff --git a/src/main/java/org/jsoup/parser/CharacterReader.java b/src/main/java/org/jsoup/parser/CharacterReader.java
-index d05c3cd..a35f19a 100644
---- a/src/main/java/org/jsoup/parser/CharacterReader.java
-+++ b/src/main/java/org/jsoup/parser/CharacterReader.java
-@@ -1,7 +1,5 @@
- package org.jsoup.parser;
+diff --git a/src/main/java/org/jsoup/parser/TreeBuilderState.java b/src/main/java/org/jsoup/parser/TreeBuilderState.java
+index 9fd235c..4ae01e1 100644
+--- a/src/main/java/org/jsoup/parser/TreeBuilderState.java
++++ b/src/main/java/org/jsoup/parser/TreeBuilderState.java
+@@ -1448,7 +1448,7 @@ enum TreeBuilderState {
+         }
+     };
  
--import org.jsoup.helper.Validate;
--
- /**
-  CharacterReader cosumes tokens off a string. To replace the old TokenQueue.
-  */
-@@ -14,9 +12,6 @@ class CharacterReader {
-     private int mark = 0;
+-    private static String nullString = String.valueOf('\u0000');
++    private static String nullString = String.valueOf(0x0000);
  
-     CharacterReader(String input) {
--        Validate.notNull(input);
--        input = input.replaceAll("\r\n?", "\n"); // normalise carriage returns to newlines
--
-         this.input = input;
-         this.length = input.length();
-     }
-@@ -97,7 +92,7 @@ class CharacterReader {
-     }
+     abstract boolean process(Token t, TreeBuilder tb);
  
-     String consumeToEnd() {
--        String data = input.substring(pos, input.length());
-+        String data = input.substring(pos, input.length() - 1);
-         pos = input.length();
-         return data;
-     }

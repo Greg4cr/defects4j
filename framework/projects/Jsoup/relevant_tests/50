@@ -1,5 +1,6 @@
 org.jsoup.integration.ParseTest
 org.jsoup.nodes.DocumentTest
+org.jsoup.nodes.DocumentTypeTest
 org.jsoup.nodes.ElementTest
 org.jsoup.nodes.NodeTest
 org.jsoup.nodes.TextNodeTest

@@ -1,9 +1,8 @@
---- org.jsoup.nodes.ElementTest::parentlessToString
-java.lang.NullPointerException
-	at org.jsoup.nodes.Node.outerHtml(Node.java:363)
-	at org.jsoup.nodes.Node.outerHtml(Node.java:358)
-	at org.jsoup.nodes.Element.toString(Element.java:1022)
-	at org.jsoup.nodes.ElementTest.parentlessToString(ElementTest.java:422)
+--- org.jsoup.nodes.DocumentTest::testNormalisesStructure
+junit.framework.AssertionFailedError: expected:<...</script><noscript><[/noscript></head><body><p>two</p><p>three</p></body]></html>> but was:<...</script><noscript><[body><p>two</p><body><p>three</p></body></body></noscript></head]></html>>
+	at org.junit.Assert.assertEquals(Assert.java:115)
+	at org.junit.Assert.assertEquals(Assert.java:144)
+	at org.jsoup.nodes.DocumentTest.testNormalisesStructure(DocumentTest.java:59)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

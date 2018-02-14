@@ -1,1 +1,2 @@
-org.jsoup.nodes.DocumentType
+org.jsoup.parser.TreeBuilderState
+org.jsoup.parser.TreeBuilder

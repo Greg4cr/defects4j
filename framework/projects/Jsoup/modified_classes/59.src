@@ -1,1 +1,2 @@
-org.jsoup.nodes.Node
+org.jsoup.nodes.Document
+org.jsoup.parser.Tag
