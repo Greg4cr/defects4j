@@ -50,3 +50,4 @@ unzip -q -u $ARCHIVE && mv defects4j/project_repos/* . && rm -r defects4j
 ./get_jacksondatabind.sh
 ./get_jacksonxml.sh
 ./get_jsoup.sh
+./get_gson.sh
