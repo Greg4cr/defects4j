@@ -7,7 +7,7 @@ projects=$1
 faults=`cat $2 | sed 's/,/ /g'`
 trials=$3
 budgets=$4
-criteria="branch branch:exception"
+criteria="default branch:exception branch line cbranch exception method methodnoexception output weakmutation"
 project_dir=$5"/defects4j/framework/projects"
 all_classes=0
 
@@ -84,8 +84,8 @@ for project in $projects; do
 				     	   	perl ../bin/run_bug_detection.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc -f "**/*Test.java" -t $working_dir"/"$project"_"$fault
 
 						# Measure mutation score.
-						echo "---Measuring mutation score"
-					perl ../bin/run_mutation.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc -f "**/*Test.java" -t $working_dir"/"$project"_"$fault 
+						#echo "---Measuring mutation score"
+				#	perl ../bin/run_mutation.pl -p $project -d $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc"/"$trial -o $result_dir"/suites/"$project"_"$fault"/"$budget"/"$project"/evosuite-"$crinosc -f "**/*Test.java" -t $working_dir"/"$project"_"$fault 
 
 
 						rm -rf $working_dir"/"$project"_"$fault 
