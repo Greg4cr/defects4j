@@ -1,25 +1,60 @@
-diff --git a/gson/src/main/java/com/google/gson/internal/bind/JsonAdapterAnnotationTypeAdapterFactory.java b/gson/src/main/java/com/google/gson/internal/bind/JsonAdapterAnnotationTypeAdapterFactory.java
-index b52e157..3801cfd 100644
---- a/gson/src/main/java/com/google/gson/internal/bind/JsonAdapterAnnotationTypeAdapterFactory.java
-+++ b/gson/src/main/java/com/google/gson/internal/bind/JsonAdapterAnnotationTypeAdapterFactory.java
-@@ -51,7 +51,7 @@ public final class JsonAdapterAnnotationTypeAdapterFactory implements TypeAdapte
-   static TypeAdapter<?> getTypeAdapter(ConstructorConstructor constructorConstructor, Gson gson,
-       TypeToken<?> fieldType, JsonAdapter annotation) {
-     Class<?> value = annotation.value();
--    TypeAdapter<?> typeAdapter;
-+    final TypeAdapter<?> typeAdapter;
-     if (TypeAdapter.class.isAssignableFrom(value)) {
-       Class<TypeAdapter<?>> typeAdapterClass = (Class<TypeAdapter<?>>) value;
-       typeAdapter = constructorConstructor.get(TypeToken.get(typeAdapterClass)).construct();
-@@ -64,9 +64,7 @@ public final class JsonAdapterAnnotationTypeAdapterFactory implements TypeAdapte
-       throw new IllegalArgumentException(
-           "@JsonAdapter value must be TypeAdapter or TypeAdapterFactory reference.");
-     }
--    if (typeAdapter != null) {
--      typeAdapter = typeAdapter.nullSafe();
--    }
--    return typeAdapter;
-+
-+    return typeAdapter.nullSafe();
+diff --git a/gson/src/main/java/com/google/gson/internal/bind/JsonTreeWriter.java b/gson/src/main/java/com/google/gson/internal/bind/JsonTreeWriter.java
+index 51dc1f3..5f9f039 100644
+--- a/gson/src/main/java/com/google/gson/internal/bind/JsonTreeWriter.java
++++ b/gson/src/main/java/com/google/gson/internal/bind/JsonTreeWriter.java
+@@ -159,14 +159,6 @@ public final class JsonTreeWriter extends JsonWriter {
+     return this;
    }
- }
+ 
+-  @Override public JsonWriter value(Boolean value) throws IOException {
+-    if (value == null) {
+-      return nullValue();
+-    }
+-    put(new JsonPrimitive(value));
+-    return this;
+-  }
+-
+   @Override public JsonWriter value(double value) throws IOException {
+     if (!isLenient() && (Double.isNaN(value) || Double.isInfinite(value))) {
+       throw new IllegalArgumentException("JSON forbids NaN and infinities: " + value);
+diff --git a/gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java b/gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java
+index 23ab8a1..0d6d013 100644
+--- a/gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java
++++ b/gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java
+@@ -162,6 +162,10 @@ public final class TypeAdapters {
+     }
+     @Override
+     public void write(JsonWriter out, Boolean value) throws IOException {
++      if (value == null) {
++        out.nullValue();
++        return;
++      }
+       out.value(value);
+     }
+   };
+diff --git a/gson/src/main/java/com/google/gson/stream/JsonWriter.java b/gson/src/main/java/com/google/gson/stream/JsonWriter.java
+index e2fc196..9bf2d22 100644
+--- a/gson/src/main/java/com/google/gson/stream/JsonWriter.java
++++ b/gson/src/main/java/com/google/gson/stream/JsonWriter.java
+@@ -471,21 +471,6 @@ public class JsonWriter implements Closeable, Flushable {
+   /**
+    * Encodes {@code value}.
+    *
+-   * @return this writer.
+-   */
+-  public JsonWriter value(Boolean value) throws IOException {
+-    if (value == null) {
+-      return nullValue();
+-    }
+-    writeDeferredName();
+-    beforeValue();
+-    out.write(value ? "true" : "false");
+-    return this;
+-  }
+-
+-  /**
+-   * Encodes {@code value}.
+-   *
+    * @param value a finite value. May not be {@link Double#isNaN() NaNs} or
+    *     {@link Double#isInfinite() infinities}.
+    * @return this writer.

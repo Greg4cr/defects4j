@@ -6,6 +6,8 @@ com.google.gson.GsonTypeAdapterTest
 com.google.gson.JavaSerializationTest
 com.google.gson.JsonObjectTest
 com.google.gson.JsonParserTest
+com.google.gson.JsonPrimitiveTest
+com.google.gson.JsonStreamParserTest
 com.google.gson.LongSerializationPolicyTest
 com.google.gson.MixedStreamTest
 com.google.gson.ObjectTypeAdapterTest
@@ -33,8 +35,10 @@ com.google.gson.functional.JavaUtilConcurrentAtomicTest
 com.google.gson.functional.JavaUtilTest
 com.google.gson.functional.JsonAdapterAnnotationOnClassesTest
 com.google.gson.functional.JsonAdapterAnnotationOnFieldsTest
+com.google.gson.functional.JsonArrayTest
 com.google.gson.functional.JsonParserTest
 com.google.gson.functional.JsonTreeTest
+com.google.gson.functional.LeniencyTest
 com.google.gson.functional.MapAsArrayTypeAdapterTest
 com.google.gson.functional.MapTest
 com.google.gson.functional.MoreSpecificTypeSerializationTest
@@ -60,4 +64,9 @@ com.google.gson.functional.TypeHierarchyAdapterTest
 com.google.gson.functional.TypeVariableTest
 com.google.gson.functional.UncategorizedTest
 com.google.gson.functional.VersioningTest
+com.google.gson.internal.bind.JsonElementReaderTest
+com.google.gson.internal.bind.JsonTreeWriterTest
 com.google.gson.metrics.PerformanceTest
+com.google.gson.regression.JsonAdapterNullSafeTest
+com.google.gson.stream.JsonReaderPathTest
+com.google.gson.stream.JsonReaderTest

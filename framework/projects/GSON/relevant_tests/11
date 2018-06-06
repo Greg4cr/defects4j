@@ -1,7 +1,9 @@
 com.google.gson.CommentsTest
+com.google.gson.DefaultDateTypeAdapterTest
 com.google.gson.DefaultInetAddressTypeAdapterTest
 com.google.gson.DefaultMapJsonSerializerTest
 com.google.gson.GsonBuilderTest
+com.google.gson.GsonTest
 com.google.gson.GsonTypeAdapterTest
 com.google.gson.JavaSerializationTest
 com.google.gson.JsonObjectTest
@@ -68,5 +70,3 @@ com.google.gson.internal.bind.JsonElementReaderTest
 com.google.gson.internal.bind.JsonTreeWriterTest
 com.google.gson.metrics.PerformanceTest
 com.google.gson.regression.JsonAdapterNullSafeTest
-com.google.gson.stream.JsonReaderPathTest
-com.google.gson.stream.JsonReaderTest

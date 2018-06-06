@@ -1,2 +1,3 @@
-com.google.gson.functional.JsonAdapterAnnotationOnClassesTest
-com.google.gson.functional.JsonAdapterAnnotationOnFieldsTest
+com.google.gson.common.TestTypes
+com.google.gson.stream.JsonReaderTest
+com.google.gson.functional.MapTest

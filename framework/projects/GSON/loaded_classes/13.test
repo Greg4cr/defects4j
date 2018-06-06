@@ -1,1 +1,1 @@
-com.google.gson.stream.JsonWriterTest
+com.google.gson.internal.bind.JsonTreeReaderTest

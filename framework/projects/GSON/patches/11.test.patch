@@ -1,52 +1,66 @@
-diff --git a/gson/src/test/java/com/google/gson/functional/MapTest.java b/gson/src/test/java/com/google/gson/functional/MapTest.java
-index 154ecf5..590760c 100755
---- a/gson/src/test/java/com/google/gson/functional/MapTest.java
-+++ b/gson/src/test/java/com/google/gson/functional/MapTest.java
-@@ -167,34 +167,6 @@ public class MapTest extends TestCase {
-     assertEquals("456", map.get(123));
-   }
- 
--  public void testMapDeserializationWithUnquotedIntegerKeys() {
--    Type typeOfMap = new TypeToken<Map<Integer, String>>() {}.getType();
--    Map<Integer, String> map = gson.fromJson("{123:\"456\"}", typeOfMap);
--    assertEquals(1, map.size());
--    assertTrue(map.containsKey(123));
--    assertEquals("456", map.get(123));
--  }
--
--  public void testMapDeserializationWithLongKeys() {
--    long longValue = 9876543210L;
--    String json = String.format("{\"%d\":\"456\"}", longValue);
--    Type typeOfMap = new TypeToken<Map<Long, String>>() {}.getType();
--    Map<Long, String> map = gson.fromJson(json, typeOfMap);
--    assertEquals(1, map.size());
--    assertTrue(map.containsKey(longValue));
--    assertEquals("456", map.get(longValue));
--  }
--
--  public void testMapDeserializationWithUnquotedLongKeys() {
--    long longKey = 9876543210L;
--    String json = String.format("{%d:\"456\"}", longKey);
--    Type typeOfMap = new TypeToken<Map<Long, String>>() {}.getType();
--    Map<Long, String> map = gson.fromJson(json, typeOfMap);
--    assertEquals(1, map.size());
--    assertTrue(map.containsKey(longKey));
--    assertEquals("456", map.get(longKey));
--  }
--
-   public void testHashMapDeserialization() throws Exception {
-     Type typeOfMap = new TypeToken<HashMap<Integer, String>>() {}.getType();
-     HashMap<Integer, String> map = gson.fromJson("{\"123\":\"456\"}", typeOfMap);
-diff --git a/gson/src/test/java/com/google/gson/stream/JsonReaderTest.java b/gson/src/test/java/com/google/gson/stream/JsonReaderTest.java
-index 48279da..a192940 100644
---- a/gson/src/test/java/com/google/gson/stream/JsonReaderTest.java
-+++ b/gson/src/test/java/com/google/gson/stream/JsonReaderTest.java
-@@ -501,7 +501,7 @@ public final class JsonReaderTest extends TestCase {
-     try {
-       reader.nextInt();
-       fail();
--    } catch (NumberFormatException expected) {
-+    } catch (IllegalStateException expected) {
+diff --git a/gson/src/test/java/com/google/gson/functional/JsonAdapterAnnotationOnFieldsTest.java b/gson/src/test/java/com/google/gson/functional/JsonAdapterAnnotationOnFieldsTest.java
+index 6f4a0ce..4c745ec 100644
+--- a/gson/src/test/java/com/google/gson/functional/JsonAdapterAnnotationOnFieldsTest.java
++++ b/gson/src/test/java/com/google/gson/functional/JsonAdapterAnnotationOnFieldsTest.java
+@@ -63,6 +63,7 @@ public final class JsonAdapterAnnotationOnFieldsTest extends TestCase {
+         @Override public void write(JsonWriter out, Part part) throws IOException {
+           throw new AssertionError();
+         }
++
+         @Override public Part read(JsonReader in) throws IOException {
+           throw new AssertionError();
+         }
+@@ -219,53 +220,4 @@ public final class JsonAdapterAnnotationOnFieldsTest extends TestCase {
+       this.part = part;
      }
-     assertEquals("12.34e5x", reader.nextString());
    }
+-
+-  /** Regression test contributed through https://github.com/google/gson/issues/831 */
+-  public void testNonPrimitiveFieldAnnotationTakesPrecedenceOverDefault() {
+-    Gson gson = new Gson();
+-    String json = gson.toJson(new GadgetWithOptionalPart(new Part("foo")));
+-    assertEquals("{\"part\":\"PartJsonFieldAnnotationAdapter\"}", json);
+-    GadgetWithOptionalPart gadget = gson.fromJson("{'part':'foo'}", GadgetWithOptionalPart.class);
+-    assertEquals("PartJsonFieldAnnotationAdapter", gadget.part.name);
+-  }
+-
+-  /** Regression test contributed through https://github.com/google/gson/issues/831 */
+-  public void testPrimitiveFieldAnnotationTakesPrecedenceOverDefault() {
+-    Gson gson = new Gson();
+-    String json = gson.toJson(new GadgetWithPrimitivePart(42));
+-    assertEquals("{\"part\":\"42\"}", json);
+-    GadgetWithPrimitivePart gadget = gson.fromJson(json, GadgetWithPrimitivePart.class);
+-    assertEquals(42, gadget.part);
+-  }
+-
+-  private static final class GadgetWithPrimitivePart {
+-    @JsonAdapter(LongToStringTypeAdapterFactory.class)
+-    final long part;
+-
+-    private GadgetWithPrimitivePart(long part) {
+-      this.part = part;
+-    }
+-  }
+-
+-  private static final class LongToStringTypeAdapterFactory implements TypeAdapterFactory {
+-    static final TypeAdapter<Long> ADAPTER = new TypeAdapter<Long>() {
+-      @Override public void write(JsonWriter out, Long value) throws IOException {
+-        out.value(value.toString());
+-      }
+-      @Override public Long read(JsonReader in) throws IOException {
+-        return in.nextLong();
+-      }
+-    };
+-    @SuppressWarnings("unchecked")
+-    @Override public <T> TypeAdapter<T> create(Gson gson, final TypeToken<T> type) {
+-      Class<?> cls = type.getRawType();
+-      if (Long.class.isAssignableFrom(cls)) {
+-        return (TypeAdapter<T>) ADAPTER;
+-      } else if (long.class.isAssignableFrom(cls)) {
+-        return (TypeAdapter<T>) ADAPTER;
+-      }
+-      throw new IllegalStateException("Non-long field of type " + type
+-          + " annotated with @JsonAdapter(LongToStringTypeAdapterFactory.class)");
+-    }
+-  }
+ }

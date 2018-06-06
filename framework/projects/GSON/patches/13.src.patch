@@ -1,60 +1,20 @@
-diff --git a/gson/src/main/java/com/google/gson/internal/bind/JsonTreeWriter.java b/gson/src/main/java/com/google/gson/internal/bind/JsonTreeWriter.java
-index 51dc1f3..5f9f039 100644
---- a/gson/src/main/java/com/google/gson/internal/bind/JsonTreeWriter.java
-+++ b/gson/src/main/java/com/google/gson/internal/bind/JsonTreeWriter.java
-@@ -159,14 +159,6 @@ public final class JsonTreeWriter extends JsonWriter {
-     return this;
+diff --git a/gson/src/main/java/com/google/gson/internal/bind/JsonTreeReader.java b/gson/src/main/java/com/google/gson/internal/bind/JsonTreeReader.java
+index 387b29e..0121231 100644
+--- a/gson/src/main/java/com/google/gson/internal/bind/JsonTreeReader.java
++++ b/gson/src/main/java/com/google/gson/internal/bind/JsonTreeReader.java
+@@ -259,13 +259,9 @@ public final class JsonTreeReader extends JsonReader {
+       pathNames[stackSize - 2] = "null";
+     } else {
+       popStack();
+-      if (stackSize > 0) {
+-        pathNames[stackSize - 1] = "null";
+-      }
+-    }
+-    if (stackSize > 0) {
+-      pathIndices[stackSize - 1]++;
++      pathNames[stackSize - 1] = "null";
+     }
++    pathIndices[stackSize - 1]++;
    }
  
--  @Override public JsonWriter value(Boolean value) throws IOException {
--    if (value == null) {
--      return nullValue();
--    }
--    put(new JsonPrimitive(value));
--    return this;
--  }
--
-   @Override public JsonWriter value(double value) throws IOException {
-     if (!isLenient() && (Double.isNaN(value) || Double.isInfinite(value))) {
-       throw new IllegalArgumentException("JSON forbids NaN and infinities: " + value);
-diff --git a/gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java b/gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java
-index 23ab8a1..0d6d013 100644
---- a/gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java
-+++ b/gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java
-@@ -162,6 +162,10 @@ public final class TypeAdapters {
-     }
-     @Override
-     public void write(JsonWriter out, Boolean value) throws IOException {
-+      if (value == null) {
-+        out.nullValue();
-+        return;
-+      }
-       out.value(value);
-     }
-   };
-diff --git a/gson/src/main/java/com/google/gson/stream/JsonWriter.java b/gson/src/main/java/com/google/gson/stream/JsonWriter.java
-index e2fc196..9bf2d22 100644
---- a/gson/src/main/java/com/google/gson/stream/JsonWriter.java
-+++ b/gson/src/main/java/com/google/gson/stream/JsonWriter.java
-@@ -471,21 +471,6 @@ public class JsonWriter implements Closeable, Flushable {
-   /**
-    * Encodes {@code value}.
-    *
--   * @return this writer.
--   */
--  public JsonWriter value(Boolean value) throws IOException {
--    if (value == null) {
--      return nullValue();
--    }
--    writeDeferredName();
--    beforeValue();
--    out.write(value ? "true" : "false");
--    return this;
--  }
--
--  /**
--   * Encodes {@code value}.
--   *
-    * @param value a finite value. May not be {@link Double#isNaN() NaNs} or
-    *     {@link Double#isInfinite() infinities}.
-    * @return this writer.
+   @Override public String toString() {

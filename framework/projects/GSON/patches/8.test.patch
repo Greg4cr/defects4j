@@ -1,70 +1,52 @@
-diff --git a/gson/src/test/java/com/google/gson/functional/JsonAdapterAnnotationOnClassesTest.java b/gson/src/test/java/com/google/gson/functional/JsonAdapterAnnotationOnClassesTest.java
-index b7b29a6..d079841 100644
---- a/gson/src/test/java/com/google/gson/functional/JsonAdapterAnnotationOnClassesTest.java
-+++ b/gson/src/test/java/com/google/gson/functional/JsonAdapterAnnotationOnClassesTest.java
-@@ -133,12 +133,6 @@ public final class JsonAdapterAnnotationOnClassesTest extends TestCase {
-     assertFalse(json.contains("jsonAdapter"));
+diff --git a/gson/src/test/java/com/google/gson/functional/MapTest.java b/gson/src/test/java/com/google/gson/functional/MapTest.java
+index 154ecf5..590760c 100755
+--- a/gson/src/test/java/com/google/gson/functional/MapTest.java
++++ b/gson/src/test/java/com/google/gson/functional/MapTest.java
+@@ -167,34 +167,6 @@ public class MapTest extends TestCase {
+     assertEquals("456", map.get(123));
    }
  
--  public void testNullSafeObjectFromJson() {
--    Gson gson = new Gson();
--    NullableClass fromJson = gson.fromJson("null", NullableClass.class);
--    assertNull(fromJson);
+-  public void testMapDeserializationWithUnquotedIntegerKeys() {
+-    Type typeOfMap = new TypeToken<Map<Integer, String>>() {}.getType();
+-    Map<Integer, String> map = gson.fromJson("{123:\"456\"}", typeOfMap);
+-    assertEquals(1, map.size());
+-    assertTrue(map.containsKey(123));
+-    assertEquals("456", map.get(123));
 -  }
 -
-   @JsonAdapter(A.JsonAdapter.class)
-   private static class A {
-     final String value;
-@@ -221,23 +215,6 @@ public final class JsonAdapterAnnotationOnClassesTest extends TestCase {
+-  public void testMapDeserializationWithLongKeys() {
+-    long longValue = 9876543210L;
+-    String json = String.format("{\"%d\":\"456\"}", longValue);
+-    Type typeOfMap = new TypeToken<Map<Long, String>>() {}.getType();
+-    Map<Long, String> map = gson.fromJson(json, typeOfMap);
+-    assertEquals(1, map.size());
+-    assertTrue(map.containsKey(longValue));
+-    assertEquals("456", map.get(longValue));
+-  }
+-
+-  public void testMapDeserializationWithUnquotedLongKeys() {
+-    long longKey = 9876543210L;
+-    String json = String.format("{%d:\"456\"}", longKey);
+-    Type typeOfMap = new TypeToken<Map<Long, String>>() {}.getType();
+-    Map<Long, String> map = gson.fromJson(json, typeOfMap);
+-    assertEquals(1, map.size());
+-    assertTrue(map.containsKey(longKey));
+-    assertEquals("456", map.get(longKey));
+-  }
+-
+   public void testHashMapDeserialization() throws Exception {
+     Type typeOfMap = new TypeToken<HashMap<Integer, String>>() {}.getType();
+     HashMap<Integer, String> map = gson.fromJson("{\"123\":\"456\"}", typeOfMap);
+diff --git a/gson/src/test/java/com/google/gson/stream/JsonReaderTest.java b/gson/src/test/java/com/google/gson/stream/JsonReaderTest.java
+index 48279da..a192940 100644
+--- a/gson/src/test/java/com/google/gson/stream/JsonReaderTest.java
++++ b/gson/src/test/java/com/google/gson/stream/JsonReaderTest.java
+@@ -501,7 +501,7 @@ public final class JsonReaderTest extends TestCase {
+     try {
+       reader.nextInt();
+       fail();
+-    } catch (NumberFormatException expected) {
++    } catch (IllegalStateException expected) {
      }
+     assertEquals("12.34e5x", reader.nextString());
    }
- 
--  @JsonAdapter(value = NullableClassJsonAdapter.class)
--  private static class NullableClass {
--  }
--
--  private static class NullableClassJsonAdapter extends TypeAdapter<NullableClass> {
--    @Override
--    public void write(JsonWriter out, NullableClass value) throws IOException {
--      out.value("nullable");
--    }
--
--    @Override
--    public NullableClass read(JsonReader in) throws IOException {
--      in.nextString();
--      return new NullableClass();
--    }
--  }
--
-   @JsonAdapter(FooJsonAdapter.class)
-   private static enum Foo { BAR, BAZ }
-   private static class FooJsonAdapter extends TypeAdapter<Foo> {
-diff --git a/gson/src/test/java/com/google/gson/functional/JsonAdapterAnnotationOnFieldsTest.java b/gson/src/test/java/com/google/gson/functional/JsonAdapterAnnotationOnFieldsTest.java
-index 4c745ec..fb5121d 100644
---- a/gson/src/test/java/com/google/gson/functional/JsonAdapterAnnotationOnFieldsTest.java
-+++ b/gson/src/test/java/com/google/gson/functional/JsonAdapterAnnotationOnFieldsTest.java
-@@ -200,24 +200,4 @@ public final class JsonAdapterAnnotationOnFieldsTest extends TestCase {
-       this.part2 = part2;
-     }
-   }
--
--  public void testJsonAdapterWrappedInNullSafeAsRequested() {
--    Gson gson = new Gson();
--    String fromJson = "{'part':null}";
--
--    GadgetWithOptionalPart gadget = gson.fromJson(fromJson, GadgetWithOptionalPart.class);
--    assertNull(gadget.part);
--
--    String toJson = gson.toJson(gadget);
--    assertFalse(toJson.contains("PartJsonFieldAnnotationAdapter"));
--  }
--
--  private static final class GadgetWithOptionalPart {
--    @JsonAdapter(value = PartJsonFieldAnnotationAdapter.class)
--    final Part part;
--
--    private GadgetWithOptionalPart(Part part) {
--      this.part = part;
--    }
--  }
- }
