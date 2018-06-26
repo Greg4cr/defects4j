@@ -91,6 +91,10 @@ Commons CSV (uses Vcs::Git as Vcs backend)
 
 Commons JXPath (uses Vcs::Git as Vcs backend)
 
+=item * L<GSON|Project::GSON>
+
+GSON library (L<Vcs::Git> backend)
+
 =item * L<Guava|Project::Guava>
 
 Guava library (L<Vcs::Git> backend)

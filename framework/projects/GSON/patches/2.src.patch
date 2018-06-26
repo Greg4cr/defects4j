@@ -1,0 +1,26 @@
+diff --git a/gson/src/main/java/com/google/gson/internal/LazilyParsedNumber.java b/gson/src/main/java/com/google/gson/internal/LazilyParsedNumber.java
+index 3669af7..b71750a 100644
+--- a/gson/src/main/java/com/google/gson/internal/LazilyParsedNumber.java
++++ b/gson/src/main/java/com/google/gson/internal/LazilyParsedNumber.java
+@@ -76,21 +76,4 @@ public final class LazilyParsedNumber extends Number {
+   private Object writeReplace() throws ObjectStreamException {
+     return new BigDecimal(value);
+   }
+-
+-  @Override
+-  public int hashCode() {
+-    return value.hashCode();
+-  }
+-
+-  @Override
+-  public boolean equals(Object obj) {
+-    if (this == obj) {
+-      return true;
+-    }
+-    if (obj instanceof LazilyParsedNumber) {
+-      LazilyParsedNumber other = (LazilyParsedNumber) obj;
+-      return value == other.value || value.equals(other.value);
+-    }
+-    return false;
+-  }
+ }

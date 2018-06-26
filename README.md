@@ -6,7 +6,7 @@ with the goal of advancing software engineering research.
 The projects
 ---------------
 
-Defects4J contains 597 bugs from the following open-source projects:
+Defects4J contains 613 bugs from the following open-source projects:
 
 | Identifier      | Project name                         | Number of bugs |
 |-----------------|--------------------------------------|----------------|
@@ -16,11 +16,12 @@ Defects4J contains 597 bugs from the following open-source projects:
 | CommonsCLI      | Apache commons-CLI library           |  24            |
 | CommonsCsv      | Apache commons-csv                   |  12            |
 | CommonsJXPath   | Apache commons-JXPath                |  14            |
+| GSON            | GSON library                         |  16            |
 | Guava           | Guava library                        |   9            |
 | JacksonCore     | Jackson core module                  |  13            |
 | JacksonDatabind | Jackson data binding utilities       |  39            |
 | JacksonXml      | Jackson XML utilities                |   5            |
-| Jsoup           | jsoup HTML parser                    |  64            |
+| Jsoup           | Jsoup HTML parser                    |  64            |
 | Lang            | Apache commons-lang                  |  65            |
 | Math            | Apache commons-math                  | 106            |
 | Mockito         | Mockito                              |  38            |
