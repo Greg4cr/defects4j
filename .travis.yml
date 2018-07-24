@@ -29,58 +29,43 @@ jobs:
     - script: carton exec ./test_randoop.sh
     - script: carton exec ./test_fix_test_suite.sh
     # Verify that all bugs are reproducible (run multiple jobs for projects that
-    # take a long time to finish.
-    - stage: verify
+# take a long time to finish).
+    - stage: verify-bugs
 ## Chart
-      script: carton exec ./test_verify_bugs.sh -p Chart -b1..7
-      script: carton exec ./test_verify_bugs.sh -p Chart -b8..14
-      script: carton exec ./test_verify_bugs.sh -p Chart -b15..21
-      script: carton exec ./test_verify_bugs.sh -p Chart -b22..26
-## CommonsCodec
-    - script: carton exec ./test_verify_bugs.sh -p CommonsCodec -b1..11
-    - script: carton exec ./test_verify_bugs.sh -p CommonsCodec -b12..22
-## CommonsCLI
-    - script: carton exec ./test_verify_bugs.sh -p CommonsCLI -b1..12
-    - script: carton exec ./test_verify_bugs.sh -p CommonsCLI -b13..24
-## CommonsCsv
-    - script: carton exec ./test_verify_bugs.sh -p CommonsCsv
-## CommonsJXPath
-    - script: carton exec ./test_verify_bugs.sh -p CommonsJXPath
-## Guava
-    - script: carton exec ./test_verify_bugs.sh -p Guava -b1..5
-    - script: carton exec ./test_verify_bugs.sh -p Guava -b6..9
-## JacksonCore
-    - script: carton exec ./test_verify_bugs.sh -p JacksonCore
-## JacksonDatabind
-    - script: carton exec ./test_verify_bugs.sh -p JacksonDatabind -b1..8
-    - script: carton exec ./test_verify_bugs.sh -p JacksonDatabind -b9..16
-    - script: carton exec ./test_verify_bugs.sh -p JacksonDatabind -b17..24
-    - script: carton exec ./test_verify_bugs.sh -p JacksonDatabind -b25..32
-    - script: carton exec ./test_verify_bugs.sh -p JacksonDatabind -b33..39
-## JacksonXml
-    - script: carton exec ./test_verify_bugs.sh -p JacksonXml
-## Jsoup
-    - script: carton exec ./test_verify_bugs.sh -p Jsoup -b1..22
-    - script: carton exec ./test_verify_bugs.sh -p Jsoup -b23..44
-    - script: carton exec ./test_verify_bugs.sh -p Jsoup -b45..64
+      script: carton exec ./test_verify_bugs.sh -p Chart
+## Closure
+    - script: carton exec ./test_verify_bugs.sh -p Closure -b1..10
+    - script: carton exec ./test_verify_bugs.sh -p Closure -b11..15
+    - script: carton exec ./test_verify_bugs.sh -p Closure -b16..20
+    - script: carton exec ./test_verify_bugs.sh -p Closure -b21..30
+    - script: carton exec ./test_verify_bugs.sh -p Closure -b31..40
+    - script: carton exec ./test_verify_bugs.sh -p Closure -b41..50
+    - script: carton exec ./test_verify_bugs.sh -p Closure -b51..60
+    - script: carton exec ./test_verify_bugs.sh -p Closure -b61..70
+    - script: carton exec ./test_verify_bugs.sh -p Closure -b71..80
+    - script: carton exec ./test_verify_bugs.sh -p Closure -b81..90
+    - script: carton exec ./test_verify_bugs.sh -p Closure -b91..100
+    - script: carton exec ./test_verify_bugs.sh -p Closure -b101..111
+    - script: carton exec ./test_verify_bugs.sh -p Closure -b112..122
+    - script: carton exec ./test_verify_bugs.sh -p Closure -b123..133
 ## Lang
     - script: carton exec ./test_verify_bugs.sh -p Lang -b1..16
     - script: carton exec ./test_verify_bugs.sh -p Lang -b17..32
     - script: carton exec ./test_verify_bugs.sh -p Lang -b33..48
     - script: carton exec ./test_verify_bugs.sh -p Lang -b49..65
 ## Math
-    - script: carton exec ./test_verify_bugs.sh -p Math -b1..21
-    - script: carton exec ./test_verify_bugs.sh -p Math -b22..42
-    - script: carton exec ./test_verify_bugs.sh -p Math -b43..63
-    - script: carton exec ./test_verify_bugs.sh -p Math -b64..84
-    - script: carton exec ./test_verify_bugs.sh -p Math -b85..106
+    - script: carton exec ./test_verify_bugs.sh -p Math -b1..18
+    - script: carton exec ./test_verify_bugs.sh -p Math -b19..36
+    - script: carton exec ./test_verify_bugs.sh -p Math -b20..54
+    - script: carton exec ./test_verify_bugs.sh -p Math -b55..80
+    - script: carton exec ./test_verify_bugs.sh -p Math -b81..106
 ## Mockito
     - script: carton exec ./test_verify_bugs.sh -p Mockito -b1..5
     - script: carton exec ./test_verify_bugs.sh -p Mockito -b6..10
     - script: carton exec ./test_verify_bugs.sh -p Mockito -b11..15
     - script: carton exec ./test_verify_bugs.sh -p Mockito -b16..20
-    - script: carton exec ./test_verify_bugs.sh -p Mockito -b21..27
-    - script: carton exec ./test_verify_bugs.sh -p Mockito -b28..38
+    - script: carton exec ./test_verify_bugs.sh -p Mockito -b21..26
+    - script: carton exec ./test_verify_bugs.sh -p Mockito -b27..38
 ## Time
     - script: carton exec ./test_verify_bugs.sh -p Time -b1..13
     - script: carton exec ./test_verify_bugs.sh -p Time -b14..27
