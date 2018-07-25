@@ -1,5 +1,5 @@
 diff --git a/src/main/java/com/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer.java b/src/main/java/com/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer.java
-index b6306aa..7c37ffa 100644
+index b6306aa7..54684191 100644
 --- a/src/main/java/com/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer.java
 +++ b/src/main/java/com/fasterxml/jackson/core/sym/ByteQuadsCanonicalizer.java
 @@ -702,9 +702,7 @@ public final class ByteQuadsCanonicalizer
@@ -7,9 +7,8 @@ index b6306aa..7c37ffa 100644
              int len = hashArea[offset+3];
              if ((hash == hashArea[offset]) && (qlen == len)) {
 -                if (_verifyLongName(q, qlen, hashArea[offset+1])) {
--                    return _names[offset >> 2];
+                     return _names[offset >> 2];
 -                }
-+                return _names[offset >> 2];
              }
              if (len == 0) {
                  return null;

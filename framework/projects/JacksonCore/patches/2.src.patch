@@ -1,5 +1,5 @@
 diff --git a/src/main/java/com/fasterxml/jackson/core/io/UTF32Reader.java b/src/main/java/com/fasterxml/jackson/core/io/UTF32Reader.java
-index 9f03623..6a7efea 100644
+index 9f036233..b881fadf 100644
 --- a/src/main/java/com/fasterxml/jackson/core/io/UTF32Reader.java
 +++ b/src/main/java/com/fasterxml/jackson/core/io/UTF32Reader.java
 @@ -109,8 +109,8 @@ public class UTF32Reader extends Reader
@@ -12,23 +12,21 @@ index 9f03623..6a7efea 100644
  
          // Ok, first; do we have a surrogate from last round?
          if (_surrogate != NC) {
-@@ -123,58 +123,51 @@ public class UTF32Reader extends Reader
-             int left = (_length - _ptr);
+@@ -124,57 +124,52 @@ public class UTF32Reader extends Reader
              if (left < 4) {
                  if (!loadMore(left)) { // (legal) EOF?
--                    // Ok if (but only if!) was at boundary
+                     // Ok if (but only if!) was at boundary
 -                    if (left == 0) {
--                        return -1;
+                         return -1;
 -                    }
 -                    reportUnexpectedEOF(_length - _ptr, 4);
-+                    return -1;
                  }
              }
          }
  
--        // 02-Jun-2017, tatu: Must ensure we don't try to read past buffer end:
+         // 02-Jun-2017, tatu: Must ensure we don't try to read past buffer end:
 -        final int _lastValidInputStart = (_length - 3);
--        
+         
          main_loop:
 -        while (outPtr < outEnd) {
 +        while (outPtr < len) {
@@ -83,7 +81,6 @@ index 9f03623..6a7efea 100644
 -        int actualLen = (outPtr - start);
 -        _charCount += actualLen;
 -        return actualLen;
-+
 +        len = outPtr - start;
 +        _charCount += len;
 +        return len;

@@ -1,5 +1,5 @@
 diff --git a/src/main/java/com/fasterxml/jackson/core/JsonGenerator.java b/src/main/java/com/fasterxml/jackson/core/JsonGenerator.java
-index 5917f5d..0048bda 100644
+index 5917f5d9..0048bda7 100644
 --- a/src/main/java/com/fasterxml/jackson/core/JsonGenerator.java
 +++ b/src/main/java/com/fasterxml/jackson/core/JsonGenerator.java
 @@ -1681,7 +1681,7 @@ public abstract class JsonGenerator
@@ -21,36 +21,9 @@ index 5917f5d..0048bda 100644
              _reportError("No current event to copy");
          }
 diff --git a/src/main/java/com/fasterxml/jackson/core/JsonParser.java b/src/main/java/com/fasterxml/jackson/core/JsonParser.java
-index 90aed56..e2d1efe 100644
+index 90aed56f..d2057ed6 100644
 --- a/src/main/java/com/fasterxml/jackson/core/JsonParser.java
 +++ b/src/main/java/com/fasterxml/jackson/core/JsonParser.java
-@@ -884,7 +884,7 @@ public abstract class JsonParser
-     /**
-      * Method that is functionally equivalent to:
-      *<code>
--     *  return currentTokenId() == id
-+     *  return getCurrentTokenId() == id
-      *</code>
-      * but may be more efficiently implemented.
-      *<p>
-@@ -899,7 +899,7 @@ public abstract class JsonParser
-     /**
-      * Method that is functionally equivalent to:
-      *<code>
--     *  return currentToken() == t
-+     *  return getCurrentTokenId() == id
-      *</code>
-      * but may be more efficiently implemented.
-      *<p>
-@@ -956,7 +956,7 @@ public abstract class JsonParser
-      *<p>
-      * Default implementation is equivalent to:
-      *<pre>
--     *   currentToken() == JsonToken.START_ARRAY
-+     *   getCurrentToken() == JsonToken.START_ARRAY
-      *</pre>
-      * but may be overridden by custom parser implementations.
-      *
 @@ -964,7 +964,7 @@ public abstract class JsonParser
       *   start-array marker (such {@link JsonToken#START_ARRAY});
       *   false if not.
@@ -79,7 +52,7 @@ index 90aed56..e2d1efe 100644
          if (t == JsonToken.VALUE_FALSE) return false;
          throw new JsonParseException(this,
 diff --git a/src/main/java/com/fasterxml/jackson/core/filter/FilteringParserDelegate.java b/src/main/java/com/fasterxml/jackson/core/filter/FilteringParserDelegate.java
-index 2bb0165..bf68cd7 100644
+index 2bb0165c..bf68cd77 100644
 --- a/src/main/java/com/fasterxml/jackson/core/filter/FilteringParserDelegate.java
 +++ b/src/main/java/com/fasterxml/jackson/core/filter/FilteringParserDelegate.java
 @@ -146,16 +146,11 @@ public class FilteringParserDelegate extends JsonParserDelegate
@@ -100,25 +73,18 @@ index 2bb0165..bf68cd7 100644
      @Override public boolean hasCurrentToken() { return _currToken != null; }
      @Override public boolean hasTokenId(int id) {
 diff --git a/src/main/java/com/fasterxml/jackson/core/util/JsonParserSequence.java b/src/main/java/com/fasterxml/jackson/core/util/JsonParserSequence.java
-index 0c9c4eb..1100d61 100644
+index 0c9c4eb9..9949fb23 100644
 --- a/src/main/java/com/fasterxml/jackson/core/util/JsonParserSequence.java
 +++ b/src/main/java/com/fasterxml/jackson/core/util/JsonParserSequence.java
-@@ -25,14 +25,6 @@ public class JsonParserSequence extends JsonParserDelegate
-      * Index of the next parser in {@link #_parsers}.
+@@ -32,7 +32,6 @@ public class JsonParserSequence extends JsonParserDelegate
+      *
+      * @since 2.8
       */
-     protected int _nextParser;
--
--    /**
--     * Flag used to indicate that `JsonParser.nextToken()` should not be called,
--     * due to parser already pointing to a token.
--     *
--     * @since 2.8
--     */
 -    protected boolean _suppressNextToken;
      
      /*
       *******************************************************
-@@ -43,7 +35,6 @@ public class JsonParserSequence extends JsonParserDelegate
+@@ -43,7 +42,6 @@ public class JsonParserSequence extends JsonParserDelegate
      protected JsonParserSequence(JsonParser[] parsers)
      {
          super(parsers[0]);
@@ -126,12 +92,9 @@ index 0c9c4eb..1100d61 100644
          _parsers = parsers;
          _nextParser = 1;
      }
-@@ -103,21 +94,15 @@ public class JsonParserSequence extends JsonParserDelegate
-     }
- 
+@@ -105,19 +103,13 @@ public class JsonParserSequence extends JsonParserDelegate
      @Override
--    public JsonToken nextToken() throws IOException
-+    public JsonToken nextToken() throws IOException, JsonParseException
+     public JsonToken nextToken() throws IOException
      {
 -        if (delegate == null) {
 -            return null;

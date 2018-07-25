@@ -1,39 +1,22 @@
 diff --git a/src/main/java/com/fasterxml/jackson/core/base/GeneratorBase.java b/src/main/java/com/fasterxml/jackson/core/base/GeneratorBase.java
-index 85b4d32..68f699b 100644
+index 85b4d328..f851abd3 100644
 --- a/src/main/java/com/fasterxml/jackson/core/base/GeneratorBase.java
 +++ b/src/main/java/com/fasterxml/jackson/core/base/GeneratorBase.java
-@@ -31,15 +31,6 @@ public abstract class GeneratorBase extends JsonGenerator
-             | Feature.STRICT_DUPLICATE_DETECTION.getMask()
-             ;
+@@ -33,12 +33,6 @@ public abstract class GeneratorBase extends JsonGenerator
  
--    // // // Constants for validation messages (since 2.6)
--
+     // // // Constants for validation messages (since 2.6)
+ 
 -    protected final String WRITE_BINARY = "write a binary value";
 -    protected final String WRITE_BOOLEAN = "write a boolean value";
 -    protected final String WRITE_NULL = "write a null";
 -    protected final String WRITE_NUMBER = "write a number";
 -    protected final String WRITE_RAW = "write a raw (unencoded) value";
 -    protected final String WRITE_STRING = "write a string";
--
+ 
      /*
      /**********************************************************
-     /* Configuration
-diff --git a/src/main/java/com/fasterxml/jackson/core/json/JsonGeneratorImpl.java b/src/main/java/com/fasterxml/jackson/core/json/JsonGeneratorImpl.java
-index 9ce93e4..dbe7c9d 100644
---- a/src/main/java/com/fasterxml/jackson/core/json/JsonGeneratorImpl.java
-+++ b/src/main/java/com/fasterxml/jackson/core/json/JsonGeneratorImpl.java
-@@ -163,7 +163,8 @@ public abstract class JsonGeneratorImpl extends GeneratorBase
-     // // Overrides just to make things final, to possibly help with inlining
-     
-     @Override
--    public final void writeStringField(String fieldName, String value) throws IOException
-+    public final void writeStringField(String fieldName, String value)
-+        throws IOException, JsonGenerationException
-     {
-         writeFieldName(fieldName);
-         writeString(value);
 diff --git a/src/main/java/com/fasterxml/jackson/core/json/JsonWriteContext.java b/src/main/java/com/fasterxml/jackson/core/json/JsonWriteContext.java
-index a5706c8..4ff12d7 100644
+index a5706c8d..4ff12d70 100644
 --- a/src/main/java/com/fasterxml/jackson/core/json/JsonWriteContext.java
 +++ b/src/main/java/com/fasterxml/jackson/core/json/JsonWriteContext.java
 @@ -166,9 +166,6 @@ public class JsonWriteContext extends JsonStreamContext
@@ -47,7 +30,7 @@ index a5706c8..4ff12d7 100644
              ++_index;
              return STATUS_OK_AFTER_COLON;
 diff --git a/src/main/java/com/fasterxml/jackson/core/json/UTF8JsonGenerator.java b/src/main/java/com/fasterxml/jackson/core/json/UTF8JsonGenerator.java
-index 8063425..885d935 100644
+index 8063425b..55ffba79 100644
 --- a/src/main/java/com/fasterxml/jackson/core/json/UTF8JsonGenerator.java
 +++ b/src/main/java/com/fasterxml/jackson/core/json/UTF8JsonGenerator.java
 @@ -416,7 +416,7 @@ public class UTF8JsonGenerator
@@ -212,28 +195,8 @@ index 8063425..885d935 100644
          _writeNull();
      }
  
-@@ -959,7 +959,8 @@ public class UTF8JsonGenerator
-      */
- 
-     @Override
--    protected final void _verifyValueWrite(String typeMsg) throws IOException
-+    protected final void _verifyValueWrite(String typeMsg)
-+        throws IOException, JsonGenerationException
-     {
-         int status = _writeContext.writeValue();
-         if (status == JsonWriteContext.STATUS_EXPECT_NAME) {
-@@ -997,7 +998,8 @@ public class UTF8JsonGenerator
-         _verifyPrettyValueWrite(typeMsg, status);
-     }
- 
--    protected final void _verifyPrettyValueWrite(String typeMsg, int status) throws IOException
-+    protected final void _verifyPrettyValueWrite(String typeMsg, int status)
-+        throws IOException, JsonGenerationException
-     {
-         // If we have a pretty printer, it knows what to do:
-         switch (status) {
 diff --git a/src/main/java/com/fasterxml/jackson/core/json/WriterBasedJsonGenerator.java b/src/main/java/com/fasterxml/jackson/core/json/WriterBasedJsonGenerator.java
-index 1e7bd6c..0da0e75 100644
+index 1e7bd6c6..0da0e759 100644
 --- a/src/main/java/com/fasterxml/jackson/core/json/WriterBasedJsonGenerator.java
 +++ b/src/main/java/com/fasterxml/jackson/core/json/WriterBasedJsonGenerator.java
 @@ -319,7 +319,7 @@ public final class WriterBasedJsonGenerator

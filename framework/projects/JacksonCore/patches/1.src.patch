@@ -1,5 +1,5 @@
 diff --git a/src/main/java/com/fasterxml/jackson/core/filter/FilteringParserDelegate.java b/src/main/java/com/fasterxml/jackson/core/filter/FilteringParserDelegate.java
-index 4459e7f..c355446 100644
+index 4459e7fa..773f845c 100644
 --- a/src/main/java/com/fasterxml/jackson/core/filter/FilteringParserDelegate.java
 +++ b/src/main/java/com/fasterxml/jackson/core/filter/FilteringParserDelegate.java
 @@ -414,7 +414,7 @@ public class FilteringParserDelegate extends JsonParserDelegate
@@ -62,11 +62,10 @@ index 4459e7f..c355446 100644
                      }
                  }
                  // Otherwise not included (leaves must be explicitly included)
-@@ -773,15 +767,7 @@ public class FilteringParserDelegate extends JsonParserDelegate
-             }
+@@ -774,13 +768,6 @@ public class FilteringParserDelegate extends JsonParserDelegate
          }
      }
--
+ 
 -    private final boolean _verifyAllowedMatches() throws IOException {
 -        if (_matchCount == 0 || _allowMultipleMatches) {
 -            ++_matchCount;
@@ -74,8 +73,6 @@ index 4459e7f..c355446 100644
 -        }
 -        return false;
 -    }
--
-+    
+ 
      @Override
      public JsonToken nextValue() throws IOException {
-         // Re-implemented same as ParserMinimalBase:
