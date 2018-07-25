@@ -1,5 +1,5 @@
 diff --git a/gson/src/main/java/com/google/gson/internal/bind/JsonAdapterAnnotationTypeAdapterFactory.java b/gson/src/main/java/com/google/gson/internal/bind/JsonAdapterAnnotationTypeAdapterFactory.java
-index 3801cfd..77554e2 100644
+index 3801cfd4..77554e22 100644
 --- a/gson/src/main/java/com/google/gson/internal/bind/JsonAdapterAnnotationTypeAdapterFactory.java
 +++ b/gson/src/main/java/com/google/gson/internal/bind/JsonAdapterAnnotationTypeAdapterFactory.java
 @@ -51,20 +51,18 @@ public final class JsonAdapterAnnotationTypeAdapterFactory implements TypeAdapte

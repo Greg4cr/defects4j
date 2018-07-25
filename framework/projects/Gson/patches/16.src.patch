@@ -1,5 +1,5 @@
 diff --git a/gson/src/main/java/com/google/gson/DefaultDateTypeAdapter.java b/gson/src/main/java/com/google/gson/DefaultDateTypeAdapter.java
-index 3ce97fe..95eb42b 100644
+index 3ce97fe8..95eb42be 100644
 --- a/gson/src/main/java/com/google/gson/DefaultDateTypeAdapter.java
 +++ b/gson/src/main/java/com/google/gson/DefaultDateTypeAdapter.java
 @@ -84,10 +84,6 @@ final class DefaultDateTypeAdapter extends TypeAdapter<Date> {

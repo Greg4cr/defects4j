@@ -20,12 +20,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 ################################################################################
-               This is the project-specific build file for GSON.
+               This is the project-specific build file for Gson.
 
 It defines project-specific properties and targets, and imports the build file
 of the checked-out project version.
 #############################################################################-->
-<project name="D4j-GSON" basedir="${basedir}">
+<project name="D4j-Gson" basedir="${basedir}">
 
     <property environment="env"/>
     <property name="compile.debug" value="yes" />

@@ -1,8 +1,8 @@
 diff --git a/gson/src/main/java/com/google/gson/internal/bind/JsonTreeWriter.java b/gson/src/main/java/com/google/gson/internal/bind/JsonTreeWriter.java
-index 51dc1f3..5f9f039 100644
+index 51dc1f3a..502d5ab9 100644
 --- a/gson/src/main/java/com/google/gson/internal/bind/JsonTreeWriter.java
 +++ b/gson/src/main/java/com/google/gson/internal/bind/JsonTreeWriter.java
-@@ -159,14 +159,6 @@ public final class JsonTreeWriter extends JsonWriter {
+@@ -159,13 +159,6 @@ public final class JsonTreeWriter extends JsonWriter {
      return this;
    }
  
@@ -13,12 +13,11 @@ index 51dc1f3..5f9f039 100644
 -    put(new JsonPrimitive(value));
 -    return this;
 -  }
--
+ 
    @Override public JsonWriter value(double value) throws IOException {
      if (!isLenient() && (Double.isNaN(value) || Double.isInfinite(value))) {
-       throw new IllegalArgumentException("JSON forbids NaN and infinities: " + value);
 diff --git a/gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java b/gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java
-index 23ab8a1..0d6d013 100644
+index 23ab8a13..0d6d013c 100644
 --- a/gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java
 +++ b/gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java
 @@ -162,6 +162,10 @@ public final class TypeAdapters {
@@ -33,15 +32,13 @@ index 23ab8a1..0d6d013 100644
      }
    };
 diff --git a/gson/src/main/java/com/google/gson/stream/JsonWriter.java b/gson/src/main/java/com/google/gson/stream/JsonWriter.java
-index e2fc196..9bf2d22 100644
+index e2fc1961..a4178eee 100644
 --- a/gson/src/main/java/com/google/gson/stream/JsonWriter.java
 +++ b/gson/src/main/java/com/google/gson/stream/JsonWriter.java
-@@ -471,21 +471,6 @@ public class JsonWriter implements Closeable, Flushable {
-   /**
-    * Encodes {@code value}.
+@@ -473,15 +473,6 @@ public class JsonWriter implements Closeable, Flushable {
     *
--   * @return this writer.
--   */
+    * @return this writer.
+    */
 -  public JsonWriter value(Boolean value) throws IOException {
 -    if (value == null) {
 -      return nullValue();
@@ -51,10 +48,6 @@ index e2fc196..9bf2d22 100644
 -    out.write(value ? "true" : "false");
 -    return this;
 -  }
--
--  /**
--   * Encodes {@code value}.
--   *
-    * @param value a finite value. May not be {@link Double#isNaN() NaNs} or
-    *     {@link Double#isInfinite() infinities}.
-    * @return this writer.
+ 
+   /**
+    * Encodes {@code value}.

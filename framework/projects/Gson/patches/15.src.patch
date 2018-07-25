@@ -1,5 +1,5 @@
 diff --git a/gson/src/main/java/com/google/gson/stream/JsonWriter.java b/gson/src/main/java/com/google/gson/stream/JsonWriter.java
-index 8148816..e2fc196 100644
+index 8148816c..e2fc1961 100644
 --- a/gson/src/main/java/com/google/gson/stream/JsonWriter.java
 +++ b/gson/src/main/java/com/google/gson/stream/JsonWriter.java
 @@ -491,10 +491,10 @@ public class JsonWriter implements Closeable, Flushable {

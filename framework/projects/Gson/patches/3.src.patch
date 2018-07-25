@@ -1,15 +1,11 @@
 diff --git a/gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java b/gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java
-index 0268aa8..0e8d161 100644
+index 0268aa8a..a0ea1d86 100644
 --- a/gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java
 +++ b/gson/src/main/java/com/google/gson/internal/bind/TypeAdapters.java
-@@ -817,33 +817,12 @@ public final class TypeAdapters {
-     };
-   }
- 
--  /**
--   * Returns a factory for all subtypes of {@code typeAdapter}. We do a runtime check to confirm
--   * that the deserialized type matches the type requested.
--   */
+@@ -821,29 +821,12 @@ public final class TypeAdapters {
+    * Returns a factory for all subtypes of {@code typeAdapter}. We do a runtime check to confirm
+    * that the deserialized type matches the type requested.
+    */
 -  public static <T1> TypeAdapterFactory newTypeHierarchyFactory(
 -      final Class<T1> clazz, final TypeAdapter<T1> typeAdapter) {
 +  public static <TT> TypeAdapterFactory newTypeHierarchyFactory(

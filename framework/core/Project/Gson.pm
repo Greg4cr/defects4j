@@ -24,15 +24,15 @@
 
 =head1 NAME
 
-Project::GSON.pm -- L<Project> submodule for Google GSON.
+Project::Gson.pm -- L<Project> submodule for Google Gson.
 
 =head1 DESCRIPTION
 
 This module provides all project-specific configurations and subroutines for the
-Jsoup project.
+Gson project.
 
 =cut
-package Project::GSON;
+package Project::Gson;
 
 use strict;
 use warnings;
@@ -41,7 +41,7 @@ use Constants;
 use Vcs::Git;
 
 our @ISA = qw(Project);
-my $PID = "GSON";
+my $PID = "Gson";
 
 sub new {
     my $class = shift;
