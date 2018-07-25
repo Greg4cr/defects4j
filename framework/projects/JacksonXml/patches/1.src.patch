@@ -1,8 +1,8 @@
 diff --git a/src/main/java/com/fasterxml/jackson/dataformat/xml/XmlMapper.java b/src/main/java/com/fasterxml/jackson/dataformat/xml/XmlMapper.java
-index 380714a..a06f163 100644
+index 380714a..8b591d4 100644
 --- a/src/main/java/com/fasterxml/jackson/dataformat/xml/XmlMapper.java
 +++ b/src/main/java/com/fasterxml/jackson/dataformat/xml/XmlMapper.java
-@@ -86,16 +86,11 @@ public class XmlMapper extends ObjectMapper
+@@ -86,16 +86,12 @@ public class XmlMapper extends ObjectMapper
          _serializationConfig = _serializationConfig.withDefaultPrettyPrinter(DEFAULT_XML_PRETTY_PRINTER);
      }
  
@@ -10,7 +10,7 @@ index 380714a..a06f163 100644
 -        super(mapper);
 -        this._xmlModule = mapper._xmlModule;
 -    }
--
+ 
      @Override
      public XmlMapper copy()
      {
@@ -21,10 +21,10 @@ index 380714a..a06f163 100644
  
      @Override
 diff --git a/src/main/java/com/fasterxml/jackson/dataformat/xml/ser/XmlSerializerProvider.java b/src/main/java/com/fasterxml/jackson/dataformat/xml/ser/XmlSerializerProvider.java
-index 179a331..56ab515 100644
+index 179a331..2fbebfd 100644
 --- a/src/main/java/com/fasterxml/jackson/dataformat/xml/ser/XmlSerializerProvider.java
 +++ b/src/main/java/com/fasterxml/jackson/dataformat/xml/ser/XmlSerializerProvider.java
-@@ -49,11 +49,6 @@ public class XmlSerializerProvider extends DefaultSerializerProvider
+@@ -49,10 +49,6 @@ public class XmlSerializerProvider extends DefaultSerializerProvider
          _rootNameLookup  = src._rootNameLookup;
      }
  
@@ -32,19 +32,17 @@ index 179a331..56ab515 100644
 -        super(toCopy);
 -        this._rootNameLookup = toCopy._rootNameLookup;
 -    }
--
+ 
      /*
      /**********************************************************************
-     /* Overridden methods
-@@ -61,11 +56,6 @@ public class XmlSerializerProvider extends DefaultSerializerProvider
+@@ -60,10 +56,6 @@ public class XmlSerializerProvider extends DefaultSerializerProvider
+     /**********************************************************************
       */
  
-     @Override
+-    @Override
 -    public DefaultSerializerProvider copy() {
 -        return new XmlSerializerProvider(this);
 -    }
--
--    @Override
+ 
+     @Override
      public DefaultSerializerProvider createInstance(SerializationConfig config,
-             SerializerFactory jsf) {
-         return new XmlSerializerProvider(this, config, jsf);
