@@ -1,5 +1,5 @@
 diff --git a/src/main/java/org/apache/commons/codec/language/Soundex.java b/src/main/java/org/apache/commons/codec/language/Soundex.java
-index 404384d..71d1f07 100644
+index 404384db..71d1f07f 100644
 --- a/src/main/java/org/apache/commons/codec/language/Soundex.java
 +++ b/src/main/java/org/apache/commons/codec/language/Soundex.java
 @@ -185,14 +185,13 @@ public class Soundex implements StringEncoder {

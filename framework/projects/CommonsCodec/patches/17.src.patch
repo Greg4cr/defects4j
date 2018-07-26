@@ -1,5 +1,5 @@
 diff --git a/src/java/org/apache/commons/codec/language/DoubleMetaphone.java b/src/java/org/apache/commons/codec/language/DoubleMetaphone.java
-index f7122d4..5186895 100644
+index f7122d41..bae039ea 100644
 --- a/src/java/org/apache/commons/codec/language/DoubleMetaphone.java
 +++ b/src/java/org/apache/commons/codec/language/DoubleMetaphone.java
 @@ -452,7 +452,7 @@ public class DoubleMetaphone implements StringEncoder {
@@ -39,17 +39,3 @@ index f7122d4..5186895 100644
                      contains(value, value.length() - 1, 1, "A", "O")) &&
                     contains(value, index - 1, 4, "ALLE")) {
              return true;
-@@ -1004,9 +1002,10 @@ public class DoubleMetaphone implements StringEncoder {
-     }
-     
-     /**
--     * Determines whether <code>value</code> contains any of the criteria starting at index <code>start</code> and
--     * matching up to length <code>length</code>
--     */
-+     * Determines whether <code>value</code> contains any of the criteria 
-+     starting
-+     * at index <code>start</code> and matching up to length <code>length</code>
-+     */    
-     protected static boolean contains(String value, int start, int length, 
-                                       String[] criteria) {
-         boolean result = false;

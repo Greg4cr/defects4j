@@ -1,5 +1,5 @@
 diff --git a/src/main/java/org/apache/commons/codec/binary/StringUtils.java b/src/main/java/org/apache/commons/codec/binary/StringUtils.java
-index e5fb718..bef55f7 100644
+index e5fb7187..bef55f70 100644
 --- a/src/main/java/org/apache/commons/codec/binary/StringUtils.java
 +++ b/src/main/java/org/apache/commons/codec/binary/StringUtils.java
 @@ -78,7 +78,7 @@ public class StringUtils {

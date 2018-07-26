@@ -1,5 +1,5 @@
 diff --git a/src/java/org/apache/commons/codec/binary/Base64.java b/src/java/org/apache/commons/codec/binary/Base64.java
-index 8ea3dbc..f7e9062 100644
+index 8ea3dbcd..f7e9062b 100644
 --- a/src/java/org/apache/commons/codec/binary/Base64.java
 +++ b/src/java/org/apache/commons/codec/binary/Base64.java
 @@ -314,10 +314,6 @@ public class Base64 implements BinaryEncoder, BinaryDecoder {

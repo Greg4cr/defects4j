@@ -1,6 +1,6 @@
 diff --git a/src/main/java/org/apache/commons/codec/binary/CharSequenceUtils.java b/src/main/java/org/apache/commons/codec/binary/CharSequenceUtils.java
 deleted file mode 100644
-index fe20eb0..0000000
+index fe20eb02..00000000
 --- a/src/main/java/org/apache/commons/codec/binary/CharSequenceUtils.java
 +++ /dev/null
 @@ -1,63 +0,0 @@
@@ -68,42 +68,13 @@ index fe20eb0..0000000
 -    }
 -}
 diff --git a/src/main/java/org/apache/commons/codec/binary/StringUtils.java b/src/main/java/org/apache/commons/codec/binary/StringUtils.java
-index 8f1f57f..14a362f 100644
+index 8f1f57fa..b3c399f5 100644
 --- a/src/main/java/org/apache/commons/codec/binary/StringUtils.java
 +++ b/src/main/java/org/apache/commons/codec/binary/StringUtils.java
-@@ -38,49 +38,6 @@ import org.apache.commons.codec.Charsets;
- public class StringUtils {
- 
-     /**
--     * <p>
--     * Compares two CharSequences, returning {@code true} if they represent equal sequences of characters.
--     * </p>
--     * 
--     * <p>
--     * {@code null}s are handled without exceptions. Two {@code null} references are considered to be equal. The
--     * comparison is case sensitive.
--     * </p>
--     * 
--     * <pre>
--     * StringUtils.equals(null, null)   = true
--     * StringUtils.equals(null, "abc")  = false
--     * StringUtils.equals("abc", null)  = false
--     * StringUtils.equals("abc", "abc") = true
--     * StringUtils.equals("abc", "ABC") = false
--     * </pre>
--     * 
--     * <p>
--     * Copied from Apache Commons Lang r1583482 on April 10, 2014 (day of 3.3.2 release).
--     * </p>
--     * 
--     * @see Object#equals(Object)
--     * @param cs1
--     *            the first CharSequence, may be {@code null}
--     * @param cs2
--     *            the second CharSequence, may be {@code null}
--     * @return {@code true} if the CharSequences are equal (case-sensitive), or both {@code null}
--     * @since 1.10
--     */
+@@ -67,18 +67,6 @@ public class StringUtils {
+      * @return {@code true} if the CharSequences are equal (case-sensitive), or both {@code null}
+      * @since 1.10
+      */
 -    public static boolean equals(final CharSequence cs1, final CharSequence cs2) {
 -        if (cs1 == cs2) {
 -            return true;
@@ -116,13 +87,11 @@ index 8f1f57f..14a362f 100644
 -        }
 -        return CharSequenceUtils.regionMatches(cs1, false, 0, cs2, 0, Math.max(cs1.length(), cs2.length()));
 -    }
--
--    /**
+ 
+     /**
       * Calls {@link String#getBytes(Charset)}
-      *
-      * @param string
 diff --git a/src/main/java/org/apache/commons/codec/language/DoubleMetaphone.java b/src/main/java/org/apache/commons/codec/language/DoubleMetaphone.java
-index 6ccd3f2..c09e00f 100644
+index 6ccd3f27..c09e00fb 100644
 --- a/src/main/java/org/apache/commons/codec/language/DoubleMetaphone.java
 +++ b/src/main/java/org/apache/commons/codec/language/DoubleMetaphone.java
 @@ -242,7 +242,7 @@ public class DoubleMetaphone implements StringEncoder {

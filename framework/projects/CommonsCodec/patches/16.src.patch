@@ -1,5 +1,5 @@
 diff --git a/src/java/org/apache/commons/codec/binary/Base64.java b/src/java/org/apache/commons/codec/binary/Base64.java
-index 31671e6..e4d1276 100644
+index 31671e69..e4d1276c 100644
 --- a/src/java/org/apache/commons/codec/binary/Base64.java
 +++ b/src/java/org/apache/commons/codec/binary/Base64.java
 @@ -222,7 +222,7 @@ public class Base64 implements BinaryEncoder, BinaryDecoder {
@@ -12,7 +12,7 @@ index 31671e6..e4d1276 100644
  
      /**
 diff --git a/src/java/org/apache/commons/codec/binary/Base64InputStream.java b/src/java/org/apache/commons/codec/binary/Base64InputStream.java
-index d6c05a6..6fd27a9 100644
+index d6c05a69..6fd27a92 100644
 --- a/src/java/org/apache/commons/codec/binary/Base64InputStream.java
 +++ b/src/java/org/apache/commons/codec/binary/Base64InputStream.java
 @@ -73,7 +73,7 @@ public class Base64InputStream extends FilterInputStream {
@@ -25,7 +25,7 @@ index d6c05a6..6fd27a9 100644
  
      /**
 diff --git a/src/java/org/apache/commons/codec/binary/Base64OutputStream.java b/src/java/org/apache/commons/codec/binary/Base64OutputStream.java
-index 2dc26b0..e5ebcb3 100644
+index 2dc26b0e..e5ebcb3a 100644
 --- a/src/java/org/apache/commons/codec/binary/Base64OutputStream.java
 +++ b/src/java/org/apache/commons/codec/binary/Base64OutputStream.java
 @@ -72,7 +72,7 @@ public class Base64OutputStream extends FilterOutputStream {
