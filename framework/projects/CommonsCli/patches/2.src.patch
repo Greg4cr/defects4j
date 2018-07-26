@@ -1,12 +1,11 @@
 diff --git a/src/main/java/org/apache/commons/cli/CommandLine.java b/src/main/java/org/apache/commons/cli/CommandLine.java
-index 81d89dd..04c8a0d 100644
+index 81d89dd..1965c02 100644
 --- a/src/main/java/org/apache/commons/cli/CommandLine.java
 +++ b/src/main/java/org/apache/commons/cli/CommandLine.java
-@@ -114,13 +114,14 @@ public class CommandLine implements Serializable
-     {
+@@ -115,12 +115,14 @@ public class CommandLine implements Serializable
          String res = getOptionValue(opt);
          Option option = resolveOption(opt);
--        
+         
 -        if (option == null || res == null)
 +        if (option == null)
          {

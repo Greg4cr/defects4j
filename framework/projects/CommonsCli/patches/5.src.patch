@@ -1,16 +1,12 @@
 diff --git a/src/main/java/org/apache/commons/cli/HelpFormatter.java b/src/main/java/org/apache/commons/cli/HelpFormatter.java
-index 6d73237..19a24e3 100644
+index 6d73237..b939ba0 100644
 --- a/src/main/java/org/apache/commons/cli/HelpFormatter.java
 +++ b/src/main/java/org/apache/commons/cli/HelpFormatter.java
-@@ -648,12 +648,12 @@ public class HelpFormatter
-         {
-             buff.append("--").append(option.getLongOpt());
+@@ -650,10 +650,10 @@ public class HelpFormatter
          }
--        
--        // if the Option has a value and a non blank argname
+         
+         // if the Option has a value and a non blank argname
 -        if (option.hasArg() && (option.getArgName() == null || option.getArgName().length() != 0))
-+
-+        // if the Option has a value
 +        if (option.hasArg() && option.hasArgName())
          {
              buff.append(option.getOpt() == null ? longOptSeparator : " ");
@@ -19,7 +15,7 @@ index 6d73237..19a24e3 100644
          }
          
          // if the Option is not a required option
-@@ -781,16 +781,14 @@ public class HelpFormatter
+@@ -781,16 +781,15 @@ public class HelpFormatter
  
              if (option.hasArg())
              {
@@ -27,7 +23,7 @@ index 6d73237..19a24e3 100644
 -                if (argName != null && argName.length() == 0)
 +                if (option.hasArgName())
                  {
--                    // if the option has a blank argname
+                     // if the option has a blank argname
 -                    optBuf.append(' ');
 +                    optBuf.append(option.hasLongOpt() ? longOptSeparator : " ");
 +                    optBuf.append("<").append(option.getArgName()).append(">");

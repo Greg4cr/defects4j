@@ -1,18 +1,16 @@
 diff --git a/src/java/org/apache/commons/cli/PosixParser.java b/src/java/org/apache/commons/cli/PosixParser.java
-index ca8b6c6..22846a7 100644
+index ca8b6c6..e89439b 100644
 --- a/src/java/org/apache/commons/cli/PosixParser.java
 +++ b/src/java/org/apache/commons/cli/PosixParser.java
-@@ -37,9 +37,6 @@ public class PosixParser extends Parser
-     /** specifies if bursting should continue */
+@@ -38,7 +38,6 @@ public class PosixParser extends Parser
      private boolean eatTheRest;
  
--    /** holder for the current option */
+     /** holder for the current option */
 -    private Option currentOption;
--
+ 
      /** the command line Options */
      private Options options;
- 
-@@ -112,14 +109,12 @@ public class PosixParser extends Parser
+@@ -112,13 +111,12 @@ public class PosixParser extends Parser
                  int pos = token.indexOf('=');
                  String opt = pos == -1 ? token : token.substring(0, pos); // --foo
  
@@ -25,11 +23,10 @@ index ca8b6c6..22846a7 100644
                  else
                  {
 -                    currentOption = options.getOption(opt);
--                    
+                     
                      tokens.add(opt);
                      if (pos != -1)
-                     {
-@@ -135,19 +130,27 @@ public class PosixParser extends Parser
+@@ -135,19 +133,27 @@ public class PosixParser extends Parser
              }
              else if (token.startsWith("-"))
              {
@@ -59,7 +56,7 @@ index ca8b6c6..22846a7 100644
              }
  
              gobble(iter);
-@@ -179,14 +182,10 @@ public class PosixParser extends Parser
+@@ -179,13 +185,10 @@ public class PosixParser extends Parser
       *
       * @param value The current token
       */
@@ -68,16 +65,13 @@ index ca8b6c6..22846a7 100644
      {
 -        if (stopAtNonOption && (currentOption == null || !currentOption.hasArg()))
 -        {
--            eatTheRest = true;
--            tokens.add("--");
+             eatTheRest = true;
+             tokens.add("--");
 -        }
--
-+        eatTheRest = true;
-+        tokens.add("--");
+ 
          tokens.add(value);
      }
- 
-@@ -204,16 +203,11 @@ public class PosixParser extends Parser
+@@ -204,15 +207,11 @@ public class PosixParser extends Parser
       */
      private void processOptionToken(String token, boolean stopAtNonOption)
      {
@@ -91,20 +85,18 @@ index ca8b6c6..22846a7 100644
 -        {
 -            currentOption = options.getOption(token);
 -        }
--
+ 
          tokens.add(token);
      }
- 
-@@ -245,6 +239,8 @@ public class PosixParser extends Parser
+@@ -245,6 +244,7 @@ public class PosixParser extends Parser
       */
      protected void burstToken(String token, boolean stopAtNonOption)
      {
 +        Option currentOption;
-+
          for (int i = 1; i < token.length(); i++)
          {
              String ch = String.valueOf(token.charAt(i));
-@@ -263,7 +259,7 @@ public class PosixParser extends Parser
+@@ -263,7 +263,7 @@ public class PosixParser extends Parser
              }
              else if (stopAtNonOption)
              {
