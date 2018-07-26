@@ -1,5 +1,5 @@
 diff --git a/src/main/java/com/fasterxml/jackson/databind/ser/std/EnumSerializer.java b/src/main/java/com/fasterxml/jackson/databind/ser/std/EnumSerializer.java
-index dae384a..7b6340a 100644
+index dae384a7c..ff3f6170d 100644
 --- a/src/main/java/com/fasterxml/jackson/databind/ser/std/EnumSerializer.java
 +++ b/src/main/java/com/fasterxml/jackson/databind/ser/std/EnumSerializer.java
 @@ -83,7 +83,7 @@ public class EnumSerializer
@@ -41,17 +41,3 @@ index dae384a..7b6340a 100644
          }
          // 19-May-2016, tatu: also consider "natural" shape
          if (shape == Shape.STRING || shape == Shape.NATURAL) {
-@@ -233,9 +231,9 @@ public class EnumSerializer
-         if (shape.isNumeric() || (shape == Shape.ARRAY)) {
-             return Boolean.TRUE;
-         }
--        // 07-Mar-2017, tatu: Also means `OBJECT` not available as property annotation...
--        throw new IllegalArgumentException(String.format(
--                "Unsupported serialization shape (%s) for Enum %s, not supported as %s annotation",
--                    shape, enumClass.getName(), (fromClass? "class" : "property")));
-+        throw new IllegalArgumentException("Unsupported serialization shape ("+shape+") for Enum "+enumClass.getName()
-+                    +", not supported as "
-+                    + (fromClass? "class" : "property")
-+                    +" annotation");
-     }
- }

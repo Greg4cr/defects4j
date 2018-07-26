@@ -1,8 +1,8 @@
 diff --git a/src/main/java/com/fasterxml/jackson/databind/ser/std/DateTimeSerializerBase.java b/src/main/java/com/fasterxml/jackson/databind/ser/std/DateTimeSerializerBase.java
-index 68dbf40..b4c51e2 100644
+index 68dbf403f..5466a3612 100644
 --- a/src/main/java/com/fasterxml/jackson/databind/ser/std/DateTimeSerializerBase.java
 +++ b/src/main/java/com/fasterxml/jackson/databind/ser/std/DateTimeSerializerBase.java
-@@ -55,20 +55,18 @@ public abstract class DateTimeSerializerBase<T>
+@@ -55,13 +55,11 @@ public abstract class DateTimeSerializerBase<T>
              if (format != null) {
  
              	// Simple case first: serialize as numeric timestamp?
@@ -17,15 +17,4 @@ index 68dbf40..b4c51e2 100644
 +                if (format.getShape() == JsonFormat.Shape.STRING) {
                      TimeZone tz = format.getTimeZone();
                      final String pattern = format.hasPattern()
--                                    ? format.getPattern()
--                                    : StdDateFormat.DATE_FORMAT_STR_ISO8601;
-+                                           ? format.getPattern()
-+                                           : StdDateFormat.DATE_FORMAT_STR_ISO8601;
-                     final Locale loc = format.hasLocale()
--                                    ? format.getLocale()
--                                    : serializers.getLocale();
-+                                       ? format.getLocale()
-+                                       : serializers.getLocale();
-                     SimpleDateFormat df = new SimpleDateFormat(pattern, loc);
-                     if (tz == null) {
-                         tz = serializers.getTimeZone();
+                                     ? format.getPattern()

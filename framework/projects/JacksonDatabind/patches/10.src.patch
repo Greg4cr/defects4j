@@ -1,23 +1,16 @@
 diff --git a/src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java b/src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java
-index afe24aa..c69169f 100644
+index afe24aa1f..82419f27b 100644
 --- a/src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java
 +++ b/src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java
-@@ -38,36 +38,7 @@ public class BeanDeserializerFactory
-     private final static Class<?>[] INIT_CAUSE_PARAMS = new Class<?>[] { Throwable.class };
- 
-     private final static Class<?>[] NO_VIEWS = new Class<?>[0];
--
--    /**
--     * Set of well-known "nasty classes", deserialization of which is considered dangerous
--     * and should (and is) prevented by default.
--     *
--     * @since 2.8.9
--     */
+@@ -45,28 +45,14 @@ public class BeanDeserializerFactory
+      *
+      * @since 2.8.9
+      */
 -    protected final static Set<String> DEFAULT_NO_DESER_CLASS_NAMES;
 -    static {
 -        Set<String> s = new HashSet<>();
--        // Courtesy of [https://github.com/kantega/notsoserial]:
--        // (and wrt [databind#1599]
+         // Courtesy of [https://github.com/kantega/notsoserial]:
+         // (and wrt [databind#1599]
 -        s.add("org.apache.commons.collections.functors.InvokerTransformer");
 -        s.add("org.apache.commons.collections.functors.InstantiateTransformer");
 -        s.add("org.apache.commons.collections4.functors.InvokerTransformer");
@@ -28,19 +21,17 @@ index afe24aa..c69169f 100644
 -        s.add("com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl");
 -        DEFAULT_NO_DESER_CLASS_NAMES = Collections.unmodifiableSet(s);
 -    }
--
--    /**
--     * Set of class names of types that are never to be deserialized.
--     *
--     * @since 2.8.9
--     */
+ 
+     /**
+      * Set of class names of types that are never to be deserialized.
+      *
+      * @since 2.8.9
+      */
 -    protected Set<String> _cfgIllegalClassNames = DEFAULT_NO_DESER_CLASS_NAMES;
--
-+    
+ 
      /*
      /**********************************************************
-     /* Life-cycle
-@@ -166,8 +137,6 @@ public class BeanDeserializerFactory
+@@ -166,8 +152,6 @@ public class BeanDeserializerFactory
          if (!isPotentialBeanType(type.getRawClass())) {
              return null;
          }
@@ -49,22 +40,18 @@ index afe24aa..c69169f 100644
          // Use generic bean introspection to build deserializer
          return buildBeanDeserializer(ctxt, type, beanDesc);
      }
-@@ -886,21 +855,4 @@ beanDesc.getBeanClass().getName(), name, ((AnnotatedParameter) m).getIndex());
-         ignoredTypes.put(type, status);
-         return status.booleanValue();
-     }
--
--    /**
--     * @since 2.8.9
--     */
+@@ -890,17 +874,7 @@ beanDesc.getBeanClass().getName(), name, ((AnnotatedParameter) m).getIndex());
+     /**
+      * @since 2.8.9
+      */
 -    protected void checkIllegalTypes(DeserializationContext ctxt, JavaType type,
 -            BeanDescription beanDesc)
 -        throws JsonMappingException
 -    {
--        // There are certain nasty classes that could cause problems, mostly
--        // via default typing -- catch them here.
+         // There are certain nasty classes that could cause problems, mostly
+         // via default typing -- catch them here.
 -        String full = type.getRawClass().getName();
--
+ 
 -        if (_cfgIllegalClassNames.contains(full)) {
 -            ctxt.reportBadTypeDefinition(beanDesc,
 -                    "Illegal type (%s) to deserialize: prevented for security reasons", full);

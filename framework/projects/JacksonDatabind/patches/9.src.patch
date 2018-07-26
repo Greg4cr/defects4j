@@ -1,5 +1,5 @@
 diff --git a/src/main/java/com/fasterxml/jackson/databind/introspect/JacksonAnnotationIntrospector.java b/src/main/java/com/fasterxml/jackson/databind/introspect/JacksonAnnotationIntrospector.java
-index f2bc1ca..d74a2e9 100644
+index f2bc1cad7..d74a2e99f 100644
 --- a/src/main/java/com/fasterxml/jackson/databind/introspect/JacksonAnnotationIntrospector.java
 +++ b/src/main/java/com/fasterxml/jackson/databind/introspect/JacksonAnnotationIntrospector.java
 @@ -576,13 +576,10 @@ public class JacksonAnnotationIntrospector
@@ -20,34 +20,29 @@ index f2bc1ca..d74a2e9 100644
  
      /*
 diff --git a/src/main/java/com/fasterxml/jackson/databind/introspect/ObjectIdInfo.java b/src/main/java/com/fasterxml/jackson/databind/introspect/ObjectIdInfo.java
-index 049ab35..0457ec0 100644
+index 049ab3530..93c3dd51c 100644
 --- a/src/main/java/com/fasterxml/jackson/databind/introspect/ObjectIdInfo.java
 +++ b/src/main/java/com/fasterxml/jackson/databind/introspect/ObjectIdInfo.java
-@@ -19,11 +19,6 @@ public class ObjectIdInfo
-     protected final Class<?> _scope;
-     protected final boolean _alwaysAsId;
- 
--    /**
--     * @since 2.8.9
--     */
+@@ -22,7 +22,6 @@ public class ObjectIdInfo
+     /**
+      * @since 2.8.9
+      */
 -    private final static ObjectIdInfo EMPTY = new ObjectIdInfo(PropertyName.NO_NAME, Object.class, null, false, null);
--
+ 
      public ObjectIdInfo(PropertyName name, Class<?> scope, Class<? extends ObjectIdGenerator<?>> gen,
              Class<? extends ObjectIdResolver> resolver)
-     {
-@@ -61,10 +56,6 @@ public class ObjectIdInfo
+@@ -61,9 +60,6 @@ public class ObjectIdInfo
          _resolver = resolver;
      }
  
 -    public static ObjectIdInfo empty() {
 -        return EMPTY;
 -    }
--
+ 
      public ObjectIdInfo withAlwaysAsId(boolean state) {
          if (_alwaysAsId == state) {
-             return this;
 diff --git a/src/main/java/com/fasterxml/jackson/databind/ser/std/BeanSerializerBase.java b/src/main/java/com/fasterxml/jackson/databind/ser/std/BeanSerializerBase.java
-index 3b838cc..ea8044b 100644
+index 3b838cc8b..1f1d2e3e2 100644
 --- a/src/main/java/com/fasterxml/jackson/databind/ser/std/BeanSerializerBase.java
 +++ b/src/main/java/com/fasterxml/jackson/databind/ser/std/BeanSerializerBase.java
 @@ -429,10 +429,9 @@ public abstract class BeanSerializerBase
@@ -56,11 +51,10 @@ index 3b838cc..ea8044b 100644
                  if (oiw != null) {
 -                    objectIdInfo = intr.findObjectReferenceInfo(accessor, null);
 -                    if (objectIdInfo != null) {
--                        oiw = _objectIdWriter.withAlwaysAsId(objectIdInfo.getAlwaysAsId());
--                    }
 +                    objectIdInfo = intr.findObjectReferenceInfo(accessor,
 +                            new ObjectIdInfo(NAME_FOR_OBJECT_REF, null, null, null));
-+                    oiw = _objectIdWriter.withAlwaysAsId(objectIdInfo.getAlwaysAsId());
+                         oiw = _objectIdWriter.withAlwaysAsId(objectIdInfo.getAlwaysAsId());
+-                    }
                  }
              } else {
                  // Ugh: mostly copied from BeanDeserializerBase: but can't easily change it

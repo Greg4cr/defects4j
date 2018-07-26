@@ -1,5 +1,5 @@
 diff --git a/src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerBase.java b/src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerBase.java
-index 3c68604..5e9dd34 100644
+index 3c686044f..e5323624e 100644
 --- a/src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerBase.java
 +++ b/src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerBase.java
 @@ -1189,10 +1189,9 @@ public abstract class BeanDeserializerBase
@@ -112,11 +112,10 @@ index 3c68604..5e9dd34 100644
                  if (_injectables != null) {
                      injectValues(ctxt, bean);
                  }
-@@ -1337,16 +1328,29 @@ public abstract class BeanDeserializerBase
- 
+@@ -1338,15 +1329,29 @@ public abstract class BeanDeserializerBase
      public Object deserializeFromArray(JsonParser p, DeserializationContext ctxt) throws IOException
      {
--        // note: can not call `_delegateDeserializer()` since order reversed here:
+         // note: can not call `_delegateDeserializer()` since order reversed here:
 -        JsonDeserializer<Object> delegateDeser = _arrayDelegateDeserializer;
 +        if (_arrayDelegateDeserializer != null) {
 +            try {
@@ -150,13 +149,10 @@ index 3c68604..5e9dd34 100644
          }
          if (ctxt.isEnabled(DeserializationFeature.UNWRAP_SINGLE_VALUE_ARRAYS)) {
              JsonToken t = p.nextToken();
-@@ -1384,17 +1388,6 @@ public abstract class BeanDeserializerBase
-         return p.getEmbeddedObject();
-     }
- 
--    /**
--     * @since 2.9
--     */
+@@ -1387,13 +1392,6 @@ public abstract class BeanDeserializerBase
+     /**
+      * @since 2.9
+      */
 -    private final JsonDeserializer<Object> _delegateDeserializer() {
 -        JsonDeserializer<Object> deser = _delegateDeserializer;
 -        if (deser == null) {
@@ -164,7 +160,6 @@ index 3c68604..5e9dd34 100644
 -        }
 -        return deser;
 -    }
--
+ 
      /*
      /**********************************************************
-     /* Overridable helper methods

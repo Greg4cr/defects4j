@@ -1,8 +1,8 @@
 diff --git a/src/main/java/com/fasterxml/jackson/databind/jsontype/impl/AsWrapperTypeDeserializer.java b/src/main/java/com/fasterxml/jackson/databind/jsontype/impl/AsWrapperTypeDeserializer.java
-index 659762b..e49ca2b 100644
+index 659762bd0..8102fd714 100644
 --- a/src/main/java/com/fasterxml/jackson/databind/jsontype/impl/AsWrapperTypeDeserializer.java
 +++ b/src/main/java/com/fasterxml/jackson/databind/jsontype/impl/AsWrapperTypeDeserializer.java
-@@ -76,46 +76,44 @@ public class AsWrapperTypeDeserializer
+@@ -76,46 +76,43 @@ public class AsWrapperTypeDeserializer
       * deserialization.
       */
      @SuppressWarnings("resource")
@@ -34,7 +34,6 @@ index 659762b..e49ca2b 100644
                      "need JSON Object to contain As.WRAPPER_OBJECT type information for class "+baseTypeName());
          }
 -        final String typeId = p.getText();
-+        // should always get field name, but just in case...
 +        if (jp.nextToken() != JsonToken.FIELD_NAME) {
 +            throw ctxt.wrongTokenException(jp, JsonToken.FIELD_NAME,
 +                    "need JSON String that contains type id (for subtype of "+baseTypeName()+")");

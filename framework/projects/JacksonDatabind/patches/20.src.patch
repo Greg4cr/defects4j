@@ -1,5 +1,5 @@
 diff --git a/src/main/java/com/fasterxml/jackson/databind/JsonMappingException.java b/src/main/java/com/fasterxml/jackson/databind/JsonMappingException.java
-index 00896ea..5c7f742 100644
+index 00896eab5..e8bd1e268 100644
 --- a/src/main/java/com/fasterxml/jackson/databind/JsonMappingException.java
 +++ b/src/main/java/com/fasterxml/jackson/databind/JsonMappingException.java
 @@ -7,6 +7,7 @@ import java.util.*;
@@ -10,14 +10,10 @@ index 00896ea..5c7f742 100644
  
  /**
   * Checked exception used to signal fatal problems with mapping of
-@@ -123,26 +124,16 @@ public class JsonMappingException
-                     sb.append("UNKNOWN");
-                 } else {
-                     Class<?> cls = (_from instanceof Class<?>) ? (Class<?>)_from : _from.getClass();
--                    // Hmmh. Although Class.getName() is mostly ok, it does look
--                    // butt-ugly for arrays.
--                    // 06-Oct-2016, tatu: as per [databind#1403], `getSimpleName()` not so good
--                    //   as it drops enclosing class. So let's try bit different approach
+@@ -127,22 +128,12 @@ public class JsonMappingException
+                     // butt-ugly for arrays.
+                     // 06-Oct-2016, tatu: as per [databind#1403], `getSimpleName()` not so good
+                     //   as it drops enclosing class. So let's try bit different approach
 -                    int arrays = 0;
 -                    while (cls.isArray()) {
 -                        cls = cls.getComponentType();
@@ -28,10 +24,6 @@ index 00896ea..5c7f742 100644
 -                        sb.append("[]");
 -                    }
 -                    /* was:
-+                    /* Hmmh. Although Class.getName() is mostly ok, it does look
-+                     * butt-ugly for arrays. So let's use getSimpleName() instead;
-+                     * but have to prepend package name too.
-+                     */
                      String pkgName = ClassUtil.getPackageName(cls);
                      if (pkgName != null) {
                          sb.append(pkgName);

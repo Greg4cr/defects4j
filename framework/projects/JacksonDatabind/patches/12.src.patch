@@ -1,13 +1,12 @@
 diff --git a/src/main/java/com/fasterxml/jackson/databind/deser/BuilderBasedDeserializer.java b/src/main/java/com/fasterxml/jackson/databind/deser/BuilderBasedDeserializer.java
-index 817e29e..760dfbe 100644
+index 817e29ec4..262fddd8d 100644
 --- a/src/main/java/com/fasterxml/jackson/databind/deser/BuilderBasedDeserializer.java
 +++ b/src/main/java/com/fasterxml/jackson/databind/deser/BuilderBasedDeserializer.java
-@@ -580,7 +580,31 @@ public class BuilderBasedDeserializer
+@@ -580,7 +580,27 @@ public class BuilderBasedDeserializer
              // creator property?
              SettableBeanProperty creatorProp = creator.findCreatorProperty(propName);
              if (creatorProp != null) {
 -                buffer.assignParameter(creatorProp, creatorProp.deserialize(p, ctxt));
-+                // Last creator property to set?
 +                if (buffer.assignParameter(creatorProp, creatorProp.deserialize(p, ctxt))) {
 +                    t = p.nextToken(); // to move to following FIELD_NAME/END_OBJECT
 +                    Object bean;
@@ -17,7 +16,6 @@ index 817e29e..760dfbe 100644
 +                        wrapAndThrow(e, _beanType.getRawClass(), propName, ctxt);
 +                        continue; // never gets here
 +                    }
-+                    // if so, need to copy all remaining tokens into buffer
 +                    while (t == JsonToken.FIELD_NAME) {
 +                        p.nextToken(); // to skip name
 +                        tokens.copyCurrentStructure(p);
@@ -25,8 +23,6 @@ index 817e29e..760dfbe 100644
 +                    }
 +                    tokens.writeEndObject();
 +                    if (bean.getClass() != _beanType.getRawClass()) {
-+                        // !!! 08-Jul-2011, tatu: Could probably support; but for now
-+                        //   it's too complicated, so bail out
 +                        ctxt.reportMappingException("Can not create polymorphic instances with unwrapped values");
 +                        return null;
 +                    }
@@ -35,7 +31,7 @@ index 817e29e..760dfbe 100644
                  continue;
              }
              // Object Id property?
-@@ -675,6 +699,7 @@ public class BuilderBasedDeserializer
+@@ -675,6 +695,7 @@ public class BuilderBasedDeserializer
                  } catch (Exception e) {
                      wrapAndThrow(e, bean, propName, ctxt);
                  }

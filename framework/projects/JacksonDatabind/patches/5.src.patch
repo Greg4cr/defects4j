@@ -1,5 +1,5 @@
 diff --git a/src/main/java/com/fasterxml/jackson/databind/type/ResolvedRecursiveType.java b/src/main/java/com/fasterxml/jackson/databind/type/ResolvedRecursiveType.java
-index 12162c5..21f37fe 100644
+index 12162c57f..21f37fe1c 100644
 --- a/src/main/java/com/fasterxml/jackson/databind/type/ResolvedRecursiveType.java
 +++ b/src/main/java/com/fasterxml/jackson/databind/type/ResolvedRecursiveType.java
 @@ -25,14 +25,6 @@ public class ResolvedRecursiveType extends TypeBase

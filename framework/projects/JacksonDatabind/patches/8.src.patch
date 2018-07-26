@@ -1,5 +1,5 @@
 diff --git a/src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java b/src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java
-index 1423f28..4b0434e 100644
+index 1423f2867..4b0434e41 100644
 --- a/src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java
 +++ b/src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java
 @@ -492,7 +492,7 @@ public class BeanDeserializerFactory

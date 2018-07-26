@@ -1,5 +1,5 @@
 diff --git a/src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializer.java b/src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializer.java
-index 8360b51..f6bc182 100644
+index 8360b5118..7bb649d48 100644
 --- a/src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializer.java
 +++ b/src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializer.java
 @@ -385,7 +385,6 @@ public class BeanDeserializer
@@ -10,27 +10,27 @@ index 8360b51..f6bc182 100644
          for (; t == JsonToken.FIELD_NAME; t = p.nextToken()) {
              String propName = p.getCurrentName();
              p.nextToken(); // to point to value
-@@ -428,18 +427,7 @@ public class BeanDeserializer
+@@ -428,18 +427,10 @@ public class BeanDeserializer
              // regular property? needs buffering
              SettableBeanProperty prop = _beanProperties.find(propName);
              if (prop != null) {
 -                try {
 -                    buffer.bufferProperty(prop, _deserializeWithErrorWrapping(p, ctxt, prop));
 -                } catch (UnresolvedForwardReference reference) {
--                    // 14-Jun-2016, tatu: As per [databind#1261], looks like we need additional
--                    //    handling of forward references here. Not exactly sure why existing
--                    //    facilities did not cover, but this does appear to solve the problem
++                buffer.bufferProperty(prop, _deserializeWithErrorWrapping(p, ctxt, prop));
+                     // 14-Jun-2016, tatu: As per [databind#1261], looks like we need additional
+                     //    handling of forward references here. Not exactly sure why existing
+                     //    facilities did not cover, but this does appear to solve the problem
 -                    BeanReferring referring = handleUnresolvedReference(p, prop, buffer, reference);
 -                    if (referrings == null) {
 -                        referrings = new ArrayList<BeanReferring>();
 -                    }
 -                    referrings.add(referring);
 -                }
-+                buffer.bufferProperty(prop, _deserializeWithErrorWrapping(p, ctxt, prop));
                  continue;
              }
              // Things marked as ignorable should not be passed to any setter
-@@ -472,11 +460,6 @@ public class BeanDeserializer
+@@ -472,11 +463,6 @@ public class BeanDeserializer
              wrapInstantiationProblem(e, ctxt);
              bean = null; // never gets here
          }
@@ -42,13 +42,10 @@ index 8360b51..f6bc182 100644
          if (unknown != null) {
              // polymorphic?
              if (bean.getClass() != _beanType.getRawClass()) {
-@@ -488,20 +471,6 @@ public class BeanDeserializer
-         return bean;
-     }
- 
--    /**
--     * @since 2.8
--     */
+@@ -491,16 +477,6 @@ public class BeanDeserializer
+     /**
+      * @since 2.8
+      */
 -    private BeanReferring handleUnresolvedReference(JsonParser p,
 -            SettableBeanProperty prop, PropertyValueBuffer buffer,
 -            UnresolvedForwardReference reference)
@@ -59,11 +56,10 @@ index 8360b51..f6bc182 100644
 -        reference.getRoid().appendReferring(referring);
 -        return referring;
 -    }
--
+ 
      protected final Object _deserializeWithErrorWrapping(JsonParser p,
              DeserializationContext ctxt, SettableBeanProperty prop)
-         throws IOException
-@@ -951,28 +920,4 @@ public class BeanDeserializer
+@@ -951,28 +927,4 @@ public class BeanDeserializer
          }
          return _nullFromCreator;
      }
@@ -93,7 +89,7 @@ index 8360b51..f6bc182 100644
 -    }
  }
 diff --git a/src/main/java/com/fasterxml/jackson/databind/deser/std/MapDeserializer.java b/src/main/java/com/fasterxml/jackson/databind/deser/std/MapDeserializer.java
-index 3dc7c4b..d671503 100644
+index 3dc7c4b06..d67150328 100644
 --- a/src/main/java/com/fasterxml/jackson/databind/deser/std/MapDeserializer.java
 +++ b/src/main/java/com/fasterxml/jackson/databind/deser/std/MapDeserializer.java
 @@ -247,6 +247,7 @@ public class MapDeserializer

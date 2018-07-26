@@ -1,17 +1,11 @@
 diff --git a/src/main/java/com/fasterxml/jackson/databind/JavaType.java b/src/main/java/com/fasterxml/jackson/databind/JavaType.java
-index 292cc39..78a65bb 100644
+index 292cc3939..4ac467b34 100644
 --- a/src/main/java/com/fasterxml/jackson/databind/JavaType.java
 +++ b/src/main/java/com/fasterxml/jackson/databind/JavaType.java
-@@ -131,26 +131,6 @@ public abstract class JavaType
-     public abstract JavaType withContentValueHandler(Object h);
- 
-     /**
--     * Mutant factory method that will try to copy handlers that the specified
--     * source type instance had, if any; this must be done recursively where
--     * necessary (as content types may be structured).
--     *
--     * @since 2.8.4
--     */
+@@ -137,18 +137,6 @@ public abstract class JavaType
+      *
+      * @since 2.8.4
+      */
 -    public JavaType withHandlersFrom(JavaType src) {
 -        JavaType type = this;
 -        Object h = src.getTypeHandler();
@@ -24,19 +18,18 @@ index 292cc39..78a65bb 100644
 -        }
 -        return type;
 -    }
--
--    /**
+ 
+     /**
       * Mutant factory method that may be called on structured types
-      * that have a so-called content type (element of arrays, value type
-      * of Maps, referenced type of referential types),
 diff --git a/src/main/java/com/fasterxml/jackson/databind/type/CollectionLikeType.java b/src/main/java/com/fasterxml/jackson/databind/type/CollectionLikeType.java
-index f355160..79090cf 100644
+index f35516036..79090cff2 100644
 --- a/src/main/java/com/fasterxml/jackson/databind/type/CollectionLikeType.java
 +++ b/src/main/java/com/fasterxml/jackson/databind/type/CollectionLikeType.java
-@@ -134,19 +134,6 @@ public class CollectionLikeType extends TypeBase
+@@ -133,19 +133,6 @@ public class CollectionLikeType extends TypeBase
+                 _valueHandler, _typeHandler, _asStatic);
      }
  
-     @Override
+-    @Override
 -    public JavaType withHandlersFrom(JavaType src) {
 -        JavaType type = super.withHandlersFrom(src);
 -        JavaType srcCt = src.getContentType();
@@ -49,22 +42,22 @@ index f355160..79090cf 100644
 -        return type;
 -    }
 -    
--    @Override
+     @Override
      public CollectionLikeType withStaticTyping() {
          if (_asStatic) {
-             return this;
 diff --git a/src/main/java/com/fasterxml/jackson/databind/type/MapLikeType.java b/src/main/java/com/fasterxml/jackson/databind/type/MapLikeType.java
-index f1d1ee0..1609c5e 100644
+index f1d1ee088..e10ae4ca3 100644
 --- a/src/main/java/com/fasterxml/jackson/databind/type/MapLikeType.java
 +++ b/src/main/java/com/fasterxml/jackson/databind/type/MapLikeType.java
-@@ -146,29 +146,6 @@ public class MapLikeType extends TypeBase {
+@@ -145,28 +145,7 @@ public class MapLikeType extends TypeBase {
+                 _valueHandler, _typeHandler, _asStatic);
      }
  
-     @Override
+-    @Override
 -    public JavaType withHandlersFrom(JavaType src) {
 -        JavaType type = super.withHandlersFrom(src);
 -        JavaType srcKeyType = src.getKeyType();
--        // "withKeyType()" not part of JavaType, hence must verify:
+         // "withKeyType()" not part of JavaType, hence must verify:
 -        if (type instanceof MapLikeType) {
 -            if (srcKeyType != null) {
 -                JavaType ct = _keyType.withHandlersFrom(srcKeyType);
@@ -82,23 +75,18 @@ index f1d1ee0..1609c5e 100644
 -        }
 -        return type;
 -    }
--
--    @Override
+ 
+     @Override
      public MapLikeType withStaticTyping() {
-         if (_asStatic) {
-             return this;
 diff --git a/src/main/java/com/fasterxml/jackson/databind/type/TypeFactory.java b/src/main/java/com/fasterxml/jackson/databind/type/TypeFactory.java
-index b8acda8..9f62740 100644
+index b8acda873..6998fc5e1 100644
 --- a/src/main/java/com/fasterxml/jackson/databind/type/TypeFactory.java
 +++ b/src/main/java/com/fasterxml/jackson/databind/type/TypeFactory.java
-@@ -423,9 +423,8 @@ public final class TypeFactory
-             }
-         } while (false);
+@@ -425,7 +425,7 @@ public final class TypeFactory
  
--        // 25-Sep-2016, tatu: As per [databind#1384] also need to ensure handlers get
--        //   copied as well
+         // 25-Sep-2016, tatu: As per [databind#1384] also need to ensure handlers get
+         //   copied as well
 -        newType = newType.withHandlersFrom(baseType);
-+        // except possibly handlers
 +//      newType = newType.withHandlersFrom(baseType);
          return newType;
  

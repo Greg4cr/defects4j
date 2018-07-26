@@ -1,5 +1,5 @@
 diff --git a/src/main/java/com/fasterxml/jackson/databind/DeserializationContext.java b/src/main/java/com/fasterxml/jackson/databind/DeserializationContext.java
-index b7fcb3b..0c091d9 100644
+index b7fcb3b34..0c091d976 100644
 --- a/src/main/java/com/fasterxml/jackson/databind/DeserializationContext.java
 +++ b/src/main/java/com/fasterxml/jackson/databind/DeserializationContext.java
 @@ -928,7 +928,7 @@ public abstract class DeserializationContext

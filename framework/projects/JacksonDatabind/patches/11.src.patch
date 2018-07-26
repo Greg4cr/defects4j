@@ -1,30 +1,25 @@
 diff --git a/src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java b/src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java
-index ad37dd1..9fcb68b 100644
+index ad37dd170..a8f42c81f 100644
 --- a/src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java
 +++ b/src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java
-@@ -139,8 +139,6 @@ public class BeanDeserializerFactory
-         if (!isPotentialBeanType(type.getRawClass())) {
+@@ -140,7 +140,6 @@ public class BeanDeserializerFactory
              return null;
          }
--        // For checks like [databind#1599]
+         // For checks like [databind#1599]
 -        checkIllegalTypes(ctxt, type, beanDesc);
          // Use generic bean introspection to build deserializer
          return buildBeanDeserializer(ctxt, type, beanDesc);
      }
-@@ -836,25 +834,4 @@ public class BeanDeserializerFactory
-         // We default to 'false', i.e. not ignorable
-         return (status == null) ? false : status.booleanValue(); 
-     }
--
--    /**
--     * @since 2.8.9
--     */
+@@ -840,21 +839,7 @@ public class BeanDeserializerFactory
+     /**
+      * @since 2.8.9
+      */
 -    protected void checkIllegalTypes(DeserializationContext ctxt, JavaType type,
 -            BeanDescription beanDesc)
 -        throws JsonMappingException
 -    {
--        // There are certain nasty classes that could cause problems, mostly
--        // via default typing -- catch them here.
+         // There are certain nasty classes that could cause problems, mostly
+         // via default typing -- catch them here.
 -        Class<?> raw = type.getRawClass();
 -        String name = raw.getSimpleName();
 -
@@ -36,4 +31,5 @@ index ad37dd1..9fcb68b 100644
 -            }
 -        }
 -    }
++
  }
