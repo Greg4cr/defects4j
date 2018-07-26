@@ -1,4 +1,4 @@
-<project name="CommonsCLI" basedir="${basedir}">
+<project name="CommonsCli" basedir="${basedir}">
     <property environment="env"/>
     <!-- Force build in Java 1.7 for older versions of the project -->
     <property name="build.compiler" value="javac1.7"/>
@@ -18,7 +18,7 @@
         <pathelement path="${classes.dir}"/>
         <pathelement path="${test.home}"/>		
         <pathelement path="${test.src.home}"/>
-        <fileset dir="${d4j.home}/framework/projects/CommonsCLI/lib/">
+        <fileset dir="${d4j.home}/framework/projects/CommonsCli/lib/">
             <include name="**/*.jar" />
         </fileset>
     </path>
@@ -40,7 +40,7 @@
             </then>
             <else>
                 <exec executable="perl" dir="${basedir}">			
-                    <arg line="${d4j.home}/framework/projects/CommonsCLI/replace_txt.pl ${basedir}"/>			
+                    <arg line="${d4j.home}/framework/projects/CommonsCli/replace_txt.pl ${basedir}"/>			
                 </exec>
                <ant antfile="${basedir}/build.xml" target="compile" inheritAll="true"/>
             </else>
@@ -58,7 +58,7 @@
             </then>
             <else>
                 <exec executable="perl" dir="${basedir}">			
-                    <arg line="${d4j.home}/framework/projects/CommonsCLI/replace_txt.pl ${basedir}"/>			
+                    <arg line="${d4j.home}/framework/projects/CommonsCli/replace_txt.pl ${basedir}"/>			
                 </exec>
                 <ant antfile="${basedir}/build.xml" target="compile-tests" inheritAll="true"/>
            </else>

@@ -24,15 +24,15 @@
 
 =head1 NAME
 
-Project::CommonsCLI.pm -- L<Project> submodule for Apache Commons CLI library.
+Project::CommonsCli.pm -- L<Project> submodule for Apache Commons Cli library.
 
 =head1 DESCRIPTION
 
 This module provides all project-specific configurations and subroutines for the
-CommonsCLI project.
+CommonsCli project.
 
 =cut
-package Project::CommonsCLI;
+package Project::CommonsCli;
 
 use strict;
 use warnings;
@@ -41,7 +41,7 @@ use Constants;
 use Vcs::Git;
 
 our @ISA = qw(Project);
-my $PID  = "CommonsCLI";
+my $PID  = "CommonsCli";
 
 sub new {
     my $class= shift;
