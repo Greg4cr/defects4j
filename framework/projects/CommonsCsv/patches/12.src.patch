@@ -50,16 +50,15 @@ index 1d425dd..abadb20 100644
          return result;
      }
 diff --git a/src/main/java/org/apache/commons/csv/CSVRecord.java b/src/main/java/org/apache/commons/csv/CSVRecord.java
-index 8fad43e..54fd275 100644
+index 8fad43e..78d8577 100644
 --- a/src/main/java/org/apache/commons/csv/CSVRecord.java
 +++ b/src/main/java/org/apache/commons/csv/CSVRecord.java
-@@ -35,13 +35,9 @@ public class CSVRecord implements Serializable, Iterable<String> {
-     /** The column name to index mapping. */
+@@ -36,12 +36,10 @@ public class CSVRecord implements Serializable, Iterable<String> {
      private final Map<String, Integer> mapping;
  
--    /** The accumulated comments (if any) */
+     /** The accumulated comments (if any) */
 -    private final String comment;
--
+ 
 -    CSVRecord(String[] values, Map<String, Integer> mapping, String comment) {
 +    CSVRecord(String[] values, Map<String, Integer> mapping) {
          this.values = values != null ? values : EMPTY_STRING_ARRAY;
@@ -68,7 +67,7 @@ index 8fad43e..54fd275 100644
      }
  
      /**
-@@ -78,9 +74,6 @@ public class CSVRecord implements Serializable, Iterable<String> {
+@@ -78,9 +76,6 @@ public class CSVRecord implements Serializable, Iterable<String> {
          return values;
      }
  

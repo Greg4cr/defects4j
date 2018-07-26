@@ -1,5 +1,5 @@
 diff --git a/src/main/java/org/apache/commons/csv/CSVFormat.java b/src/main/java/org/apache/commons/csv/CSVFormat.java
-index 019e767..3e8df5a 100644
+index 019e767..a0c0109 100644
 --- a/src/main/java/org/apache/commons/csv/CSVFormat.java
 +++ b/src/main/java/org/apache/commons/csv/CSVFormat.java
 @@ -191,7 +191,7 @@ public class CSVFormat implements Serializable {
@@ -11,29 +11,10 @@ index 019e767..3e8df5a 100644
      }
  
      /**
-@@ -376,109 +376,7 @@ public class CSVFormat implements Serializable {
-     public Quote getQuotePolicy() {
-         return quotePolicy;
+@@ -395,89 +395,7 @@ public class CSVFormat implements Serializable {
+         return result;
      }
--
--    @Override
--    public int hashCode()
--    {
--        final int prime = 31;
--        int result = 1;
--
--        result = prime * result + delimiter;
--        result = prime * result + ((quotePolicy == null) ? 0 : quotePolicy.hashCode());
--        result = prime * result + ((quoteChar == null) ? 0 : quoteChar.hashCode());
--        result = prime * result + ((commentStart == null) ? 0 : commentStart.hashCode());
--        result = prime * result + ((escape == null) ? 0 : escape.hashCode());
--        result = prime * result + (ignoreSurroundingSpaces ? 1231 : 1237);
--        result = prime * result + (ignoreEmptyLines ? 1231 : 1237);
--        result = prime * result + ((recordSeparator == null) ? 0 : recordSeparator.hashCode());
--        result = prime * result + Arrays.hashCode(header);
--        return result;
--    }
--
+ 
 -    @Override
 -    public boolean equals(Object obj)
 -    {
@@ -49,7 +30,7 @@ index 019e767..3e8df5a 100644
 -        {
 -            return false;
 -        }
--
+ 
 -        CSVFormat other = (CSVFormat) obj;
 -        if (delimiter != other.delimiter)
 -        {
@@ -117,8 +98,6 @@ index 019e767..3e8df5a 100644
 -        }
 -        return true;
 -    }
--
-+    
+ 
      public static class CSVFormatBuilder {
  
-         private char delimiter;

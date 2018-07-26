@@ -1,5 +1,5 @@
 diff --git a/src/main/java/org/apache/commons/csv/CSVRecord.java b/src/main/java/org/apache/commons/csv/CSVRecord.java
-index fd633c2..0485235 100644
+index fd633c2..dc52017 100644
 --- a/src/main/java/org/apache/commons/csv/CSVRecord.java
 +++ b/src/main/java/org/apache/commons/csv/CSVRecord.java
 @@ -82,14 +82,7 @@ public class CSVRecord implements Serializable, Iterable<String> {
@@ -7,14 +7,13 @@ index fd633c2..0485235 100644
          }
          final Integer index = mapping.get(name);
 -        try {
--            return index != null ? values[index.intValue()] : null;
+             return index != null ? values[index.intValue()] : null;
 -        } catch (ArrayIndexOutOfBoundsException e) {
 -            throw new IllegalArgumentException(
 -                    String.format(
 -                            "Index for header '%s' is %d but CSVRecord only has %d values!",
 -                            name, index.intValue(), values.length));
 -        }
-+        return index != null ? values[index.intValue()] : null;
      }
  
      /**
