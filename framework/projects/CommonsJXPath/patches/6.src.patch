@@ -1,31 +1,8 @@
 diff --git a/src/java/org/apache/commons/jxpath/ri/model/dom/DOMNodePointer.java b/src/java/org/apache/commons/jxpath/ri/model/dom/DOMNodePointer.java
-index 8e3b775..e5f3fa3 100644
+index 8e3b775..62d5a31 100644
 --- a/src/java/org/apache/commons/jxpath/ri/model/dom/DOMNodePointer.java
 +++ b/src/java/org/apache/commons/jxpath/ri/model/dom/DOMNodePointer.java
-@@ -507,7 +507,7 @@ public class DOMNodePointer extends NodePointer {
-                     if (nsURI == null) {
-                         buffer.append(ln);
-                         buffer.append('[');
--                        buffer.append(getRelativePositionByQName()).append(']');
-+                        buffer.append(getRelativePositionByName()).append(']');
-                     }
-                     else {
-                         String prefix = getNamespaceResolver().getPrefix(nsURI);
-@@ -516,7 +516,7 @@ public class DOMNodePointer extends NodePointer {
-                             buffer.append(':');
-                             buffer.append(ln);
-                             buffer.append('[');
--                            buffer.append(getRelativePositionByQName());
-+                            buffer.append(getRelativePositionByName());
-                             buffer.append(']');
-                         }
-                         else {
-@@ -553,26 +553,21 @@ public class DOMNodePointer extends NodePointer {
-      * Get relative position of this among like-named siblings.
-      * @return 1..n
-      */
--    private int getRelativePositionByQName() {
-+    private int getRelativePositionByName() {
+@@ -557,21 +557,17 @@ public class DOMNodePointer extends NodePointer {
          int count = 1;
          Node n = node.getPreviousSibling();
          while (n != null) {
@@ -49,41 +26,13 @@ index 8e3b775..e5f3fa3 100644
 -        }
 -        return equalStrings(node.getNodeName(), n.getNodeName());
 -    }
--
+ 
      /**
       * Get relative position of this among all siblings.
-      * @return 1..n
 diff --git a/src/java/org/apache/commons/jxpath/ri/model/jdom/JDOMNodePointer.java b/src/java/org/apache/commons/jxpath/ri/model/jdom/JDOMNodePointer.java
-index 4b40a39..98862c4 100644
+index 4b40a39..7df3ace 100644
 --- a/src/java/org/apache/commons/jxpath/ri/model/jdom/JDOMNodePointer.java
 +++ b/src/java/org/apache/commons/jxpath/ri/model/jdom/JDOMNodePointer.java
-@@ -641,7 +641,7 @@ public class JDOMNodePointer extends NodePointer {
-                 if (nsURI == null) {
-                     buffer.append(ln);
-                     buffer.append('[');
--                    buffer.append(getRelativePositionByQName()).append(']');
-+                    buffer.append(getRelativePositionByName()).append(']');
-                 }
-                 else {
-                     String prefix = getNamespaceResolver().getPrefix(nsURI);
-@@ -650,7 +650,7 @@ public class JDOMNodePointer extends NodePointer {
-                         buffer.append(':');
-                         buffer.append(ln);
-                         buffer.append('[');
--                        buffer.append(getRelativePositionByQName());
-+                        buffer.append(getRelativePositionByName());
-                         buffer.append(']');
-                     }
-                     else {
-@@ -681,7 +681,7 @@ public class JDOMNodePointer extends NodePointer {
-      * Get relative position of this among like-named siblings.
-      * @return 1..n
-      */
--    private int getRelativePositionByQName() {
-+    private int getRelativePositionByName() {
-         if (node instanceof Element) {
-             Object parent = ((Element) node).getParent();
-             if (!(parent instanceof Element)) {
 @@ -693,7 +693,8 @@ public class JDOMNodePointer extends NodePointer {
              String name = ((Element) node).getQualifiedName();
              for (int i = 0; i < children.size(); i++) {
@@ -94,7 +43,7 @@ index 4b40a39..98862c4 100644
                      count++;
                  }
                  if (child == node) {
-@@ -705,16 +706,6 @@ public class JDOMNodePointer extends NodePointer {
+@@ -705,15 +706,6 @@ public class JDOMNodePointer extends NodePointer {
          return 1;
      }
  
@@ -107,7 +56,6 @@ index 4b40a39..98862c4 100644
 -        }
 -        return element.getName().equals(((Element) node).getName());
 -    }
--
+ 
      /**
       * Get relative position of this among all siblings.
-      * @return 1..n

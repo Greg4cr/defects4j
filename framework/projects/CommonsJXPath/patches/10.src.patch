@@ -1,5 +1,5 @@
 diff --git a/src/java/org/apache/commons/jxpath/ri/model/dom/DOMAttributeIterator.java b/src/java/org/apache/commons/jxpath/ri/model/dom/DOMAttributeIterator.java
-index a979a10..f6ffe42 100644
+index a979a10..a5c9193 100644
 --- a/src/java/org/apache/commons/jxpath/ri/model/dom/DOMAttributeIterator.java
 +++ b/src/java/org/apache/commons/jxpath/ri/model/dom/DOMAttributeIterator.java
 @@ -57,7 +57,7 @@ public class DOMAttributeIterator implements NodeIterator {
@@ -20,7 +20,7 @@ index a979a10..f6ffe42 100644
          String nodePrefix = DOMNodePointer.getPrefix(attr);
          String nodeLocalName = DOMNodePointer.getLocalName(attr);
  
-@@ -79,16 +79,22 @@ public class DOMAttributeIterator implements NodeIterator {
+@@ -79,16 +79,21 @@ public class DOMAttributeIterator implements NodeIterator {
  
          String testLocalName = name.getName();
          if (testLocalName.equals("*") || testLocalName.equals(nodeLocalName)) {
@@ -38,7 +38,6 @@ index a979a10..f6ffe42 100644
 +            if (testPrefix != null) {
 +                testNS = parent.getNamespaceURI(testPrefix);
 +            }
-+
 +            String nodeNS = null;
 +            if (nodePrefix != null) {
 +                nodeNS = parent.getNamespaceURI(nodePrefix);
@@ -49,7 +48,7 @@ index a979a10..f6ffe42 100644
          }
          return false;
      }
-@@ -117,7 +123,7 @@ public class DOMAttributeIterator implements NodeIterator {
+@@ -117,7 +122,7 @@ public class DOMAttributeIterator implements NodeIterator {
              NamedNodeMap nnm = element.getAttributes();
              for (int i = 0; i < nnm.getLength(); i++) {
                  attr = (Attr) nnm.item(i);
@@ -58,21 +57,25 @@ index a979a10..f6ffe42 100644
                      return attr;
                  }
              }
+@@ -148,4 +153,4 @@ public class DOMAttributeIterator implements NodeIterator {
+         this.position = position;
+         return position >= 1 && position <= attributes.size();
+     }
+-}
+\ No newline at end of file
++}
 diff --git a/src/java/org/apache/commons/jxpath/ri/model/jdom/JDOMAttributeIterator.java b/src/java/org/apache/commons/jxpath/ri/model/jdom/JDOMAttributeIterator.java
-index d7b7a30..e52ee1e 100644
+index d7b7a30..db0b14d 100644
 --- a/src/java/org/apache/commons/jxpath/ri/model/jdom/JDOMAttributeIterator.java
 +++ b/src/java/org/apache/commons/jxpath/ri/model/jdom/JDOMAttributeIterator.java
 @@ -67,9 +67,11 @@ public class JDOMAttributeIterator implements NodeIterator {
              String lname = name.getName();
              if (!lname.equals("*")) {
                  attributes = new ArrayList();
--                Attribute attr = element.getAttribute(lname, ns);
--                if (attr != null) {
--                    attributes.add(attr);
 +                if (ns != null) {
-+                    Attribute attr = element.getAttribute(lname, ns);
-+                    if (attr != null) {
-+                        attributes.add(attr);
+                 Attribute attr = element.getAttribute(lname, ns);
+                 if (attr != null) {
+                     attributes.add(attr);
 +                    }
                  }
              }
@@ -87,3 +90,10 @@ index d7b7a30..e52ee1e 100644
                          attributes.add(attr);
                      }
                  }
+@@ -113,4 +114,4 @@ public class JDOMAttributeIterator implements NodeIterator {
+         this.position = position;
+         return position >= 1 && position <= attributes.size();
+     }
+-}
+\ No newline at end of file
++}

@@ -1,17 +1,16 @@
 diff --git a/src/java/org/apache/commons/jxpath/ri/axes/AttributeContext.java b/src/java/org/apache/commons/jxpath/ri/axes/AttributeContext.java
-index 4193b3a..8db3c6d 100644
+index 4193b3a..63b4ba6 100644
 --- a/src/java/org/apache/commons/jxpath/ri/axes/AttributeContext.java
 +++ b/src/java/org/apache/commons/jxpath/ri/axes/AttributeContext.java
-@@ -32,8 +32,6 @@ import org.apache.commons.jxpath.ri.model.NodePointer;
+@@ -32,7 +32,6 @@ import org.apache.commons.jxpath.ri.model.NodePointer;
   * @version $Revision$ $Date$
   */
  public class AttributeContext extends EvalContext {
 -    private static final NodeNameTest WILDCARD_TEST = new NodeNameTest(new QName(null, "*"));
--
+ 
      private NodeTest nodeTest;
      private boolean setStarted = false;
-     private NodeIterator iterator;
-@@ -75,20 +73,12 @@ public class AttributeContext extends EvalContext {
+@@ -75,20 +74,12 @@ public class AttributeContext extends EvalContext {
          super.setPosition(getCurrentPosition() + 1);
          if (!setStarted) {
              setStarted = true;
@@ -36,3 +35,10 @@ index 4193b3a..8db3c6d 100644
          }
          if (iterator == null) {
              return false;
+@@ -99,4 +90,4 @@ public class AttributeContext extends EvalContext {
+         currentNodePointer = iterator.getNodePointer();
+         return true;
+     }
+-}
+\ No newline at end of file
++}

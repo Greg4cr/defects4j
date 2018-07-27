@@ -1,18 +1,17 @@
 diff --git a/src/java/org/apache/commons/jxpath/ri/Compiler.java b/src/java/org/apache/commons/jxpath/ri/Compiler.java
-index 34a239e..4d0162a 100644
+index 34a239e..ede60b7 100644
 --- a/src/java/org/apache/commons/jxpath/ri/Compiler.java
 +++ b/src/java/org/apache/commons/jxpath/ri/Compiler.java
-@@ -96,8 +96,6 @@ public interface Compiler {
-     public static final int FUNCTION_NULL = 28;
+@@ -97,7 +97,6 @@ public interface Compiler {
      public static final int FUNCTION_KEY = 29;
      public static final int FUNCTION_FORMAT_NUMBER = 30;
--    
+     
 -    public static final int FUNCTION_ENDS_WITH = 31;
  
      /**
       * Produces an EXPRESSION object that represents a numeric constant.
 diff --git a/src/java/org/apache/commons/jxpath/ri/compiler/CoreFunction.java b/src/java/org/apache/commons/jxpath/ri/compiler/CoreFunction.java
-index 2332276..079c8bb 100644
+index 2332276..cab884c 100644
 --- a/src/java/org/apache/commons/jxpath/ri/compiler/CoreFunction.java
 +++ b/src/java/org/apache/commons/jxpath/ri/compiler/CoreFunction.java
 @@ -89,8 +89,6 @@ public class CoreFunction extends Operation {
@@ -41,26 +40,19 @@ index 2332276..079c8bb 100644
              case Compiler.FUNCTION_CONTAINS :
                  return functionContains(context);
              case Compiler.FUNCTION_SUBSTRING_BEFORE :
-@@ -548,19 +543,6 @@ public class CoreFunction extends Operation {
-     }
- 
-     /**
--     * ends-with() implementation.
--     * @param context evaluation context
--     * @return Boolean
--     * @since 1.4
--     */
+@@ -553,12 +548,6 @@ public class CoreFunction extends Operation {
+      * @return Boolean
+      * @since 1.4
+      */
 -    protected Object functionEndsWith(EvalContext context) {
 -        assertArgCount(2);
 -        String s1 = InfoSetUtil.stringValue(getArg1().computeValue(context));
 -        String s2 = InfoSetUtil.stringValue(getArg2().computeValue(context));
 -        return s1.endsWith(s2) ? Boolean.TRUE : Boolean.FALSE;
 -    }
--
--    /**
+ 
+     /**
       * contains() implementation.
-      * @param context evaluation context
-      * @return Boolean
 diff --git a/src/java/org/apache/commons/jxpath/ri/parser/XPath.jj b/src/java/org/apache/commons/jxpath/ri/parser/XPath.jj
 index 5a899e4..4182a84 100644
 --- a/src/java/org/apache/commons/jxpath/ri/parser/XPath.jj

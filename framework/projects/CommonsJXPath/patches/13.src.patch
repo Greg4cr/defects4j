@@ -1,5 +1,5 @@
 diff --git a/src/java/org/apache/commons/jxpath/ri/axes/UnionContext.java b/src/java/org/apache/commons/jxpath/ri/axes/UnionContext.java
-index 80e111e..bbf39b3 100644
+index 80e111e..f57c333 100644
 --- a/src/java/org/apache/commons/jxpath/ri/axes/UnionContext.java
 +++ b/src/java/org/apache/commons/jxpath/ri/axes/UnionContext.java
 @@ -16,8 +16,7 @@
@@ -12,7 +12,7 @@ index 80e111e..bbf39b3 100644
  
  import org.apache.commons.jxpath.BasicNodeSet;
  import org.apache.commons.jxpath.Pointer;
-@@ -48,23 +47,19 @@ public class UnionContext extends NodeSetContext {
+@@ -48,24 +47,21 @@ public class UnionContext extends NodeSetContext {
          if (!prepared) {
              prepared = true;
              BasicNodeSet nodeSet = (BasicNodeSet) getNodeSet();
@@ -31,12 +31,15 @@ index 80e111e..bbf39b3 100644
                          }
                      }
                  }
-             }
+-            }
 -            sortPointers(pointers);
--
+ 
 -            for (Iterator it = pointers.iterator(); it.hasNext();) {
 -                nodeSet.add((Pointer) it.next());
--            }
+             }
          }
          return super.setPosition(position);
      }
+-}
+\ No newline at end of file
++}
