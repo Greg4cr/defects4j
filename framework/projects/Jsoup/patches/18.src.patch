@@ -1,5 +1,5 @@
 diff --git a/src/main/java/org/jsoup/helper/HttpConnection.java b/src/main/java/org/jsoup/helper/HttpConnection.java
-index a215b56..b21379d 100644
+index a215b56..89ad76c 100644
 --- a/src/main/java/org/jsoup/helper/HttpConnection.java
 +++ b/src/main/java/org/jsoup/helper/HttpConnection.java
 @@ -714,7 +714,7 @@ public class HttpConnection implements Connection {
@@ -11,12 +11,12 @@ index a215b56..b21379d 100644
              processResponseHeaders(resHeaders);
  
              // if from a redirect, map previous response cookies into this response
-@@ -726,30 +726,6 @@ public class HttpConnection implements Connection {
+@@ -726,29 +726,7 @@ public class HttpConnection implements Connection {
              }
          }
  
 -        private static LinkedHashMap<String, List<String>> createHeaderMap(HttpURLConnection conn) {
--            // the default sun impl of conn.getHeaderFields() returns header values out of order
+             // the default sun impl of conn.getHeaderFields() returns header values out of order
 -            final LinkedHashMap<String, List<String>> headers = new LinkedHashMap<String, List<String>>();
 -            int i = 0;
 -            while (true) {
@@ -38,17 +38,14 @@ index a215b56..b21379d 100644
 -            }
 -            return headers;
 -        }
--
+ 
          void processResponseHeaders(Map<String, List<String>> resHeaders) {
              for (Map.Entry<String, List<String>> entry : resHeaders.entrySet()) {
-                 String name = entry.getKey();
-@@ -769,19 +745,9 @@ public class HttpConnection implements Connection {
-                         if (cookieName.length() > 0)
+@@ -770,18 +748,8 @@ public class HttpConnection implements Connection {
                              cookie(cookieName, cookieVal);
                      }
--                } else { // combine same header names with comma: http://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2
+                 } else { // combine same header names with comma: http://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2
 -                    if (values.size() == 1)
-+                } else { // only take the first instance of each header
 +                    if (!values.isEmpty())
                          header(name, values.get(0));
 -                    else if (values.size() > 1) {

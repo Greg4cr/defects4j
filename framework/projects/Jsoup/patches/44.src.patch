@@ -36,7 +36,7 @@ index dc352dc..5d52e0e 100644
          Integer index = indexInList(this, siblings);
          Validate.notNull(index);
 diff --git a/src/main/java/org/jsoup/nodes/Node.java b/src/main/java/org/jsoup/nodes/Node.java
-index c0640cd..eb1bb3c 100644
+index c0640cd..f0dbabb 100644
 --- a/src/main/java/org/jsoup/nodes/Node.java
 +++ b/src/main/java/org/jsoup/nodes/Node.java
 @@ -441,15 +441,7 @@ public abstract class Node implements Cloneable {
@@ -56,28 +56,26 @@ index c0640cd..eb1bb3c 100644
      }
  
      /**
-@@ -474,9 +466,6 @@ public abstract class Node implements Cloneable {
+@@ -474,8 +466,6 @@ public abstract class Node implements Cloneable {
       @return the previous sibling, or null if this is the first sibling
       */
      public Node previousSibling() {
 -        if (parentNode == null)
 -            return null; // root
--
+ 
          List<Node> siblings = parentNode.childNodes;
          Integer index = siblingIndex();
-         Validate.notNull(index);
 diff --git a/src/main/java/org/jsoup/select/Elements.java b/src/main/java/org/jsoup/select/Elements.java
-index 7f8f66a..02eb56e 100644
+index 7f8f66a..a10ae3b 100644
 --- a/src/main/java/org/jsoup/select/Elements.java
 +++ b/src/main/java/org/jsoup/select/Elements.java
-@@ -19,10 +19,6 @@ public class Elements implements List<Element>, Cloneable {
+@@ -19,9 +19,6 @@ public class Elements implements List<Element>, Cloneable {
          contents = new ArrayList<Element>();
      }
  
 -    public Elements(int initialCapacity) {
 -        contents = new ArrayList<Element>(initialCapacity);
 -    }
--
+ 
      public Elements(Collection<Element> elements) {
          contents = new ArrayList<Element>(elements);
-     }

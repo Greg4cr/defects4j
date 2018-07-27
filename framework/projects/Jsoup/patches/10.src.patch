@@ -1,5 +1,5 @@
 diff --git a/src/main/java/org/jsoup/nodes/DocumentType.java b/src/main/java/org/jsoup/nodes/DocumentType.java
-index 4e7730b..838ec6f 100644
+index 4e7730b..fde181f 100644
 --- a/src/main/java/org/jsoup/nodes/DocumentType.java
 +++ b/src/main/java/org/jsoup/nodes/DocumentType.java
 @@ -9,10 +9,7 @@ import org.jsoup.nodes.Document.OutputSettings.*;
@@ -13,35 +13,34 @@ index 4e7730b..838ec6f 100644
      private static final String PUBLIC_ID = "publicId";
      private static final String SYSTEM_ID = "systemId";
      // todo: quirk mode from publicId and systemId
-@@ -29,27 +26,6 @@ public class DocumentType extends Node {
+@@ -29,9 +26,6 @@ public class DocumentType extends Node {
  
          attr(NAME, name);
          attr(PUBLIC_ID, publicId);
 -        if (has(PUBLIC_ID)) {
 -            attr(PUB_SYS_KEY, PUBLIC_KEY);
 -        }
--        attr(SYSTEM_ID, systemId);
--    }
--
--    /**
--     * Create a new doctype element.
--     * @param name the doctype's name
--     * @param publicId the doctype's public ID
--     * @param systemId the doctype's system ID
--     * @param baseUri the doctype's base URI
--     */
+         attr(SYSTEM_ID, systemId);
+     }
+ 
+@@ -42,16 +36,7 @@ public class DocumentType extends Node {
+      * @param systemId the doctype's system ID
+      * @param baseUri the doctype's base URI
+      */
 -    public DocumentType(String name, String pubSysKey, String publicId, String systemId, String baseUri) {
 -        super(baseUri);
--
+ 
 -        attr(NAME, name);
 -        if (pubSysKey != null) {
 -            attr(PUB_SYS_KEY, pubSysKey);
 -        }
 -        attr(PUBLIC_ID, publicId);
-         attr(SYSTEM_ID, systemId);
-     }
+-        attr(SYSTEM_ID, systemId);
+-    }
  
-@@ -68,10 +44,8 @@ public class DocumentType extends Node {
+     @Override
+     public String nodeName() {
+@@ -68,10 +53,8 @@ public class DocumentType extends Node {
          }
          if (has(NAME))
              accum.append(" ").append(attr(NAME));
@@ -67,7 +66,7 @@ index c515462..9a40814 100644
                  if (d.isForceQuirks())
                      tb.getDocument().quirksMode(Document.QuirksMode.quirks);
 diff --git a/src/main/java/org/jsoup/parser/Token.java b/src/main/java/org/jsoup/parser/Token.java
-index 34baf19..3b110c9 100644
+index 34baf19..0eccbbe 100644
 --- a/src/main/java/org/jsoup/parser/Token.java
 +++ b/src/main/java/org/jsoup/parser/Token.java
 @@ -32,7 +32,6 @@ abstract class Token {
@@ -86,17 +85,16 @@ index 34baf19..3b110c9 100644
              reset(publicIdentifier);
              reset(systemIdentifier);
              forceQuirks = false;
-@@ -55,10 +53,6 @@ abstract class Token {
+@@ -55,9 +53,6 @@ abstract class Token {
              return name.toString();
          }
  
 -        String getPubSysKey() {
 -            return pubSysKey;
 -        }
--
+ 
          String getPublicIdentifier() {
              return publicIdentifier.toString();
-         }
 diff --git a/src/main/java/org/jsoup/parser/TokeniserState.java b/src/main/java/org/jsoup/parser/TokeniserState.java
 index 6a97238..2e998d5 100644
 --- a/src/main/java/org/jsoup/parser/TokeniserState.java

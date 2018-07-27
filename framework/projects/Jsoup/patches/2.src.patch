@@ -45,7 +45,7 @@ index e837383..9a118eb 100644
                          tb.error(this);
                          return false;
 diff --git a/src/main/java/org/jsoup/parser/Tokeniser.java b/src/main/java/org/jsoup/parser/Tokeniser.java
-index b047940..1526c2a 100644
+index b047940..69df151 100644
 --- a/src/main/java/org/jsoup/parser/Tokeniser.java
 +++ b/src/main/java/org/jsoup/parser/Tokeniser.java
 @@ -33,6 +33,7 @@ final class Tokeniser {
@@ -56,7 +56,7 @@ index b047940..1526c2a 100644
  
      Tokeniser(CharacterReader reader, ParseErrorList errors) {
          this.reader = reader;
-@@ -40,6 +41,11 @@ final class Tokeniser {
+@@ -40,6 +41,10 @@ final class Tokeniser {
      }
  
      Token read() {
@@ -64,11 +64,10 @@ index b047940..1526c2a 100644
 +            error("Self closing flag not acknowledged");
 +            selfClosingFlagAcknowledged = true;
 +        }
-+
          while (!isEmitPending)
              state.read(this, reader);
  
-@@ -68,6 +74,8 @@ final class Tokeniser {
+@@ -68,6 +73,8 @@ final class Tokeniser {
          if (token.type == Token.TokenType.StartTag) {
              Token.StartTag startTag = (Token.StartTag) token;
              lastStartTag = startTag.tagName;
@@ -77,7 +76,7 @@ index b047940..1526c2a 100644
          } else if (token.type == Token.TokenType.EndTag) {
              Token.EndTag endTag = (Token.EndTag) token;
              if (endTag.attributes != null)
-@@ -114,6 +122,10 @@ final class Tokeniser {
+@@ -114,6 +121,10 @@ final class Tokeniser {
          this.state = state;
      }
  
@@ -88,7 +87,7 @@ index b047940..1526c2a 100644
      final private int[] codepointHolder = new int[1]; // holder to not have to keep creating arrays
      final private int[] multipointHolder = new int[2];
      int[] consumeCharacterReference(Character additionalAllowedCharacter, boolean inAttribute) {
-@@ -240,7 +252,7 @@ final class Tokeniser {
+@@ -240,7 +251,7 @@ final class Tokeniser {
              errors.add(new ParseError(reader.pos(), "Invalid character reference: %s", message));
      }
  

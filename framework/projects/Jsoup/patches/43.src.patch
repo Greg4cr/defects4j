@@ -1,8 +1,8 @@
 diff --git a/src/main/java/org/jsoup/parser/CharacterReader.java b/src/main/java/org/jsoup/parser/CharacterReader.java
-index 4db4d79..d05c3cd 100644
+index 4db4d79..599a25f 100644
 --- a/src/main/java/org/jsoup/parser/CharacterReader.java
 +++ b/src/main/java/org/jsoup/parser/CharacterReader.java
-@@ -115,26 +115,6 @@ class CharacterReader {
+@@ -115,25 +115,6 @@ class CharacterReader {
          return input.substring(start, pos);
      }
  
@@ -25,10 +25,9 @@ index 4db4d79..d05c3cd 100644
 -
 -        return input.substring(start, pos);
 -    }
--
+ 
      String consumeHexSequence() {
          int start = pos;
-         while (!isEmpty()) {
 diff --git a/src/main/java/org/jsoup/parser/Tokeniser.java b/src/main/java/org/jsoup/parser/Tokeniser.java
 index d53a49b..d1e3ee6 100644
 --- a/src/main/java/org/jsoup/parser/Tokeniser.java

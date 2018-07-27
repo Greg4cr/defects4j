@@ -16,7 +16,7 @@ index ffcb4a4..4e04c72 100644
      
      /**
 diff --git a/src/main/java/org/jsoup/select/QueryParser.java b/src/main/java/org/jsoup/select/QueryParser.java
-index d3a2041..6ba1fdd 100644
+index d3a2041..923cfe9 100644
 --- a/src/main/java/org/jsoup/select/QueryParser.java
 +++ b/src/main/java/org/jsoup/select/QueryParser.java
 @@ -35,12 +35,8 @@ public class QueryParser {
@@ -24,13 +24,11 @@ index d3a2041..6ba1fdd 100644
       */
      public static Evaluator parse(String query) {
 -        try {
--            QueryParser p = new QueryParser(query);
--            return p.parse();
+             QueryParser p = new QueryParser(query);
+             return p.parse();
 -        } catch (IllegalArgumentException e) {
 -            throw new Selector.SelectorParseException(e.getMessage());
 -        }
-+        QueryParser p = new QueryParser(query);
-+        return p.parse();
      }
  
      /**

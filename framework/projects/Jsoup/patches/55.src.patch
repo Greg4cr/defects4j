@@ -1,5 +1,5 @@
 diff --git a/src/main/java/org/jsoup/select/Selector.java b/src/main/java/org/jsoup/select/Selector.java
-index e370de8..b46e468 100644
+index e370de8..4c2aeaf 100644
 --- a/src/main/java/org/jsoup/select/Selector.java
 +++ b/src/main/java/org/jsoup/select/Selector.java
 @@ -107,8 +107,6 @@ public class Selector {
@@ -20,11 +20,10 @@ index e370de8..b46e468 100644
          } else { // unhandled
              throw new SelectorParseException("Could not parse query '%s': unexpected token at '%s'", query, tq.remainder());
          }
-@@ -305,15 +301,6 @@ public class Selector {
-         return own ? root.getElementsMatchingOwnText(regex) : root.getElementsMatchingText(regex);
+@@ -306,13 +302,6 @@ public class Selector {
      }
  
--    // :not(selector)
+     // :not(selector)
 -    private Elements not() {
 -        tq.consume(":not");
 -        String subQuery = tq.chompBalanced('(', ')');
@@ -32,15 +31,13 @@ index e370de8..b46e468 100644
 -
 -        return filterOut(root.getAllElements(), select(subQuery, root));
 -    }
--
+ 
      // direct child descendants
      private static Elements filterForChildren(Collection<Element> parents, Collection<Element> candidates) {
-         Elements children = new Elements();
-@@ -405,23 +392,6 @@ public class Selector {
-         return children;
+@@ -406,21 +395,6 @@ public class Selector {
      }
  
--    // exclude set. package open so that Elements can implement .not() selector.
+     // exclude set. package open so that Elements can implement .not() selector.
 -    static Elements filterOut(Collection<Element> elements, Collection<Element> outs) {
 -        Elements output = new Elements();
 -        for (Element el: elements) {
@@ -56,7 +53,6 @@ index e370de8..b46e468 100644
 -        }
 -        return output;
 -    }
--
+ 
      public static class SelectorParseException extends IllegalStateException {
          public SelectorParseException(String msg, Object... params) {
-             super(String.format(msg, params));

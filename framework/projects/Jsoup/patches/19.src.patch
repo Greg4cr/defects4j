@@ -1,12 +1,11 @@
 diff --git a/src/main/java/org/jsoup/nodes/Entities.java b/src/main/java/org/jsoup/nodes/Entities.java
-index aa1f946..ad80489 100644
+index aa1f946..08cf311 100644
 --- a/src/main/java/org/jsoup/nodes/Entities.java
 +++ b/src/main/java/org/jsoup/nodes/Entities.java
-@@ -118,8 +118,7 @@ public class Entities {
-                             accum.append("&#xa0;");
+@@ -119,7 +119,7 @@ public class Entities {
                          break;
                      case '<':
--                        // escape when in character data or when in a xml attribue val; not needed in html attr val
+                         // escape when in character data or when in a xml attribue val; not needed in html attr val
 -                        if (!inAttribute || escapeMode == EscapeMode.xhtml)
 +                        if (!inAttribute)
                              accum.append("&lt;");

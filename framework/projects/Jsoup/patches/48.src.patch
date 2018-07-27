@@ -1,26 +1,24 @@
 diff --git a/src/main/java/org/jsoup/parser/CharacterReader.java b/src/main/java/org/jsoup/parser/CharacterReader.java
-index d05c3cd..a35f19a 100644
+index d05c3cd..d84ddea 100644
 --- a/src/main/java/org/jsoup/parser/CharacterReader.java
 +++ b/src/main/java/org/jsoup/parser/CharacterReader.java
-@@ -1,7 +1,5 @@
+@@ -1,6 +1,5 @@
  package org.jsoup.parser;
  
 -import org.jsoup.helper.Validate;
--
+ 
  /**
   CharacterReader cosumes tokens off a string. To replace the old TokenQueue.
-  */
-@@ -14,9 +12,6 @@ class CharacterReader {
+@@ -14,8 +13,6 @@ class CharacterReader {
      private int mark = 0;
  
      CharacterReader(String input) {
 -        Validate.notNull(input);
 -        input = input.replaceAll("\r\n?", "\n"); // normalise carriage returns to newlines
--
+ 
          this.input = input;
          this.length = input.length();
-     }
-@@ -97,7 +92,7 @@ class CharacterReader {
+@@ -97,7 +94,7 @@ class CharacterReader {
      }
  
      String consumeToEnd() {

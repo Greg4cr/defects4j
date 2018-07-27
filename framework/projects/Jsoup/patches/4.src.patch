@@ -51,19 +51,18 @@ index 02c3158..0000000
 -    }
 -}
 diff --git a/src/main/java/org/jsoup/nodes/Element.java b/src/main/java/org/jsoup/nodes/Element.java
-index a5f36e8..175654e 100644
+index a5f36e8..3411f36 100644
 --- a/src/main/java/org/jsoup/nodes/Element.java
 +++ b/src/main/java/org/jsoup/nodes/Element.java
-@@ -25,8 +25,6 @@ import java.util.Set;
+@@ -25,7 +25,6 @@ import java.util.Set;
  import java.util.regex.Pattern;
  import java.util.regex.PatternSyntaxException;
  
 -import static org.jsoup.internal.Normalizer.normalize;
--
+ 
  /**
   * A HTML element consists of a tag name, attributes, and child nodes (including text nodes and
-  * other elements).
-@@ -649,7 +647,7 @@ public class Element extends Node {
+@@ -649,7 +648,7 @@ public class Element extends Node {
       */
      public Elements getElementsByTag(String tagName) {
          Validate.notEmpty(tagName);
@@ -73,19 +72,18 @@ index a5f36e8..175654e 100644
          return Collector.collect(new Evaluator.Tag(tagName), this);
      }
 diff --git a/src/main/java/org/jsoup/nodes/Node.java b/src/main/java/org/jsoup/nodes/Node.java
-index 947cfe0..ed19156 100644
+index 947cfe0..80fb740 100644
 --- a/src/main/java/org/jsoup/nodes/Node.java
 +++ b/src/main/java/org/jsoup/nodes/Node.java
-@@ -13,8 +13,6 @@ import java.util.Collections;
+@@ -13,7 +13,6 @@ import java.util.Collections;
  import java.util.LinkedList;
  import java.util.List;
  
 -import static org.jsoup.internal.Normalizer.lowerCase;
--
+ 
  /**
   The base, abstract Node model. Elements, Documents, Comments etc are all Node instances.
- 
-@@ -80,7 +78,7 @@ public abstract class Node implements Cloneable {
+@@ -80,7 +79,7 @@ public abstract class Node implements Cloneable {
          String val = attributes.getIgnoreCase(attributeKey);
          if (val.length() > 0)
              return val;
@@ -95,19 +93,18 @@ index 947cfe0..ed19156 100644
          else return "";
      }
 diff --git a/src/main/java/org/jsoup/parser/ParseSettings.java b/src/main/java/org/jsoup/parser/ParseSettings.java
-index e9df9df..9ac7e6b 100644
+index e9df9df..61a0b4e 100644
 --- a/src/main/java/org/jsoup/parser/ParseSettings.java
 +++ b/src/main/java/org/jsoup/parser/ParseSettings.java
-@@ -3,8 +3,6 @@ package org.jsoup.parser;
+@@ -3,7 +3,6 @@ package org.jsoup.parser;
  import org.jsoup.nodes.Attribute;
  import org.jsoup.nodes.Attributes;
  
 -import static org.jsoup.internal.Normalizer.lowerCase;
--
+ 
  /**
   * Controls parser settings, to optionally preserve tag and/or attribute name case.
-  */
-@@ -39,21 +37,21 @@ public class ParseSettings {
+@@ -39,21 +38,21 @@ public class ParseSettings {
      String normalizeTag(String name) {
          name = name.trim();
          if (!preserveTagCase)
@@ -133,19 +130,18 @@ index e9df9df..9ac7e6b 100644
          }
          return attributes;
 diff --git a/src/main/java/org/jsoup/parser/Token.java b/src/main/java/org/jsoup/parser/Token.java
-index c983557..af51432 100644
+index c983557..a8e0403 100644
 --- a/src/main/java/org/jsoup/parser/Token.java
 +++ b/src/main/java/org/jsoup/parser/Token.java
-@@ -5,8 +5,6 @@ import org.jsoup.nodes.Attribute;
+@@ -5,7 +5,6 @@ import org.jsoup.nodes.Attribute;
  import org.jsoup.nodes.Attributes;
  import org.jsoup.nodes.BooleanAttribute;
  
 -import static org.jsoup.internal.Normalizer.lowerCase;
--
+ 
  /**
   * Parse tokens for the Tokeniser.
-  */
-@@ -144,7 +142,7 @@ abstract class Token {
+@@ -144,7 +143,7 @@ abstract class Token {
  
          final Tag name(String name) {
              tagName = name;
@@ -154,7 +150,7 @@ index c983557..af51432 100644
              return this;
          }
  
-@@ -160,7 +158,7 @@ abstract class Token {
+@@ -160,7 +159,7 @@ abstract class Token {
          // these appenders are rarely hit in not null state-- caused by null chars.
          final void appendTagName(String append) {
              tagName = tagName == null ? append : tagName.concat(append);
@@ -163,7 +159,7 @@ index c983557..af51432 100644
          }
  
          final void appendTagName(char append) {
-@@ -233,7 +231,7 @@ abstract class Token {
+@@ -233,7 +232,7 @@ abstract class Token {
          StartTag nameAttr(String name, Attributes attributes) {
              this.tagName = name;
              this.attributes = attributes;
@@ -173,19 +169,18 @@ index c983557..af51432 100644
          }
  
 diff --git a/src/main/java/org/jsoup/safety/Whitelist.java b/src/main/java/org/jsoup/safety/Whitelist.java
-index 8258ce9..b8d0886 100644
+index 8258ce9..3fce958 100644
 --- a/src/main/java/org/jsoup/safety/Whitelist.java
 +++ b/src/main/java/org/jsoup/safety/Whitelist.java
-@@ -15,8 +15,6 @@ import java.util.HashSet;
+@@ -15,7 +15,6 @@ import java.util.HashSet;
  import java.util.Map;
  import java.util.Set;
  
 -import static org.jsoup.internal.Normalizer.lowerCase;
--
+ 
  
  /**
-  Whitelists define what HTML (elements and attributes) to allow through the cleaner. Everything else is removed.
-@@ -544,7 +542,7 @@ public class Whitelist {
+@@ -544,7 +543,7 @@ public class Whitelist {
  
              prot += ":";
  
@@ -195,20 +190,19 @@ index 8258ce9..b8d0886 100644
              }
          }
 diff --git a/src/main/java/org/jsoup/select/Evaluator.java b/src/main/java/org/jsoup/select/Evaluator.java
-index e797495..d363f16 100644
+index e797495..b09c530 100644
 --- a/src/main/java/org/jsoup/select/Evaluator.java
 +++ b/src/main/java/org/jsoup/select/Evaluator.java
-@@ -12,9 +12,6 @@ import java.util.List;
+@@ -12,8 +12,6 @@ import java.util.List;
  import java.util.regex.Matcher;
  import java.util.regex.Pattern;
  
 -import static org.jsoup.internal.Normalizer.lowerCase;
 -import static org.jsoup.internal.Normalizer.normalize;
--
+ 
  
  /**
-  * Evaluates that an element matches the selector.
-@@ -150,14 +147,14 @@ public abstract class Evaluator {
+@@ -150,14 +148,14 @@ public abstract class Evaluator {
  
          public AttributeStarting(String keyPrefix) {
              Validate.notEmpty(keyPrefix);
@@ -225,7 +219,7 @@ index e797495..d363f16 100644
                      return true;
              }
              return false;
-@@ -220,7 +217,7 @@ public abstract class Evaluator {
+@@ -220,7 +218,7 @@ public abstract class Evaluator {
  
          @Override
          public boolean matches(Element root, Element element) {
@@ -234,7 +228,7 @@ index e797495..d363f16 100644
          }
  
          @Override
-@@ -240,7 +237,7 @@ public abstract class Evaluator {
+@@ -240,7 +238,7 @@ public abstract class Evaluator {
  
          @Override
          public boolean matches(Element root, Element element) {
@@ -243,7 +237,7 @@ index e797495..d363f16 100644
          }
  
          @Override
-@@ -260,7 +257,7 @@ public abstract class Evaluator {
+@@ -260,7 +258,7 @@ public abstract class Evaluator {
  
          @Override
          public boolean matches(Element root, Element element) {
@@ -252,7 +246,7 @@ index e797495..d363f16 100644
          }
  
          @Override
-@@ -278,7 +275,7 @@ public abstract class Evaluator {
+@@ -278,7 +276,7 @@ public abstract class Evaluator {
          Pattern pattern;
  
          public AttributeWithValueMatching(String key, Pattern pattern) {
@@ -261,7 +255,7 @@ index e797495..d363f16 100644
              this.pattern = pattern;
          }
  
-@@ -305,12 +302,12 @@ public abstract class Evaluator {
+@@ -305,12 +303,12 @@ public abstract class Evaluator {
              Validate.notEmpty(key);
              Validate.notEmpty(value);
  
@@ -276,7 +270,7 @@ index e797495..d363f16 100644
          }
      }
  
-@@ -651,12 +648,12 @@ public abstract class Evaluator {
+@@ -651,12 +649,12 @@ public abstract class Evaluator {
          private String searchText;
  
          public ContainsText(String searchText) {
@@ -291,7 +285,7 @@ index e797495..d363f16 100644
          }
  
          @Override
-@@ -672,12 +669,12 @@ public abstract class Evaluator {
+@@ -672,12 +670,12 @@ public abstract class Evaluator {
          private String searchText;
  
          public ContainsData(String searchText) {
@@ -306,7 +300,7 @@ index e797495..d363f16 100644
          }
  
          @Override
-@@ -693,12 +690,12 @@ public abstract class Evaluator {
+@@ -693,12 +691,12 @@ public abstract class Evaluator {
          private String searchText;
  
          public ContainsOwnText(String searchText) {
@@ -322,19 +316,18 @@ index e797495..d363f16 100644
  
          @Override
 diff --git a/src/main/java/org/jsoup/select/QueryParser.java b/src/main/java/org/jsoup/select/QueryParser.java
-index 46c6c2d..d3a2041 100644
+index 46c6c2d..7df67fa 100644
 --- a/src/main/java/org/jsoup/select/QueryParser.java
 +++ b/src/main/java/org/jsoup/select/QueryParser.java
-@@ -9,8 +9,6 @@ import org.jsoup.helper.StringUtil;
+@@ -9,7 +9,6 @@ import org.jsoup.helper.StringUtil;
  import org.jsoup.helper.Validate;
  import org.jsoup.parser.TokenQueue;
  
 -import static org.jsoup.internal.Normalizer.normalize;
--
+ 
  /**
   * Parses a CSS selector into an Evaluator tree.
-  */
-@@ -224,7 +222,7 @@ public class QueryParser {
+@@ -224,7 +223,7 @@ public class QueryParser {
  
          // namespaces: wildcard match equals(tagName) or ending in ":"+tagName
          if (tagName.startsWith("*|")) {
@@ -343,7 +336,7 @@ index 46c6c2d..d3a2041 100644
          } else {
              // namespaces: if element name is "abc:def", selector must be "abc|def", so flip:
              if (tagName.contains("|"))
-@@ -290,7 +288,7 @@ public class QueryParser {
+@@ -290,7 +289,7 @@ public class QueryParser {
      private static final Pattern NTH_B  = Pattern.compile("(\\+|-)?(\\d+)");
  
  	private void cssNthChild(boolean backwards, boolean ofType) {
