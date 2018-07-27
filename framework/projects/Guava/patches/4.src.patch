@@ -11,16 +11,3 @@ index f182e59..51351cf 100644
      upperBound.describeAsUpperBound(sb);
      return sb.toString();
    }
-diff --git a/guava/src/com/google/common/collect/RangeMap.java b/guava/src/com/google/common/collect/RangeMap.java
-index bbd7faf..a45f35f 100644
---- a/guava/src/com/google/common/collect/RangeMap.java
-+++ b/guava/src/com/google/common/collect/RangeMap.java
-@@ -119,7 +119,7 @@ public interface RangeMap<K extends Comparable, V> {
-    * Returns a view of the part of this range map that intersects with {@code range}.
-    *
-    * <p>For example, if {@code rangeMap} had the entries
--   * {@code [1, 5] => "foo", (6, 8) => "bar", (10, ∞) => "baz"}
-+   * {@code [1, 5] => "foo", (6, 8) => "bar", (10, \u2025) => "baz"}
-    * then {@code rangeMap.subRangeMap(Range.open(3, 12))} would return a range map
-    * with the entries {@code (3, 5) => "foo", (6, 8) => "bar", (10, 12) => "baz"}.
-    *

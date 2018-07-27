@@ -1,5 +1,5 @@
 diff --git a/guava/src/com/google/common/collect/RegularContiguousSet.java b/guava/src/com/google/common/collect/RegularContiguousSet.java
-index 7138b04..428377f 100644
+index 7138b042b..428377ff9 100644
 --- a/guava/src/com/google/common/collect/RegularContiguousSet.java
 +++ b/guava/src/com/google/common/collect/RegularContiguousSet.java
 @@ -157,7 +157,7 @@ final class RegularContiguousSet<C extends Comparable> extends ContiguousSet<C>
