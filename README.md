@@ -1,5 +1,21 @@
+This branch is now depricated 
+==============================
+
+We are remining each project in this branch, following a number of Defects4J 
+framework upgrades. You may continue to use these faults and this branch, but 
+important framework changes are not reflected.
+
+For the updated versions of these projects (along with more faults), see 
+branch 
+[additional-faults-4](https://github.com/rjust/defects4j/tree/additional-projects-4) 
+in the core Defects4J repository.
+
+Old content of README
+===========
+
 Defects4J -- version 1.4.0 [![Build Status](https://travis-ci.org/rjust/defects4j.svg?branch=master)](https://travis-ci.org/rjust/defects4j)
 ================
+
 Defects4J is a collection of reproducible bugs and a supporting infrastructure
 with the goal of advancing software engineering research.
 
